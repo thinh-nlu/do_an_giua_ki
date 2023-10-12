@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Site Metas -->
-    <title>Freshshop - Ecommerce Bootstrap 4 HTML Template</title>
+    <title>NongLamXanh</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -36,72 +36,14 @@
 </head>
 
 <body>
-<!-- Start Main Top -->
-<div class="main-top">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <div class="custom-select-box">
-                    <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
-                        <option>₫ VNĐ</option>
-                        <option>$ USD</option>
-                        <option>€ EUR</option>
-                    </select>
-                </div>
-                <div class="right-phone-box">
-                    <p>Call US :- <a href="#"> +11 900 800 100</a></p>
-                </div>
-                <div class="our-link">
-                    <ul>
-                        <li><a href="#"><i class="fa fa-user s_color"></i> Tài khoản của tôi</a></li>
-                        <li><a href="#"><i class="fas fa-location-arrow"></i> Vị trí</a></li>
-                        <li><a href="#"><i class="fas fa-headset"></i> Liên hệ </a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <div class="login-box">
-                    <select id="basic" class="selectpicker show-tick form-control" data-placeholder="Sign In">
-                        <option>Đăng kí tại đây</option>
-                        <option>Đăng nhập</option>
-                    </select>
-                </div>
-                <div class="text-slid-box">
-                    <div id="offer-box" class="carouselTicker">
-                        <ul class="offer-box">
-                            <li>
-                                <i class="fab fa-opencart"></i> Giảm 20% cho toàn bộ mã khuyến mãi mua hàng: offT80
-                            </li>
-                            <li>
-                                <i class="fab fa-opencart"></i> Giảm giá 50%-80% cho rau củ
-                            </li>
-                            <li>
-                                <i class="fab fa-opencart"></i> Giảm 10% Mua rau!!!
-                            </li>
-                            <li>
-                                <i class="fab fa-opencart"></i> Giảm 50%! Mua ngay
-                            </li>
-                            <li>
-                                <i class="fab fa-opencart"></i> Giảm 10% rau tươi trong ngày !!
-                            </li>
-                            <li>
-                                <i class="fab fa-opencart"></i> Giảm 20% cho Táo !!
-                            </li>
-                            <li>
-                                <i class="fab fa-opencart"></i> Giảm 20% cho toàn bộ mã khuyễn mãi mua hàng: offT30
-                            </li>
-                            <li>
-                                <i class="fab fa-opencart"></i> Giảm 70%! Mua ngay
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Main Top -->
-
+<div id="container_header"></div>
+<script>
+    fetch("include/header.html")
+        .then(response => response.text())
+        .then(data => {
+           document.getElementById("container_header").innerHTML = data;
+        });
+</script>
 <!-- Start Main Top -->
 <header class="main-header">
     <!-- Start Navigation -->
@@ -124,9 +66,9 @@
                     <li class="dropdown">
                         <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Tiện ích</a>
                         <ul class="dropdown-menu">
-                            <li><a href="cart.html">Giỏ hàng</a></li>
-                            <li><a href="checkout.html">Thanh toán</a></li>
-                            <li><a href="my-account.html">Tài khoản</a></li>
+                            <li><a href="tien_ich/cart.html">Giỏ hàng</a></li>
+                            <li><a href="tien_ich/checkout.html">Thanh toán</a></li>
+                            <li><a href="tien_ich/my-account.html">Tài khoản</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="gallery.html">Cửa Hàng</a></li>
@@ -422,85 +364,14 @@
 
 <!-- Start Footer  -->
 <footer>
-    <div class="footer-main">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-12 col-sm-12">
-                    <div class="footer-top-box">
-                        <h3>Thời gian kinh doan</h3>
-                        <ul class="list-time">
-                            <li>Thứ hai- Thứ sáu: 08.00 đến 17.00</li> <li>Thứ bảy: 10.00 đến 20.00</li> <li>Chủ nhật: <span>Đóng cửa</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12 col-sm-12">
-                    <div class="footer-top-box">
-                        <h3>Bản tin</h3>
-                        <form class="newsletter-box">
-                            <div class="form-group">
-                                <input class="" type="email" name="Email" placeholder="Địa chỉ E-mail*" />
-                                <i class="fa fa-envelope"></i>
-                            </div>
-                            <button class="btn hvr-hover" type="submit">Gửi</button>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12 col-sm-12">
-                    <div class="footer-top-box">
-                        <h3>Các trang truyền thông</h3>
-                        <ul>
-                            <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-lg-4 col-md-12 col-sm-12">
-                    <div class="footer-widget">
-                        <h4>Freshshop</h4>
-                        <p>Ở đây chất lượng được đặt lên hàng đầu </p>
-                        <p>Sức khỏe khách hàng là ưu tiên của chúng tôi </p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12 col-sm-12">
-                    <div class="footer-link">
-                        <h4>Thông tin</h4>
-                        <ul>
-                            <li><a href="#">Liên hệ chúng tôi</a></li>
-                            <li><a href="#">Dịch vụ chăm sóc khách hàng </a></li>
-                            <li><a href="#">Our Sitemap</a></li>
-                            <li><a href="#">Điều khoản và điều kiện</a></li>
-                            <li><a href="#">Chính sách bảo mật</a></li>
-                            <li><a href="#">Thông tin giao hàng</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12 col-sm-12">
-                    <div class="footer-link-contact">
-                        <h4>Liên hệ với chúng tôi</h4>
-                        <ul>
-                            <li>
-                                <p><i class="fas fa-map-marker-alt"></i>Địa chỉ: 47 đường số 17 <br>Phường Linh Trung<br> Thành phố Thủ Đức</p>
-                            </li>
-                            <li>
-                                <p><i class="fas fa-phone-square"></i>Liện hệ: <a href="tel:+1-888705770"></a></p>
-                            </li>
-                            <li>
-                                <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com"></a></p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div id="container_footer"></div>
+    <script>
+            fetch("include/footer.html")
+            .then(response => response.text())
+            .then(data => {
+            document.getElementById("container_footer").innerHTML = data;
+        });
+    </script>
 </footer>
 <!-- End Footer  -->
 
