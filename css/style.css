@@ -2598,7 +2598,30 @@
 	border: none;
 }
 
-
+.login-register{
+    float: right;
+}
+.login-register ul li{
+    display: inline-block;
+    border-right: 1px solid #ffffff;
+    padding: 0px 10px;
+    line-height: 14px;
+}
+.login-register ul{
+    line-height: 30px;
+}
+.login-register ul li a{
+    color: #ffffff;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+.login-register ul li a:hover{
+    color: #b0b435;
+}
+.login-register ul li:last-child{
+    border: none;
+}
 
 
 
