@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="css/responsive.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="./asset/bootstrap-icons-1.11.1/bootstrap-icons.css">
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -3501,9 +3502,11 @@
 </div>
 <!-- End Gallery  -->
 <nav aria-label="...">
-    <ul class="pagination py-5 justify-content-center">
+    <ul class="pagination pb-5 justify-content-center ">
         <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Previous</a>
+            <a class="page-link" href="#" aria-label="Previous">
+                <i class="bi-arrow-left"></i>
+            </a>
         </li>
         <li class="page-item active"><a class="page-link" href="gallery_1.html">1</a></li>
         <li class="page-item"><a class="page-link" href="gallery_2.html">2</a></li>
@@ -3516,7 +3519,9 @@
         <li class="page-item"><a class="page-link" href="gallery_9.html">9</a></li>
 
         <li class="page-item">
-            <a class="page-link" href="gallery_2.html">Next</a>
+            <a class="page-link" href="gallery_2.html" aria-label="Next">
+                <i class="bi-arrow-right"></i>
+            </a>
         </li>
     </ul>
 </nav>
@@ -3629,7 +3634,7 @@
 </div>
 <!-- End copyright  -->
 
-<a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
+<a href="#" id="back-to-top" title="Back to top" style="display: none;"><i class="bi-arrow-up-short"></i></a>
 
 <!-- ALL JS FILES -->
 <script src="js/jquery-3.2.1.min.js"></script>
