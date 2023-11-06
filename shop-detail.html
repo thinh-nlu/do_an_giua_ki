@@ -36,14 +36,39 @@
 </head>
 
 <body>
-<div id="container_header"></div>
-<script>
-    fetch("include/header.html")
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("container_header").innerHTML = data;
-        });
-</script>
+<div class="main-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="custom-select-box">
+                    <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
+                        <option>₫ VNĐ</option>
+                        <option>$ USD</option>
+                        <option>€ EUR</option>
+                    </select>
+                </div>
+                <div class="right-phone-box">
+                    <p>Call US :- <a href="#"> +11 900 800 100</a></p>
+                </div>
+                <div class="our-link">
+                    <ul>
+                        <li><a href="#"><i class="fa fa-user s_color"></i> Tài khoản của tôi</a></li>
+                        <li><a href="#"><i class="fas fa-location-arrow"></i> Vị trí</a></li>
+                        <li><a href="#"><i class="fas fa-headset"></i> Liên hệ </a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="login-register">
+                    <ul>
+                        <li><a href="./account/registration.html">Đăng Kí</a></li>
+                        <li><a href="./account/login.html">Đăng Nhập</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- Start Main Top -->
     <header class="main-header">
