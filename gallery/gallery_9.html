@@ -16,18 +16,18 @@
     <meta name="author" content="">
 
     <!-- Site Icons -->
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
     <!-- Site CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <!-- Responsive CSS -->
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="../css/responsive.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/custom.css">
-    <link rel="stylesheet" href="asset/bootstrap-icons-1.11.1/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/custom.css">
+    <link rel="stylesheet" href="../asset/bootstrap-icons-1.11.1/bootstrap-icons.css">
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -39,7 +39,7 @@
 <body>
 <div id="container_header"></div>
 <script>
-    fetch("include/header.html")
+    fetch("../include/header.html")
         .then(response => response.text())
         .then(data => {
             document.getElementById("container_header").innerHTML = data;
@@ -55,25 +55,25 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                    <a class="navbar-brand" href="index.html"><img src="images/logo.png" class="logo" alt=""></a>
+                    <a class="navbar-brand" href="../index.html"><img src="../images/logo.png" class="logo" alt=""></a>
                 </div>
                 <!-- End Header Navigation -->
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">Giới thiệu</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../index.html">Trang chủ</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../about.html">Giới thiệu</a></li>
                         <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Tiện ích</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tiện ích <i class="bi bi-list "></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="tien_ich/cart.html">Giỏ hàng</a></li>
-                                <li><a href="tien_ich/checkout.html">Thanh toán</a></li>
-                                <li><a href="tien_ich/my-account.html">Tài Khoản</a></li>
+                                <li><a href="../tien_ich/cart.html">Giỏ hàng</a></li>
+                                <li><a href="../tien_ich/checkout.html">Thanh toán</a></li>
+                                <li><a href="../tien_ich/my-account.html">Tài Khoản</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item active"><a class="nav-link" href="gallery.html">Cửa Hàng</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contact-us.html">Liên Hệ</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="../gallery.html">Cửa Hàng</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../contact-us.html">Liên Hệ</a></li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -82,7 +82,7 @@
                 <div class="attr-nav">
                     <ul>
                         <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                        <li class="side-menu"><a href="#">
+                        <li class="side-menu"><a href="../tien_ich/cart.html">
 						<i class="fa fa-shopping-bag"></i>
                             <span class="badge">3</span>
 							<p>Giỏ Hàng</p>
@@ -97,17 +97,17 @@
                 <li class="cart-box">
                     <ul class="cart-list">
                         <li>
-                            <a href="#" class="photo"><img src="images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
+                            <a href="#" class="photo"><img src="../images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
                             <h6><a href="#">Delica omtantur </a></h6>
                             <p>1x - <span class="price">$80.00</span></p>
                         </li>
                         <li>
-                            <a href="#" class="photo"><img src="images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
+                            <a href="#" class="photo"><img src="../images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
                             <h6><a href="#">Omnes ocurreret</a></h6>
                             <p>1x - <span class="price">$60.00</span></p>
                         </li>
                         <li>
-                            <a href="#" class="photo"><img src="images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
+                            <a href="#" class="photo"><img src="../images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
                             <h6><a href="#">Agam facilisis</a></h6>
                             <p>1x - <span class="price">$40.00</span></p>
                         </li>
@@ -181,7 +181,7 @@
                 <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
                     <div class="products-single fix">
                         <div class="box-img-hover">
-                            <img src="images/DataWeb/Ớt%20hiểm.jpg" class="img-fluid" alt="Image">
+                            <img src="../images/DataWeb/hoa%20chuối%20bào.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
@@ -192,67 +192,7 @@
                             </div>
                         </div>
                         <div class="why-text">
-                            <h4>Ớt hiểm- 50g</h4>
-                            <h5>3.500đ</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="images/DataWeb/Quýt%20úc.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Thêm  giỏ hàng</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Quýt úc- 1kg</h4>
-                            <h5>52.000đ</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="images/DataWeb/rau%20cải%20ngọt%20baby.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Thêm  giỏ hàng</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Rau cải ngọt baby- 300g</h4>
-                            <h5>14.500đ</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="images/DataWeb/Rau%20cần%20nước.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Thêm  giỏ hàng</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Rau cần nước- 500g</h4>
+                            <h4>Hoa chuối bào- 200g</h4>
                             <h5>19.000đ</h5>
                         </div>
                     </div>
@@ -261,7 +201,7 @@
                 <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
                     <div class="products-single fix">
                         <div class="box-img-hover">
-                            <img src="images/DataWeb/Rau%20đắng.jpg" class="img-fluid" alt="Image">
+                            <img src="../images/DataWeb/Nấm%20Notaly.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
@@ -272,8 +212,8 @@
                             </div>
                         </div>
                         <div class="why-text">
-                            <h4>Rau đắng- 200g</h4>
-                            <h5>8.000đ</h5>
+                            <h4>Nấm Notaly- 200g</h4>
+                            <h5>17.000đ</h5>
                         </div>
                     </div>
                 </div>
@@ -281,7 +221,7 @@
                 <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
                     <div class="products-single fix">
                         <div class="box-img-hover">
-                            <img src="images/DataWeb/rau%20dền.jpg" class="img-fluid" alt="Image">
+                            <img src="../images/DataWeb/Khoai%20tây%20đông%20lạnh.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
@@ -292,8 +232,8 @@
                             </div>
                         </div>
                         <div class="why-text">
-                            <h4>Rau dền- 500g</h4>
-                            <h5>14.500đ</h5>
+                            <h4>Khoai tây đông lạnh- 500g</h4>
+                            <h5>48.000đ</h5>
                         </div>
                     </div>
                 </div>
@@ -301,7 +241,7 @@
                 <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
                     <div class="products-single fix">
                         <div class="box-img-hover">
-                            <img src="images/DataWeb/Rau%20diếp%20cá.jpg" class="img-fluid" alt="Image">
+                            <img src="../images/DataWeb/Nấm%20bào%20ngư%20xám.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
@@ -312,8 +252,8 @@
                             </div>
                         </div>
                         <div class="why-text">
-                            <h4>Rau diếp cá- 100g</h4>
-                            <h5>7.500đ</h5>
+                            <h4>Nấm bào ngư xám- 300g</h4>
+                            <h5>28.000đ</h5>
                         </div>
                     </div>
                 </div>
@@ -321,7 +261,7 @@
                 <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
                     <div class="products-single fix">
                         <div class="box-img-hover">
-                            <img src="images/DataWeb/Rau%20húng%20cây.jpg" class="img-fluid" alt="Image">
+                            <img src="../images/DataWeb/ổi%20trân%20châu%20ruột%20đỏ.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
@@ -332,8 +272,8 @@
                             </div>
                         </div>
                         <div class="why-text">
-                            <h4>Rau húng cây- 100g</h4>
-                            <h5>8.000đ</h5>
+                            <h4>Ổi trân châu ruột đỏ- 1kg</h4>
+                            <h5>31.000đ</h5>
                         </div>
                     </div>
                 </div>
@@ -341,7 +281,7 @@
                 <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
                     <div class="products-single fix">
                         <div class="box-img-hover">
-                            <img src="images/DataWeb/Rau%20húng%20quế.jpg" class="img-fluid" alt="Image">
+                            <img src="../images/DataWeb/Me%20chua.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
@@ -352,8 +292,8 @@
                             </div>
                         </div>
                         <div class="why-text">
-                            <h4>Rau húng quế- 100g</h4>
-                            <h5>7.000đ</h5>
+                            <h4>Me chua- 250g</h4>
+                            <h5>12.000đ</h5>
                         </div>
                     </div>
                 </div>
@@ -361,7 +301,7 @@
                 <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
                     <div class="products-single fix">
                         <div class="box-img-hover">
-                            <img src="images/DataWeb/Rau%20lang.jpg" class="img-fluid" alt="Image">
+                            <img src="../images/DataWeb/sapoche.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
@@ -372,8 +312,8 @@
                             </div>
                         </div>
                         <div class="why-text">
-                            <h4>Rau lang- 500g</h4>
-                            <h5>14.000đ</h5>
+                            <h4>Sapoche- 1kg</h4>
+                            <h5>33.000đ</h5>
                         </div>
                     </div>
                 </div>
@@ -381,7 +321,7 @@
                 <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
                     <div class="products-single fix">
                         <div class="box-img-hover">
-                            <img src="images/DataWeb/Rau%20má.jpg" class="img-fluid" alt="Image">
+                            <img src="../images/DataWeb/Dưa%20cải%20chua%20ngọt.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
@@ -392,8 +332,8 @@
                             </div>
                         </div>
                         <div class="why-text">
-                            <h4>Rau má- 200g</h4>
-                            <h5>10.000đ</h5>
+                            <h4>Dưa cải chua ngọt- 500g</h4>
+                            <h5>33.600đ</h5>
                         </div>
                     </div>
                 </div>
@@ -401,7 +341,7 @@
                 <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
                     <div class="products-single fix">
                         <div class="box-img-hover">
-                            <img src="images/DataWeb/Rau%20mồng%20tơi.jpg" class="img-fluid" alt="Image">
+                            <img src="../images/DataWeb/Bầu%20sao%20trái.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
@@ -412,91 +352,153 @@
                             </div>
                         </div>
                         <div class="why-text">
-                            <h4>Rau mồng tơi- 500g</h4>
+                            <h4>Bầu sao trái- 550g</h4>
+                            <h5>6.800đ</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <img src="../images/DataWeb/ớt%20xiêm%20xanh.jpg" class="img-fluid" alt="Image">
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
+                                </ul>
+                                <a class="cart" href="#">Thêm  giỏ hàng</a>
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <h4>Ớt xiêm xanh- 50g</h4>
+                            <h5>4.000đ</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <img src="../images/DataWeb/Củ%20sen%20tươi%20cắt%20lát.jpg" class="img-fluid" alt="Image">
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
+                                </ul>
+                                <a class="cart" href="#">Thêm  giỏ hàng</a>
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <h4>Củ sen tươi cắt lát- 250g</h4>
+                            <h5>29.500đ</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <img src="../images/DataWeb/nấm%20tuyết.jpg" class="img-fluid" alt="Image">
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
+                                </ul>
+                                <a class="cart" href="#">Thêm  giỏ hàng</a>
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <h4>Nấm tuyết- gói 50g</h4>
+                            <h5>30.000đ</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <img src="../images/DataWeb/Nho%20không%20hạt.jpg" class="img-fluid" alt="Image">
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
+                                </ul>
+                                <a class="cart" href="#">Thêm  giỏ hàng</a>
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <h4>Nho không hạt- 500g</h4>
+                            <h5>135.000đ</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <img src="../images/DataWeb/Nấm%20mỡ%20nâu.jpg" class="img-fluid" alt="Image">
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
+                                </ul>
+                                <a class="cart" href="#">Thêm  giỏ hàng</a>
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <h4>Bí xanh trái- 500g</h4>
+                            <h5>18.000đ</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <img src="../images/DataWeb/Cam%20sành.jpg" class="img-fluid" alt="Image">
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
+                                </ul>
+                                <a class="cart" href="#">Thêm  giỏ hàng</a>
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <h4>Cam sành- 1kg</h4>
+                            <h5>17.000đ</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <img src="../images/DataWeb/nguyên%20liệu%20kho%20sả%20ớt.jpg" class="img-fluid" alt="Image">
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
+                                </ul>
+                                <a class="cart" href="#">Thêm  giỏ hàng</a>
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <h4>Nguyên liệu kho sả ớt- 80g</h4>
                             <h5>15.000đ</h5>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="images/DataWeb/Rau%20muống%20nước%20bỏ%20lá.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Thêm  giỏ hàng</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Rau mung nước bỏ lá- 300g</h4>
-                            <h5>10.000đ</h5>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="images/DataWeb/Rau%20răm.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Thêm  giỏ hàng</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Rau răm- 100g</h4>
-                            <h5>5.500</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="images/DataWeb/rau%20thì%20là.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Thêm  giỏ hàng</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Rau thì là- 100g</h4>
-                            <h5>9.500đ</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="images/DataWeb/Sả%20cây.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Thêm  giỏ hàng</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Sả cây- 200g</h4>
-                            <h5>6.500đ</h5>
-                        </div>
-                    </div>
-                </div>
 
 
             </div>
@@ -516,22 +518,22 @@
 <nav aria-label="...">
     <ul class="pagination pb-5 justify-content-center ">
         <li class="page-item ">
-            <a class="page-link" href="gallery_5.html" aria-label="Previous">
+            <a class="page-link" href="gallery_8.html" aria-label="Previous">
                 <i class="bi-arrow-left"></i>
             </a>
         </li>
-        <li class="page-item"><a class="page-link" href="gallery.html">1</a></li>
+        <li class="page-item"><a class="page-link" href="../gallery.html">1</a></li>
         <li class="page-item"><a class="page-link" href="gallery_2.html">2</a></li>
         <li class="page-item"><a class="page-link" href="gallery_3.html">3</a></li>
         <li class="page-item"><a class="page-link" href="gallery_4.html">4</a></li>
         <li class="page-item"><a class="page-link" href="gallery_5.html">5</a></li>
-        <li class="page-item active"><a class="page-link" href="gallery_6.html">6</a></li>
+        <li class="page-item"><a class="page-link" href="gallery_6.html">6</a></li>
         <li class="page-item"><a class="page-link" href="gallery_7.html">7</a></li>
         <li class="page-item"><a class="page-link" href="gallery_8.html">8</a></li>
-        <li class="page-item"><a class="page-link" href="gallery_9.html">9</a></li>
+        <li class="page-item active"><a class="page-link" href="gallery_9.html">9</a></li>
 
-        <li class="page-item">
-            <a class="page-link" href="gallery_7.html" aria-label="Next">
+        <li class="page-item disabled">
+            <a class="page-link" href="#" aria-label="Next">
                 <i class="bi-arrow-right"></i>
             </a>
         </li>
@@ -543,7 +545,7 @@
         <div class="main-instagram owl-carousel owl-theme">
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-01.jpg" alt="" />
+                    <img src="../images/instagram-img-01.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -551,7 +553,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-02.jpg" alt="" />
+                    <img src="../images/instagram-img-02.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -559,7 +561,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-03.jpg" alt="" />
+                    <img src="../images/instagram-img-03.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -567,7 +569,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-04.jpg" alt="" />
+                    <img src="../images/instagram-img-04.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -575,7 +577,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-05.jpg" alt="" />
+                    <img src="../images/instagram-img-05.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -583,7 +585,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-06.jpg" alt="" />
+                    <img src="../images/instagram-img-06.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -591,7 +593,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-07.jpg" alt="" />
+                    <img src="../images/instagram-img-07.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -599,7 +601,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-08.jpg" alt="" />
+                    <img src="../images/instagram-img-08.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -607,7 +609,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-09.jpg" alt="" />
+                    <img src="../images/instagram-img-09.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -615,7 +617,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="images/instagram-img-05.jpg" alt="" />
+                    <img src="../images/instagram-img-05.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -630,7 +632,7 @@
 <footer>
     <div id="container_footer"></div>
     <script>
-        fetch("include/footer.html")
+        fetch("../include/footer.html")
             .then(response => response.text())
             .then(data => {
                 document.getElementById("container_footer").innerHTML = data;
@@ -649,21 +651,21 @@
     <a href="#" id="back-to-top" title="Back to top" style="display: none;"><i class="bi-arrow-up-short"></i></a>
 
     <!-- ALL JS FILES -->
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     <!-- ALL PLUGINS -->
-    <script src="js/jquery.superslides.min.js"></script>
-    <script src="js/bootstrap-select.js"></script>
-    <script src="js/inewsticker.js"></script>
-    <script src="js/bootsnav.js."></script>
-    <script src="js/images-loded.min.js"></script>
-    <script src="js/isotope.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/baguetteBox.min.js"></script>
-    <script src="js/form-validator.min.js"></script>
-    <script src="js/contact-form-script.js"></script>
-    <script src="js/custom.js"></script>
+    <script src="../js/jquery.superslides.min.js"></script>
+    <script src="../js/bootstrap-select.js"></script>
+    <script src="../js/inewsticker.js"></script>
+    <script src="../js/bootsnav.js"></script>
+    <script src="../js/images-loded.min.js"></script>
+    <script src="../js/isotope.min.js"></script>
+    <script src="../js/owl.carousel.min.js"></script>
+    <script src="../js/baguetteBox.min.js"></script>
+    <script src="../js/form-validator.min.js"></script>
+    <script src="../js/contact-form-script.js"></script>
+    <script src="../js/custom.js"></script>
 </body>
 
 </html>
