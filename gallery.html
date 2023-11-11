@@ -38,13 +38,39 @@
 
 <body>
 <div id="container_header"></div>
-<script>
-    fetch("include/header.html")
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("container_header").innerHTML = data;
-        });
-</script>
+<div class="main-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="custom-select-box">
+                    <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
+                        <option>₫ VNĐ</option>
+                        <option>$ USD</option>
+                        <option>€ EUR</option>
+                    </select>
+                </div>
+                <div class="right-phone-box">
+                    <p>Call US :- <a href="#"> +11 900 800 100</a></p>
+                </div>
+                <div class="our-link">
+                    <ul>
+                        <li><a href="#"><i class="fa fa-user s_color"></i> Tài khoản của tôi</a></li>
+                        <li><a href="#"><i class="fas fa-location-arrow"></i> Vị trí</a></li>
+                        <li><a href="#"><i class="fas fa-headset"></i> Liên hệ </a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="login-register">
+                    <ul>
+                        <li><a href="./account/registration.html">Đăng Kí</a></li>
+                        <li><a href="./account/login.html">Đăng Nhập</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- Start Main Top -->
     <header class="main-header">
         <!-- Start Navigation -->
@@ -204,7 +230,7 @@
                             <img src="images/DataWeb/Bắp%20cải%20thảo.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
-                                    <li><a href="shop-detail.html" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
@@ -223,7 +249,7 @@
                             <img src="images/DataWeb/Bắp%20mĩ%20tách%20hạt.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
-                                    <li><a href="shop-detail.html" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
@@ -243,7 +269,7 @@
                             <img src="images/DataWeb/Bắp%20nữ%20hoàng.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
-                                    <li><a href="shop-detail.html" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
@@ -267,7 +293,7 @@
                             <img src="images/DataWeb/Bầu%20sao%20trái.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
-                                    <li><a href="shop-detail.html" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
@@ -286,7 +312,7 @@
                             <img src="images/DataWeb/Bí%20đỏ%20tròn.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
-                                    <li><a href="shop-detail.html" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
@@ -306,7 +332,7 @@
                             <img src="images/DataWeb/Bí%20ngòi%20xanh.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
-                                    <li><a href="shop-detail.html" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
@@ -326,7 +352,7 @@
                             <img src="images/DataWeb/Bơ.png" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
-                                    <li><a href="shop-detail.html" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
@@ -346,7 +372,7 @@
                             <img src="images/DataWeb/Bòn%20bon.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
-                                    <li><a href="shop-detail.html" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
@@ -366,7 +392,7 @@
                             <img src="images/DataWeb/Bông%20bí%20nụ.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
-                                    <li><a href="shop-detail.html" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
@@ -386,7 +412,7 @@
                             <img src="images/DataWeb/Cà%20chua.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
-                                    <li><a href="shop-detail.html" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
@@ -406,7 +432,7 @@
                             <img src="images/DataWeb/Cà%20pháo.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
-                                    <li><a href="shop-detail.html" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
@@ -426,7 +452,7 @@
                             <img src="images/DataWeb/Cà%20pháo%20ngâm%20chua%20ngọt.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
-                                    <li><a href="shop-detail.html" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
@@ -446,7 +472,7 @@
                             <img src="images/DataWeb/Cà%20rốt.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
-                                    <li><a href="shop-detail.html" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
@@ -466,7 +492,7 @@
                             <img src="images/DataWeb/Cà%20tím.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
-                                    <li><a href="shop-detail.html" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
@@ -486,7 +512,7 @@
                             <img src="images/DataWeb/Cải%20bẹ%20dún.jpg" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
-                                    <li><a href="shop-detail.html" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
@@ -524,17 +550,17 @@
             </a>
         </li>
         <li class="page-item active"><a class="page-link" href="gallery_1.html">1</a></li>
-        <li class="page-item"><a class="page-link" href="gallery_2.html">2</a></li>
-        <li class="page-item"><a class="page-link" href="gallery_3.html">3</a></li>
-        <li class="page-item"><a class="page-link" href="gallery_4.html">4</a></li>
-        <li class="page-item"><a class="page-link" href="gallery_5.html">5</a></li>
-        <li class="page-item"><a class="page-link" href="gallery_6.html">6</a></li>
-        <li class="page-item"><a class="page-link" href="gallery_7.html">7</a></li>
-        <li class="page-item"><a class="page-link" href="gallery_8.html">8</a></li>
-        <li class="page-item"><a class="page-link" href="gallery_9.html">9</a></li>
+        <li class="page-item"><a class="page-link" href="gallery/gallery_2.html">2</a></li>
+        <li class="page-item"><a class="page-link" href="gallery/gallery_3.html">3</a></li>
+        <li class="page-item"><a class="page-link" href="gallery/gallery_4.html">4</a></li>
+        <li class="page-item"><a class="page-link" href="gallery/gallery_5.html">5</a></li>
+        <li class="page-item"><a class="page-link" href="gallery/gallery_6.html">6</a></li>
+        <li class="page-item"><a class="page-link" href="gallery/gallery_7.html">7</a></li>
+        <li class="page-item"><a class="page-link" href="gallery/gallery_8.html">8</a></li>
+        <li class="page-item"><a class="page-link" href="gallery/gallery_9.html">9</a></li>
 
         <li class="page-item">
-            <a class="page-link" href="gallery_2.html" aria-label="Next">
+            <a class="page-link" href="gallery/gallery_2.html" aria-label="Next">
                 <i class="bi-arrow-right"></i>
             </a>
         </li>
