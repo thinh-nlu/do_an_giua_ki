@@ -2,8 +2,8 @@
 /** ADD YOUR AWESOME CODES HERE **/
 .pagination > li > a
 {
-    background-color: white;
-    color: #B0B435;
+    background-color: #FAA21B;
+    color: #8BC63F;
 
 }
 
@@ -13,19 +13,19 @@
 .pagination > li > span:hover
 {
     color: #5a5a5a;
-    background-color: #eee;
-    border-color: #ddd;
+    background-color: #FAA21B;
+    border-color: #FAA21B;
 }
 
 .pagination > .active > a
 {
     color: white;
-    background-color: #B0B435 !Important;
-    border: solid 1px #B0B435 !Important;
+    background-color: #8BC63F !Important;
+    border: solid 1px #8BC63F !Important;
 }
 
 .pagination > .active > a:hover
 {
-    background-color: #B0B435 !Important;
-    border: solid 1px #B0B435;
+    background-color: #8BC63F !Important;
+    border: solid 1px #8BC63F;
 }
