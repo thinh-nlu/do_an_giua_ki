@@ -2,7 +2,7 @@
 /** ADD YOUR AWESOME CODES HERE **/
 .pagination > li > a
 {
-    background-color: #FAA21B;
+    background-color: white;
     color: #8BC63F;
 
 }
@@ -13,8 +13,8 @@
 .pagination > li > span:hover
 {
     color: #5a5a5a;
-    background-color: #FAA21B;
-    border-color: #FAA21B;
+    background-color: #eee;
+    border-color: #ddd;
 }
 
 .pagination > .active > a
