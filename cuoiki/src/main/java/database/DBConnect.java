@@ -37,10 +37,15 @@ public class DBConnect {
     public static Connection getConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection(uri);
+            con = DriverManager.getConnection(uri,DBConfig.username,DBConfig.password);
+            System.out.println("thanh cong");
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         }
         return con;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(DBConnect.getConnection());
     }
 }
