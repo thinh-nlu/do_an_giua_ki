@@ -3,6 +3,7 @@ package controller;
 import dao.ProductDAO;
 import database.DBConnect;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import model.Product;
@@ -11,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 @WebServlet("/add_product")
+@MultipartConfig
 public class AddProduct extends HttpServlet {
 
     @Override
@@ -25,6 +27,7 @@ public class AddProduct extends HttpServlet {
         String image = part.getSubmittedFileName();
 
         Product p = new Product(title,price,unit,image,category,keyword,quantity,"con");
+        System.out.println(p);
         ProductDAO dao = new ProductDAO(DBConnect.getConnection());
         boolean isAdd = dao.addProduct(p);
         HttpSession session = req.getSession();

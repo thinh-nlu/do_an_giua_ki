@@ -152,7 +152,7 @@
 
         <div class="form-outline mb-4 w-50 m-auto">
             <label for="product_category" class="form-label">Loại</label>
-            <select class="form-control" id="product_category" name="product-category">
+            <select class="form-control" id="product_category" name="product_category" required="required">
                 <option value="rau">Rau</option>
                 <option value="cu">Củ</option>
                 <option value="hat">Hạt</option>
@@ -160,7 +160,7 @@
             </select>
         </div>
 
-        <!-- image1 -->
+        <!-- image -->
         <div class="form-outline mb-4 w-50 m-auto">
             <label for="product_image" class="form-label">Hình ảnh sản phẩm</label>
             <input type="file" name="product_image" id="product_image" class="form-control"

@@ -114,13 +114,14 @@ public class Product {
         return "Product{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", price=" + price +
+                ", price='" + price + '\'' +
                 ", unit='" + unit + '\'' +
                 ", image='" + image + '\'' +
                 ", categoryId='" + categoryId + '\'' +
                 ", keyword='" + keyword + '\'' +
-                ", dateInsert=" + timestamp +
-                ", quantity=" + quantity +
+                ", timestamp=" + timestamp +
+                ", quantity='" + quantity + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

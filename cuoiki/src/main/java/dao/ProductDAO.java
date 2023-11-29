@@ -23,12 +23,12 @@ public class ProductDAO {
             ps = con.prepareStatement(query);
             ps.setString(1,p.getTitle());
             ps.setString(2,p.getImage());
-            ps.setString(3,p.getUnit());
+            ps.setString(3,p.getPrice());
             ps.setString(4,p.getUnit());
             ps.setString(5,p.getCategoryId());
             ps.setString(6,p.getKeyword());
             ps.setString(7,p.getStatus());
-            ps.setString(9,p.getQuantity());
+            ps.setString(8,p.getQuantity());
             int i = ps.executeUpdate();
 
             isAdd = i == 1;
