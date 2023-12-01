@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored = "false" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,14 +36,7 @@
     <link rel="stylesheet" href="../css/admin-style.css">
 </head>
 <body>
-<div id="container_header"></div>
-<script>
-    fetch("../include/header.html")
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("container_header").innerHTML = data;
-        });
-</script>
+<jsp:include page="../include/header.jsp"/>
 <header class="main-header">
     <!-- Start Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
@@ -144,18 +139,7 @@
     <h2>Chào mừng đến với trang quản lí</h2>
     <p>Đây là trang chính của hệ thống quản lí. Hãy chọn chức năng phía trên để tiếp tục.</p>
 </div>
-<!-- Start Footer  -->
-<!--<footer>-->
-<!--    <div id="container_footer"></div>-->
-<!--    <script>-->
-<!--        fetch("..include/footer.jsp")-->
-<!--            .then(response => response.text())-->
-<!--            .then(data => {-->
-<!--                document.getElementById("container_footer").innerHTML = data;-->
-<!--            });-->
-<!--    </script>-->
-<!--</footer>-->
-<!-- End Footer  -->
+<jsp:include page="../include/footer.jsp"/>
 <!-- All JS Files -->
 <script src="../js/jquery-3.2.1.min.js"></script>
 <script src="../js/popper.min.js"></script>

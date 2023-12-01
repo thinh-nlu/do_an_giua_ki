@@ -127,9 +127,12 @@
         </div>
 
         <div class="form-outline mb-4 w-50 m-auto">
-            <label for="unit" class="form-label">Đơn Giá</label>
-            <input type="text" name="unit" id="unit" class="form-control"
-                   placeholder="Nhập đơn giá" autocomplete="off" required="required">
+            <label for="unit" class="form-label">Đơn vị</label>
+            <select class="form-control" id="unit" name="unit" required="required">
+                <option value="kg">Kg</option>
+                <option value="g">g</option>
+            </select>
+
         </div>
         <!-- price -->
         <div class="form-outline mb-4 w-50 m-auto">
@@ -164,6 +167,12 @@
         <div class="form-outline mb-4 w-50 m-auto">
             <label for="product_image" class="form-label">Hình ảnh sản phẩm</label>
             <input type="file" name="product_image" id="product_image" class="form-control"
+                   required="required">
+        </div>
+
+        <div class="form-outline mb-4 w-50 m-auto">
+            <label for="unit_price" class="form-label">Đơn Giá</label>
+            <input type="number" name="unit_price" id="unit_price" class="form-control"
                    required="required">
         </div>
 

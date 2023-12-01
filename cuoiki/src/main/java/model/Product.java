@@ -15,10 +15,11 @@ public class Product {
     private Timestamp timestamp;
     private String quantity;
     private String status;
+    private String unitPrice;
 
     public Product() {}
 
-    public Product(String title, String price, String unit, String image, String categoryId, String keyword, String quantity, String status) {
+    public Product(String title, String price, String unit, String image, String categoryId, String keyword, String quantity, String status, String unitPrice) {
         this.title = title;
         this.price = price;
         this.unit = unit;
@@ -27,6 +28,23 @@ public class Product {
         this.keyword = keyword;
         this.quantity = quantity;
         this.status = status;
+        this.unitPrice = unitPrice;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(String unitPrice) {
+        this.unitPrice = unitPrice;
     }
 
     public int getId() {
