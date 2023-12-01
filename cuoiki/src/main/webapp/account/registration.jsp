@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored = "false" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,13 +36,7 @@
 </head>
 <body>
 <div id="container_header"></div>
-<script>
-	fetch("../include/header.html")
-			.then(response => response.text())
-			.then(data => {
-				document.getElementById("container_header").innerHTML = data;
-			});
-</script>
+<jsp:include page="../include/header.jsp"/>
 <!-- Start Main Top -->
 <header class="main-header">
 	<!-- Start Navigation -->
@@ -131,27 +127,35 @@
 				<div class="row justify-content-center"> <!-- Dùng justify-content-center để căn giữa nội dung -->
 						<div class="signup-form">
 							<h2 class="form-title mt-5">Đăng Ký</h2>
-							<form method="post" action="register" class="mt-3" id="formRegister">
+							<c:if test="${not empty success}">
+								<p class="text-center text-success">${success}</p>
+								<c:remove var="success" scope="session"/>
+							</c:if>
+							<c:if test="${not empty failed}">
+								<p class="text-center text-danger">${failed}</p>
+								<c:remove var="failed" scope="session"/>
+							</c:if>
+							<form method="post" action="../register" class="mt-3" id="formRegister">
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										<label for="name" class="mb-0">Tên Đăng Nhập</label>
-										<input type="text" class="form-control" id="name" placeholder="">
+										<input type="text" class="form-control" id="name" name="name" placeholder="">
 									</div>
 									<div class="form-group col-md-6">
 										<label for="email" class="mb-0">Địa Chỉ Email</label>
-										<input type="email" class="form-control" id="email" placeholder="">
+										<input type="email" class="form-control" id="email" name="email" placeholder="">
 									</div>
 									<div class="form-group col-md-6">
 										<label for = "password" class="mb-0">Mật Khẩu</label>
-										<input type="password" class="form-control" id="password" placeholder="">
+										<input type="password" class="form-control" id="password" name="password" placeholder="">
 									</div>
 									<div class="form-group col-md-6">
 										<label for="re_pass" class="mb-0">Nhập Lại Mật Khẩu</label>
-										<input type="password" class="form-control" id="re_pass" placeholder="">
+										<input type="password" class="form-control" id="re_pass" name="re_pass" placeholder="">
 									</div>
 									<div class="form-group col-md-6">
 										<label for="contact" class="mb-0">Số Điện Thoại</label>
-										<input type="text" class="form-control" id="contact" placeholder="">
+										<input type="text" class="form-control" id="contact" name="contact" placeholder="">
 									</div>
 								</div>
 								<div class="mb-5">
@@ -171,22 +175,10 @@
 <script src="js/main.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" href="alert/dist/sweetalert.css">
-<script type="text/javascript">
-	var status = document.getElementById("status").value;
-	if (status == "success") {
-		swal("Congrats", "Account Created Successfully", "success");
-	}
-</script>
 <!-- Start Footer  -->
 <footer>
 	<div id="container_footer"></div>
-	<script>
-		fetch("../include/footer.html")
-				.then(response => response.text())
-				.then(data => {
-					document.getElementById("container_footer").innerHTML = data;
-				});
-	</script>
+	<jsp:include page="../include/footer.jsp"/>
 </footer>
 <!-- End Footer  -->
 
