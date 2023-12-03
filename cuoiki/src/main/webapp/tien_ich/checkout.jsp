@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored = "false" %>
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -38,13 +40,7 @@
 
 <body>
 <div id="container_header"></div>
-<script>
-    fetch("../include/header.html")
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("container_header").innerHTML = data
-        })
-</script>
+<jsp:include page="../include/header.jsp"/>
 
     <!-- Start Main Top -->
     <header class="main-header">
@@ -69,7 +65,7 @@
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tiện ích <i class="bi bi-list "></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="cart.jsp">Giỏ Hàng</a></li>
-                                <li><a href="checkout.html">Thanh Toán</a></li>
+                                <li><a href="checkout.jsp">Thanh Toán</a></li>
                                 <li><a href="my-account.jsp">Tài Khoản</a></li>
                             </ul>
                         </li>
@@ -344,13 +340,7 @@
     <!-- Start Footer  -->
     <footer>
         <div id="container_footer"></div>
-        <script>
-            fetch("../include/footer.html")
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById("container_footer").innerHTML = data;
-                });
-        </script>
+        <jsp:include page="../include/footer.jsp"/>
     </footer>
     <!-- End Footer  -->
 

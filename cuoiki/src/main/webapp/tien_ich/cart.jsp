@@ -1,4 +1,7 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored = "false" %>
 <!DOCTYPE html>
+
 <html lang="en">
 <!-- Basic -->
 
@@ -38,13 +41,7 @@
 
 <body>
     <div id="container_header"></div>
-    <script>
-        fetch("../include/header.html")
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("container_header").innerHTML = data
-            })
-    </script>
+    <jsp:include page="../include/header.jsp"/>
 
     <!-- Start Main Top -->
     <header class="main-header">
@@ -68,7 +65,7 @@
                         <li class="dropdown active">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tiện ích <i class="bi bi-list "></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="cart.html">Giỏ hàng</a></li>
+                                <li><a href="cart.jsp">Giỏ hàng</a></li>
                                 <li><a href="checkout.jsp">Thanh toán</a></li>
                                 <li><a href="my-account.jsp">Tài Khoản</a></li>
                             </ul>
@@ -83,7 +80,7 @@
                 <div class="attr-nav">
                     <ul>
                         <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                        <li class="side-menu"><a href="../tien_ich/cart.html">
+                        <li class="side-menu"><a href="../tien_ich/cart.jsp">
 						<i class="fa fa-shopping-bag"></i>
                             <span class="badge">3</span>
 							<p>Giỏ Hàng</p>
@@ -398,13 +395,7 @@
     <!-- Start Footer  -->
     <footer>
         <div id="container_footer"></div>
-        <script>
-            fetch("../include/footer.html")
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById("container_footer").innerHTML = data;
-                });
-        </script>
+        <jsp:include page="../include/footer.jsp"/>
     </footer>
     <!-- End Footer  -->
 

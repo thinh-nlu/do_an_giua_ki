@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored = "false" %>
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -38,13 +40,7 @@
 
 <body>
 <div id="container_header"></div>
-<script>
-    fetch("../include/header.html")
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("container_header").innerHTML = data
-        })
-</script>
+<jsp:include page="../include/header.jsp"/>
 
 <!-- Start Main Top -->
 <header class="main-header">

@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored = "false" %>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <!-- Basic -->
@@ -77,7 +79,7 @@
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                     <li class="nav-item"><a class="nav-link" href="index.jsp">Trang chủ</a></li>
-                    <li class="nav-item active"><a class="nav-link" href="about.html">Giới Thiệu</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="about.jsp">Giới Thiệu</a></li>
                     <li class="dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tiện ích <i class="bi bi-list "></i></a>
                         <ul class="dropdown-menu" >
@@ -338,13 +340,7 @@
 <!-- Start Footer  -->
 <footer>
     <div id="container_footer"></div>
-    <script>
-            fetch("include/footer.html")
-            .then(response => response.text())
-            .then(data => {
-            document.getElementById("container_footer").innerHTML = data;
-        });
-    </script>
+    <jsp:include page="include/footer.jsp"/>
 </footer>
 <!-- End Footer  -->
 
