@@ -14,40 +14,29 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Timestamp;
 
-@WebServlet("/register")
-public class RegisterUser extends HttpServlet {
+@WebServlet("/login")
+public class LoginUser extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         String username = req.getParameter("name").trim();
-        String email = req.getParameter("email");
         String password = req.getParameter("password").trim();
-        String rePass = req.getParameter("re_pass").trim();
-        String contact = req.getParameter("contact").trim();
-        String hashPassword = hashPassword(password);
 
-        User user = new User(username,email,hashPassword,contact,"1");
-        System.out.println(user);
-        HttpSession session = req.getSession();
         UserDAO dao = new UserDAO(DBConnect.getConnection());
-        if (password.length() <= 7) {
-            session.setAttribute("failed","Vui lòng nhập mật khẩu có ít nhất 8 kí tự");
-            resp.sendRedirect("account/registration.jsp");
-        } else if (!password.equals(rePass)) {
-            session.setAttribute("failed","Mật khẩu không trùng khớp");
-            resp.sendRedirect("account/registration.jsp");
+        User user = dao.getUserByUsername(username);
+        String passwordHashFromDB = user.getPassword();
+        String passwordHash = hashPassword(password);
+        HttpSession session = req.getSession();
+        if (user == null) {
+            session.setAttribute("failed","Tài khoản không tồn tại");
+            resp.sendRedirect("account/login.jsp");
+        } else if (!passwordHash.equals(passwordHashFromDB)) {
+            session.setAttribute("failed","Mật khẩu không chính xác");
+            resp.sendRedirect("account/login.jsp");
         } else {
-            boolean isAdd = dao.registerUser(user);
-            if (isAdd) {
-                session.setAttribute("success","Đăng kí thành công");
-                resp.sendRedirect("account/registration.jsp");
-            } else {
-                session.setAttribute("failed","Hệ thống đang gặp lỗi vui lòng thử lại sau");
-                resp.sendRedirect("account/registration.jsp");
-            }
+            session.setAttribute("success",user);
+            resp.sendRedirect("index.jsp");
         }
     }
 
