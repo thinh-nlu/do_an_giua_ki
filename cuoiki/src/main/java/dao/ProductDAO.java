@@ -47,12 +47,13 @@ public class ProductDAO {
 
     public List<Product> getAllProduct() {
         List<Product> products = new ArrayList<>();
-        Product p = new Product();
+        Product p = null;
         query = "select * from products";
         try {
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()){
+                p = new Product();
                 p.setId(rs.getInt(1));
                 p.setTitle(rs.getString(2));
                 p.setImage(rs.getString(3));

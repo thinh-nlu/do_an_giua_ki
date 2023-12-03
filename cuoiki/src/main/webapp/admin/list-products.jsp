@@ -137,10 +137,10 @@
         <tr class='text-center text-dark font-weight-normal  '>
             <td><%=p.getId()%></td>
             <td><%=p.getTitle()%></td>
-            <td><img width="50" height="50" class='cart_img' src='<%=p.getImage()%>'></td>
+            <td><img width="50" height="50" class='cart_img' src='../DataWeb/<%=p.getImage()%>'></td>
 
             <td><%=p.getPrice()%></td>
-            <td><%=p.getUnitPrice()+"/"+p.getUnit()%></td>
+            <td><%=p.getPrice()+"/"+p.getUnitPrice()+p.getUnit()%></td>
             <td><a href="#" class='text-dark'><i class=" bi bi-pencil-square"> </i></a></td>
             <td><a href="#" class='text-dark'><i class="bi bi-trash"></i></a></td>
         <%
