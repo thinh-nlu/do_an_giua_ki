@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored = "false" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,14 +37,7 @@
 </head>
 
 <body>
-<div id="container_header"></div>
-<script>
-	fetch("../include/header.html")
-			.then(response => response.text())
-			.then(data => {
-				document.getElementById("container_header").innerHTML = data;
-			});
-</script>
+<jsp:include page="../include/header.jsp"/>
 <!-- Start Main Top -->
 <header class="main-header">
 	<!-- Start Navigation -->
@@ -132,15 +127,23 @@
 				<div class="row justify-content-center">
 					<div class="signin-form">
 						<h2 class="form-title mt-5">Đăng Nhập</h2>
-						<form method="post" action="login" class="mt-3" id="formLogin">
+						<c:if test="${not empty success}">
+							<p class="text-center text-success">${success}</p>
+							<c:remove var="success" scope="session"/>
+						</c:if>
+						<c:if test="${not empty failed}">
+							<p class="text-center text-danger">${failed}</p>
+							<c:remove var="failed" scope="session"/>
+						</c:if>
+						<form method="post" action="../login" class="mt-3" id="formLogin">
 							<div class="form-col md-3">
 								<div class="form-group">
 									<label for="name" class="mb-0">Tên Đăng Nhập</label>
-									<input type="text" class="form-control" id="name" placeholder="">
+									<input type="text" class="form-control" id="name" name="name" placeholder="">
 								</div>
 								<div class="form-group">
 									<label for = "password" class="mb-0">Mật Khẩu</label>
-									<input type="password" class="form-control" id="password" placeholder="">
+									<input type="password" class="form-control" id="password" name="password" placeholder="">
 								</div>
 								<div>
 									<div class="form-check mb-3">
@@ -164,16 +167,7 @@
 		</div>
 	</section>
 </div>
-<footer>
-	<div id="container_footer"></div>
-	<script>
-		fetch("../include/footer.html")
-				.then(response => response.text())
-				.then(data => {
-					document.getElementById("container_footer").innerHTML = data;
-				});
-	</script>
-</footer>
+<jsp:include page="../include/footer.jsp"/>
 <!-- End Footer  -->
 <!-- JS -->
 <!-- All JS Files -->
