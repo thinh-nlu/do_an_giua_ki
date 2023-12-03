@@ -1,3 +1,13 @@
+<%@ page import="model.Product" %>
+<%@ page import="java.util.List" %>
+<%@ page import="dao.ProductDAO" %>
+<%@ page import="database.DBConnect" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored = "false" %>
+<%
+    ProductDAO dao = new ProductDAO(DBConnect.getConnection());
+    List<Product> list = dao.getAllProduct();
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,14 +34,7 @@
 
 </head>
 <body class="">
-<div id="container_header"></div>
-<script>
-    fetch("../include/header.html")
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("container_header").innerHTML = data;
-        });
-</script>
+<jsp:include page="../include/header.jsp"/>
 <!-- Start Main Top -->
 <header class="main-header">
     <!-- Start Navigation -->
@@ -127,65 +130,26 @@
         </tr>
         </thead>
         <tbody class="bg-light text-dark">
-
+        <%
+            for (Product p: list) {
+                if (p!=null) {
+        %>
         <tr class='text-center text-dark font-weight-normal  '>
-            <td>1</td>
-            <td>Ớt</td>
-            <td><img width="50" height="50" class='cart_img' src='../images/gallery-img-03.jpg'></td>
+            <td><%=p.getId()%></td>
+            <td><%=p.getTitle()%></td>
+            <td><img width="50" height="50" class='cart_img' src='<%=p.getImage()%>'></td>
 
-            <td> 20.000đ </td>
-            <td> 200g </td>
+            <td><%=p.getPrice()%></td>
+            <td><%=p.getUnitPrice()+"/"+p.getUnit()%></td>
             <td><a href="#" class='text-dark'><i class=" bi bi-pencil-square"> </i></a></td>
             <td><a href="#" class='text-dark'><i class="bi bi-trash"></i></a></td>
-
-        </tr>
-        <tr class='text-center text-dark font-weight-normal  '>
-            <td>2</td>
-            <td>Cà Chua</td>
-            <td><img width="50" height="50" class='cart_img' src='../images/gallery-img-02.jpg'></td>
-
-            <td> 16.000đ </td>
-            <td> 500g </td>
-            <td><a href="#" class='text-dark'><i class=" bi bi-pencil-square"> </i></a></td>
-            <td><a href="#" class='text-dark'><i class="bi bi-trash"></i></a></td>
-
-        </tr>
-        <tr class='text-center text-dark font-weight-normal  '>
-            <td>3</td>
-            <td>Đậu xanh</td>
-            <td><img width="50" height="50" class='cart_img' src='../images/gallery-img-08.jpg'></td>
-
-            <td> 23.000đ </td>
-            <td> 100g </td>
-            <td><a href="#" class='text-dark'><i class=" bi bi-pencil-square"> </i></a></td>
-            <td><a href="#" class='text-dark'><i class="bi bi-trash"></i></a></td>
-
-        </tr>
-        <tr class='text-center text-dark font-weight-normal  '>
-            <td>4</td>
-            <td>Đậu hà lan</td>
-            <td><img width="50" height="50" class='cart_img' src='../images/gallery-img-12.jpg'></td>
-
-            <td> 26.000đ </td>
-            <td> 100g </td>
-            <td><a href="#" class='text-dark'><i class=" bi bi-pencil-square"> </i></a></td>
-            <td><a href="#" class='text-dark'><i class="bi bi-trash"></i></a></td>
-
-        </tr>
-        <tr class='text-center text-dark font-weight-normal  '>
-            <td>5</td>
-            <td>Dâu</td>
-            <td><img width="50" height="50" class='cart_img' src='../images/instagram-img-08.jpg'></td>
-
-            <td> 50.000đ </td>
-            <td> 500g </td>
-            <td><a href="#" class='text-dark'><i class=" bi bi-pencil-square"> </i></a></td>
-            <td><a href="#" class='text-dark'><i class="bi bi-trash"></i></a></td>
-
+        <%
+            }
+            }
+        %>
         </tr>
 
-
-        </tbody>
+  </tbody>
     </table>
 </div>
 
