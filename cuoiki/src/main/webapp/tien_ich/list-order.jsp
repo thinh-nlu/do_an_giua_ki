@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored = "false" %>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -29,13 +31,7 @@
 </head>
 <body>
 <div id="container_header"></div>
-<script>
-    fetch("../include/header.html")
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("container_header").innerHTML = data
-        })
-</script>
+<jsp:include page="../include/header.jsp"/>
 
 <!-- Start Main Top -->
 <header class="main-header">
@@ -44,11 +40,11 @@
         <div class="container">
             <!-- Start Header Navigation -->
             <div class="navbar-header">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="../index.jsp"><img src="../images/logo.png" class="logo" alt=""></a><a class="navbar-brand" href="../index.jsp"><img src="../images/logo1.png" class="logo" style="width: 200px;height: 108px" alt=""></a>
-            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand" href="../index.jsp"><img src="../images/logo1.png" class="logo" style="width: 200px;height: 108px" alt=""></a>
+        </div>
             <!-- End Header Navigation -->
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -208,13 +204,7 @@
 <!-- Start Footer  -->
 <footer>
     <div id="container_footer"></div>
-    <script>
-        fetch("../include/footer.html")
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("container_footer").innerHTML = data;
-            });
-    </script>
+    <jsp:include page="../include/footer.jsp"/>
 </footer>
 <!-- End Footer  -->
 

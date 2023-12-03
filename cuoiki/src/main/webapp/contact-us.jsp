@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored = "false" %>
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -45,7 +47,7 @@
                 <div class="our-link">
                     <ul>
                         <li><a href="tien_ich/my-account.jsp"><i class="fa fa-user s_color"></i> Tài khoản của tôi</a></li>
-                        <li><a href="contact-us.html"><i class="fas fa-headset"></i> Liên hệ </a></li>
+                        <li><a href="contact-us.jsp"><i class="fas fa-headset"></i> Liên hệ </a></li>
                     </ul>
                 </div>
             </div>
@@ -89,7 +91,7 @@
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="gallery.jsp">Cửa Hàng</a></li>
-                        <li class="nav-item active"><a class="nav-link" href="contact-us.html">Liên Hệ</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="contact-us.jsp">Liên Hệ</a></li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -322,14 +324,10 @@
     <!-- Start Footer  -->
 <footer>
     <div id="container_footer"></div>
-    <script>
-        fetch("include/footer.html")
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("container_footer").innerHTML = data;
-            });
-    </script>
+    <jsp:include page="include/footer.jsp"/>
+
 </footer>
+
     <!-- End Footer  -->
 
     <a href="#" id="back-to-top" title="Back to top" style="display: none;"><i class="bi-arrow-up-short"></i></a>

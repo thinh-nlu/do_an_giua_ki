@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored = "false" %>
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -87,7 +89,7 @@
                                 <li><a href="tien_ich/my-account.jsp">Tài Khoản</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item active"><a class="nav-link" href="gallery.html">Cửa Hàng</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="gallery.jsp">Cửa Hàng</a></li>
                         <li class="nav-item"><a class="nav-link" href="contact-us.jsp">Liên Hệ</a></li>
                     </ul>
                 </div>
@@ -647,13 +649,7 @@
     <!-- Start Footer  -->
 <footer>
     <div id="container_footer"></div>
-    <script>
-        fetch("include/footer.html")
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("container_footer").innerHTML = data;
-            });
-    </script>
+    <jsp:include page="include/footer.jsp"/>
 </footer>
     <!-- End Footer  -->
 
