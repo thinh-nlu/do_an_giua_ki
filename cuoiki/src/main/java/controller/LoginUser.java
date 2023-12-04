@@ -28,6 +28,7 @@ public class LoginUser extends HttpServlet {
         String passwordHashFromDB = user.getPassword();
         String passwordHash = hashPassword(password);
         HttpSession session = req.getSession();
+        session.setMaxInactiveInterval(30 * 60);
         if (user == null) {
             session.setAttribute("failed","Tài khoản không tồn tại");
             resp.sendRedirect("account/login.jsp");

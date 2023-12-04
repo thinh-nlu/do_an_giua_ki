@@ -1,3 +1,14 @@
+<%@ page import="model.User" %>
+<%@ page import="java.util.List" %>
+<%@ page import="dao.UserDAO" %>
+<%@ page import="database.DBConnect" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored = "false" %>
+<%
+  User user = (User) session.getAttribute("success");
+  UserDAO dao = new UserDAO(DBConnect.getConnection());
+  List<User> users = dao.getAllUser();
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,14 +35,41 @@
 
 </head>
 <body class="">
-<div id="container_header"></div>
-<script>
-  fetch("../include/header.html")
-          .then(response => response.text())
-          .then(data => {
-            document.getElementById("container_header").innerHTML = data;
-          });
-</script>
+<!-- Start Main Top -->
+<div class="main-top">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="our-link">
+          <ul>
+            <li><a href="../tien_ich/my-account.jsp"><i class="fa fa-user s_color"></i> Tài khoản của tôi</a></li>
+            <li><a href="../contact-us.jsp"><i class="fas fa-headset"></i> Liên hệ </a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="login-register">
+          <ul>
+            <% if (user != null) { %>
+            <% if (user.getIsAdmin().equals("1")) { %>
+            <li><a href="../tien_ich/my-account.jsp">Xin chào <%=user.getName()%></a></li>
+            <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
+            <%} else {%>
+            <li><p>Xin chào <%= user.getName() %></p></li>
+            <li><a href="../admin/admin.jsp">Trang Quản Lí</a></li>
+            <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
+            <%}%>
+            <% } else { %>
+            <li><a href="../account/registration.jsp">Đăng Kí</a></li>
+            <li><a href="../account/login.jsp">Đăng Nhập</a></li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Main Top -->
 <!-- Start Main Top -->
 <header class="main-header">
   <!-- Start Navigation -->
@@ -125,55 +163,24 @@
     </tr>
     </thead>
     <tbody class="bg-light text-dark">
-
+    <%
+      if(!users.isEmpty()) {
+        for (User u: users) {
+    %>
     <tr class='text-center text-dark font-weight-normal  '>
-      <td>1</td>
-      <td>Nguyễn văn A</td>
-      <td> ABC@gmail.com </td>
-      <td> 0434999598 </td>
+      <td><%=u.getId()%></td>
+      <td><%=u.getName()%></td>
+      <td><%=u.getEmail()%></td>
+      <td><%=u.getContact()%></td>
       <td><a href="#" class='text-dark'><i class="bi bi-trash"></i></a></td>
 
     </tr>
-
-    <tr class='text-center text-dark font-weight-normal  '>
-      <td>2</td>
-      <td>Nguyễn văn B</td>
-      <td> ABC@gmail.com </td>
-      <td> 0434999598 </td>
-      <td><a href="#" class='text-dark'><i class="bi bi-trash"></i></a></td>
-
-    </tr>
-    <tr class='text-center text-dark font-weight-normal  '>
-      <td>3</td>
-      <td>Nguyễn văn A</td>
-      <td> ABC@gmail.com </td>
-      <td> 0434999598 </td>
-      <td><a href="#" class='text-dark'><i class="bi bi-trash"></i></a></td>
-
-    </tr>
-    <tr class='text-center text-dark font-weight-normal  '>
-      <td>3</td>
-      <td>Nguyễn văn A</td>
-      <td> ABC@gmail.com </td>
-      <td> 0434999598 </td>
-      <td><a href="#" class='text-dark'><i class="bi bi-trash"></i></a></td>
-
-    </tr>
-
-
+    <%
+      }
+      }
+    %>
     </tbody>
   </table>
-
 </div>
-<footer>
-  <div id="container_footer"></div>
-  <script>
-    fetch("../include/footer.html")
-            .then(response => response.text())
-            .then(data => {
-              document.getElementById("container_footer").innerHTML = data;
-            });
-  </script>
-</footer>
 </body>
 </html>

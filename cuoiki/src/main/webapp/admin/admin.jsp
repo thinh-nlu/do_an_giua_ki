@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="../css/responsive.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/custom.css">
+    <link rel="stylesheet" href="../css/admin-style.css">
     <link rel="stylesheet" href="../asset/bootstrap-icons-1.11.1/bootstrap-icons.css">
 
     <!--[if lt IE 9]>
@@ -56,8 +57,14 @@
                 <div class="login-register">
                     <ul>
                         <% if (user != null) { %>
-                        <li><p>Xin chào <%= user.getName() %></p></li>
+                        <% if (user.getIsAdmin().equals("1")) { %>
+                        <li><a href="../tien_ich/my-account.jsp">Xin chào <%=user.getName()%></a></li>
                         <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
+                        <%} else {%>
+                        <li><p>Xin chào <%= user.getName() %></p></li>
+                        <li><a href="../admin/admin.jsp">Trang Quản Lí</a></li>
+                        <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
+                        <%}%>
                         <% } else { %>
                         <li><a href="../account/registration.jsp">Đăng Kí</a></li>
                         <li><a href="../account/login.jsp">Đăng Nhập</a></li>
@@ -78,7 +85,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand " href="../index.jsp"><img src="../images/logo1.png" class="logo " style="width: 200px;height: 108px" alt="" ></a>
+                <a class="navbar-brand " href="../index.jsp"><img src="../images/icon.png" class="logo " style="width: 200px;height: 108px" alt="" ></a>
             </div>
             <!-- End Header Navigation -->
 
@@ -147,6 +154,10 @@
     </nav>
     <!-- End Navigation -->
 </header>
+<div class="content">
+    <h2>Chào mừng đến với trang quản lí</h2>
+    <p>Đây là trang chính của hệ thống quản lí. Hãy chọn chức năng phía dưới để tiếp tục.</p>
+</div>
 <div class="navbar1 navbar-expand-lg">
     <ul class="navbar-nav mx-auto" data-in="fadeInDown" data-out="fadeOutUp">
         <li class="nav-item">
@@ -166,12 +177,6 @@
         </li>
     </ul>
 </div>
-
-<div class="content">
-    <h2>Chào mừng đến với trang quản lí</h2>
-    <p>Đây là trang chính của hệ thống quản lí. Hãy chọn chức năng phía trên để tiếp tục.</p>
-</div>
-<jsp:include page="../include/footer.jsp"/>
 <!-- All JS Files -->
 <script src="../js/jquery-3.2.1.min.js"></script>
 <script src="../js/popper.min.js"></script>
