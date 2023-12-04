@@ -2,11 +2,13 @@
 <%@ page import="java.util.List" %>
 <%@ page import="dao.ProductDAO" %>
 <%@ page import="database.DBConnect" %>
+<%@ page import="model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
 <%
     ProductDAO dao = new ProductDAO(DBConnect.getConnection());
     List<Product> list = dao.getAllProduct();
+    User user = (User) session.getAttribute("success");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +36,35 @@
 
 </head>
 <body class="">
-<jsp:include page="../include/header.jsp"/>
+<!-- Start Main Top -->
+<div class="main-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="our-link">
+                    <ul>
+                        <li><a href="../tien_ich/my-account.jsp"><i class="fa fa-user s_color"></i> Tài khoản của tôi</a></li>
+                        <li><a href="../contact-us.jsp"><i class="fas fa-headset"></i> Liên hệ </a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="login-register">
+                    <ul>
+                        <% if (user != null) { %>
+                        <li><p>Xin chào <%= user.getName() %></p></li>
+                        <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
+                        <% } else { %>
+                        <li><a href="../account/registration.jsp">Đăng Kí</a></li>
+                        <li><a href="../account/login.jsp">Đăng Nhập</a></li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Main Top -->
 <!-- Start Main Top -->
 <header class="main-header">
     <!-- Start Navigation -->
@@ -137,10 +167,10 @@
         <tr class='text-center text-dark font-weight-normal  '>
             <td><%=p.getId()%></td>
             <td><%=p.getTitle()%></td>
-            <td><img width="50" height="50" class='cart_img' src='<%=p.getImage()%>'></td>
+            <td><img width="50" height="50" class='cart_img' src='../DataWeb/<%=p.getImage()%>'></td>
 
             <td><%=p.getPrice()%></td>
-            <td><%=p.getUnitPrice()+"/"+p.getUnit()%></td>
+            <td><%=p.getPrice()+"/"+p.getUnitPrice()+p.getUnit()%></td>
             <td><a href="#" class='text-dark'><i class=" bi bi-pencil-square"> </i></a></td>
             <td><a href="#" class='text-dark'><i class="bi bi-trash"></i></a></td>
         <%

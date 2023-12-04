@@ -1,5 +1,9 @@
+<%@ page import="model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
+<%
+	User user = (User) session.getAttribute("success");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,8 +39,35 @@
 	<![endif]-->
 </head>
 <body>
-<div id="container_header"></div>
-<jsp:include page="../include/header.jsp"/>
+<!-- Start Main Top -->
+<div class="main-top">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<div class="our-link">
+					<ul>
+						<li><a href="../tien_ich/my-account.jsp"><i class="fa fa-user s_color"></i> Tài khoản của tôi</a></li>
+						<li><a href="../contact-us.jsp"><i class="fas fa-headset"></i> Liên hệ </a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<div class="login-register">
+					<ul>
+						<% if (user != null) { %>
+						<li><p>Xin chào <%= user.getName() %></p></li>
+						<li><a href="../logout">Đăng Xuất</a></li>
+						<% } else { %>
+						<li><a href="../account/registration.jsp">Đăng Kí</a></li>
+						<li><a href="../account/login.jsp">Đăng Nhập</a></li>
+						<% } %>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Main Top -->
 <!-- Start Main Top -->
 <header class="main-header">
 	<!-- Start Navigation -->
@@ -127,13 +158,13 @@
 				<div class="row justify-content-center"> <!-- Dùng justify-content-center để căn giữa nội dung -->
 						<div class="signup-form">
 							<h2 class="form-title mt-5">Đăng Ký</h2>
-							<c:if test="${not empty success}">
-								<p class="text-center text-success">${success}</p>
-								<c:remove var="success" scope="session"/>
+							<c:if test="${not empty successRegister}">
+								<p class="text-center text-success">${successRegister}</p>
+								<c:remove var="successRegister" scope="session"/>
 							</c:if>
-							<c:if test="${not empty failed}">
-								<p class="text-center text-danger">${failed}</p>
-								<c:remove var="failed" scope="session"/>
+							<c:if test="${not empty failedRegister}">
+								<p class="text-center text-danger">${failedRegister}</p>
+								<c:remove var="failedRegister" scope="session"/>
 							</c:if>
 							<form method="post" action="../register" class="mt-3" id="formRegister">
 								<div class="form-row">

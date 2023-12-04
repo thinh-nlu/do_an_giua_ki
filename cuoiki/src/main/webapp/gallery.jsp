@@ -1,5 +1,15 @@
+<%@ page import="dao.ProductDAO" %>
+<%@ page import="database.DBConnect" %>
+<%@ page import="java.util.List" %>
+<%@ page import="model.Product" %>
+<%@ page import="model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
+<%
+    ProductDAO dao = new ProductDAO(DBConnect.getConnection());
+    List<Product> products = dao.getAllProduct();
+    User user = (User) session.getAttribute("success");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -54,8 +64,13 @@
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="login-register">
                     <ul>
+                        <% if (user != null) { %>
+                        <li><p>Xin chào <%= user.getName() %></p></li>
+                        <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
+                        <% } else { %>
                         <li><a href="account/registration.jsp">Đăng Kí</a></li>
                         <li><a href="account/login.jsp">Đăng Nhập</a></li>
+                        <% } %>
                     </ul>
                 </div>
             </div>
@@ -194,11 +209,14 @@
             </div>
 
             <div class="row special-list">
-
+                <%
+                    if(products != null) {
+                        for (Product p: products) {
+                %>
                 <div class="col-lg-3 col-md-6 special-grid bulbs">
                     <div class="products-single fix">
                         <div class="box-img-hover">
-                            <img src="images/DataWeb/Bạc%20hà.jpg" class="img-fluid" alt="Image">
+                            <img src="./DataWeb/<%=p.getImage()%>" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="shop-detail.jsp" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
@@ -209,327 +227,17 @@
                             </div>
                         </div>
                         <div class="why-text">
-                            <h4>Bạc Hà - 200g</h4>
-                            <h5>7.500đ</h5>
+                            <h4><%=p.getTitle()+" - "+p.getUnitPrice()+p.getUnit()%></h4>
+                            <h5><%=p.getPrice()%></h5>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-lg-3 col-md-6 special-grid fruits">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="images/DataWeb/Bắp%20cải%20thảo.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Thêm  giỏ hàng</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Bắp cải thảo - 500g</h4>
-                            <h5>12.000đ</h5>
-                        </div>
-                    </div>
-                </div>
-				<div class="col-lg-3 col-md-6 special-grid bulbs">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="images/DataWeb/Bắp%20mĩ%20tách%20hạt.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Thêm  giỏ hàng</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Bắp Mĩ tách hạt - 250g</h4>
-                            <h5>16.000đ</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 special-grid fruits">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="images/DataWeb/Bắp%20nữ%20hoàng.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Thêm  giỏ hàng</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Bắp nữ hoàng - 250g trở lên</h4>
-                            <h5>18.000đ</h5>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-				<div class="col-lg-3 col-md-6 special-grid root-and-tuberous">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="images/DataWeb/Bầu%20sao%20trái.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Bầu sao trái - 500g</h4>
-                            <h5>6.900</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="images/DataWeb/Bí%20đỏ%20tròn.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Thêm  giỏ hàng</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Bí đỏ tròn - 450g</h4>
-                            <h5>11.000đ</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 special-grid root-and-tuberous">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="images/DataWeb/Bí%20ngòi%20xanh.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Thêm  giỏ hàng</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Bí ngòi xanh - 500g(1-2 trái)</h4>
-                            <h5>22.000đ</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="images/DataWeb/Bơ.png" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Thêm  giỏ hàng</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Bơ - 900g</h4>
-                            <h5>26.000đ</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="images/DataWeb/Bòn%20bon.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Thêm  giỏ hàng</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Bòn bon - 500g</h4>
-                            <h5>43.000đ</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="images/DataWeb/Bông%20bí%20nụ.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Thêm  giỏ hàng</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Bông bí nụ - 300g</h4>
-                            <h5>25.650đ</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="images/DataWeb/Cà%20chua.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Thêm  giỏ hàng</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Cà chua - 500g</h4>
-                            <h5>15.000đ</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 special-grid bulbs">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="images/DataWeb/Cà%20pháo.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Thêm giỏ hàng</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Cà pháo - 200g</h4>
-                            <h5>8.000đ</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="images/DataWeb/Cà%20pháo%20ngâm%20chua%20ngọt.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Thêm  giỏ hàng</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Cà pháo ngâm(hũ) - 370g</h4>
-                            <h5>27.000đ</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="images/DataWeb/Cà%20rốt.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Thêm  giỏ hàng</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Cà rốt Đà Lạt - 500g(4-7 củ)</h4>
-                            <h5>19.000đ</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="images/DataWeb/Cà%20tím.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Thêm  giỏ hàng</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Cà tím - 500g(2-3 trái)</h4>
-                            <h5>12.000đ</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <img src="images/DataWeb/Cải%20bẹ%20dún.jpg" class="img-fluid" alt="Image">
-                            <div class="mask-icon">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Thêm  giỏ hàng</a>
-                            </div>
-                        </div>
-                        <div class="why-text">
-                            <h4>Cải bẹ dún - 450g</h4>
-                            <h5>16.000đ</h5>
-                        </div>
-                    </div>
-                </div>
-
-
-
+                <%
+                    }
+                    }
+                %>
             </div>
-
-
-
-
-
             </div>
-
-
-
-
         </div>
     </div>
     <!-- End Gallery  -->
@@ -647,10 +355,85 @@
 
 
     <!-- Start Footer  -->
-<footer>
-    <div id="container_footer"></div>
-    <jsp:include page="include/footer.jsp"/>
-</footer>
+<div class="footer-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-top-box">
+                    <h3>Thời gian kinh doan</h3>
+                    <ul class="list-time">
+                        <li>Thứ hai- Thứ sáu: 08.00 đến 17.00</li> <li>Thứ bảy: 10.00 đến 20.00</li> <li>Chủ nhật: <span>Đóng cửa</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-top-box">
+                    <h3>Bản tin</h3>
+                    <form class="newsletter-box">
+                        <div class="form-group">
+                            <input class="" type="email" name="Email" placeholder="Địa chỉ E-mail*" />
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                        <button class="btn hvr-hover" type="submit">Gửi</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-top-box">
+                    <h3>Các trang truyền thông</h3>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-widget">
+                    <h4>Freshshop</h4>
+                    <p>Ở đây chất lượng được đặt lên hàng đầu </p>
+                    <p>Sức khỏe khách hàng là ưu tiên của chúng tôi </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-link">
+                    <h4>Thông tin</h4>
+                    <ul>
+                        <li><a href="#">Liên hệ chúng tôi</a></li>
+                        <li><a href="#">Dịch vụ chăm sóc khách hàng </a></li>
+                        <li><a href="#">Our Sitemap</a></li>
+                        <li><a href="#">Điều khoản và điều kiện</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Thông tin giao hàng</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-link-contact">
+                    <h4>Liên hệ với chúng tôi</h4>
+                    <ul>
+                        <li>
+                            <p><i class="fas fa-map-marker-alt"></i>Địa chỉ: 47 đường số 17 <br>Phường Linh Trung<br> Thành phố Thủ Đức</p>
+                        </li>
+                        <li>
+                            <p><i class="fas fa-phone-square"></i>Liện hệ: <a href="tel:+1-888705770"></a></p>
+                        </li>
+                        <li>
+                            <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com"></a></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- End Footer  -->
 
     <a href="#" id="back-to-top" title="Back to top" style="display: none;"><i class="bi-arrow-up-short"></i></a>

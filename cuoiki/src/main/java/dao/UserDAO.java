@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO {
 
@@ -64,6 +66,30 @@ public class UserDAO {
         return user;
     }
 
+    public List<User> getAllUser() {
+        List<User> users = new ArrayList<>();
+        query = "select * from users";
+        User u = null;
+        try {
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                u = new User();
+                u.setId(rs.getInt(1));
+                u.setName(rs.getString(2));
+                u.setEmail(rs.getString(3));
+                u.setPassword(rs.getString(4));
+                u.setContact(rs.getString(5));
+                u.setIsAdmin(rs.getString(6));
+                u.setTimestamp(rs.getTimestamp(7));
+                users.add(u);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return users;
+    }
+
     private String hashPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -88,7 +114,7 @@ public class UserDAO {
 
     public static void main(String[] args) {
         UserDAO dao = new UserDAO(DBConnect.getConnection());
-        User user = dao.getUserByUsername("a");
-        System.out.println(user);
+        List<User> users = dao.getAllUser();
+        System.out.println(users.toString());
     }
 }
