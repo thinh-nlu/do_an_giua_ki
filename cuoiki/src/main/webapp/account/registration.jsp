@@ -160,11 +160,11 @@
 							<h2 class="form-title mt-5">Đăng Ký</h2>
 							<c:if test="${not empty successRegister}">
 								<p class="text-center text-success">${successRegister}</p>
-								<c:remove var="success" scope="session"/>
+								<c:remove var="successRegister" scope="session"/>
 							</c:if>
 							<c:if test="${not empty failedRegister}">
 								<p class="text-center text-danger">${failedRegister}</p>
-								<c:remove var="failed" scope="session"/>
+								<c:remove var="failedRegister" scope="session"/>
 							</c:if>
 							<form method="post" action="../register" class="mt-3" id="formRegister">
 								<div class="form-row">
