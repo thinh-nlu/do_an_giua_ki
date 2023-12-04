@@ -1,5 +1,9 @@
+<%@ page import="model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
+<%
+    User user = (User) session.getAttribute("success");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,8 +53,13 @@
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="login-register">
                     <ul>
+                        <% if (user != null) { %>
+                        <li><p>Xin chào <%= user.getName() %></p></li>
+                        <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
+                        <% } else { %>
                         <li><a href="../account/registration.jsp">Đăng Kí</a></li>
                         <li><a href="../account/login.jsp">Đăng Nhập</a></li>
+                        <% } %>
                     </ul>
                 </div>
             </div>
