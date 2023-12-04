@@ -5,10 +5,24 @@
 <%@ page import="model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
+
 <%
+    String spageid=request.getParameter("page");
+    int pageid = (spageid != null && !spageid.isEmpty()) ? Integer.parseInt(spageid) : 1;
+    int total=16;
+    int activePage = pageid;
+    int previousPage = pageid-1;
+    int nextPage = pageid+1;
+    if(pageid==1){}
+    else{
+        pageid=pageid-1;
+        pageid=pageid*total+1;
+    }
     ProductDAO dao = new ProductDAO(DBConnect.getConnection());
-    List<Product> products = dao.getAllProduct();
+    List<Product> products= dao.getRecords(pageid,total);
     User user = (User) session.getAttribute("success");
+
+
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -248,28 +262,24 @@
     </div>
     <!-- End Gallery  -->
 <nav aria-label="...">
-    <ul class="pagination pb-5 justify-content-center ">
-        <li class="page-item disabled">
-            <a class="page-link" href="#" aria-label="Previous">
+    <ul class="pagination pb-5 justify-content-center">
+        <li class="page-item  <%= (activePage==1)?"disabled":"enable"%>">
+            <a class="page-link" href="gallery.jsp?page=<%= previousPage %>" aria-label="Previous">
                 <i class="bi-arrow-left"></i>
             </a>
         </li>
-        <li class="page-item active"><a class="page-link" href="gallery_1.html">1</a></li>
-        <li class="page-item"><a class="page-link" href="gallery/gallery_2.html">2</a></li>
-        <li class="page-item"><a class="page-link" href="gallery/gallery_3.html">3</a></li>
-        <li class="page-item"><a class="page-link" href="gallery/gallery_4.html">4</a></li>
-        <li class="page-item"><a class="page-link" href="gallery/gallery_5.html">5</a></li>
-        <li class="page-item"><a class="page-link" href="gallery/gallery_6.html">6</a></li>
-        <li class="page-item"><a class="page-link" href="gallery/gallery_7.html">7</a></li>
-        <li class="page-item"><a class="page-link" href="gallery/gallery_8.html">8</a></li>
-        <li class="page-item"><a class="page-link" href="gallery/gallery_9.html">9</a></li>
-
-        <li class="page-item">
-            <a class="page-link" href="gallery/gallery_2.html" aria-label="Next">
+        <% for (int i = 1; i <= 9; i++) { %>
+        <li class="page-item <%= (i == activePage) ? "active" : "" %>">
+            <a class="page-link" href="gallery.jsp?page=<%= i %>"><%= i %></a>
+        </li>
+        <% } %>
+        <li class="page-item <%= (activePage==9)?"disabled":"enable"%>">
+            <a class="page-link" href="gallery.jsp?page=<%= nextPage %>" aria-label="Next">
                 <i class="bi-arrow-right"></i>
             </a>
         </li>
     </ul>
+
 </nav>
 
     <!-- Start Instagram Feed  -->
