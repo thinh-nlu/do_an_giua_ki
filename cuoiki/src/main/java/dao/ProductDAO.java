@@ -72,6 +72,36 @@ public class ProductDAO {
         }
         return products;
     }
+    public  List<Product> getRecords(int start, int total) {
+        List<Product> products = new ArrayList<>();
+        Product p = null;
+        query = "select * from products limit " + (start-1) + "," + total;
+
+        try {
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                p = new Product();
+                p.setId(rs.getInt(1));
+                p.setTitle(rs.getString(2));
+                p.setImage(rs.getString(3));
+                p.setPrice(rs.getString(4));
+                p.setUnit(rs.getString(5));
+                p.setCategoryId(rs.getString(6));
+                p.setKeyword(rs.getString(7));
+                p.setStatus(rs.getString(8));
+                p.setDateInsert(rs.getTimestamp(9));
+                p.setQuantity(rs.getString(10));
+                p.setUnitPrice(rs.getString(11));
+                products.add(p);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return products;
+    }
+
+
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO(DBConnect.getConnection());
