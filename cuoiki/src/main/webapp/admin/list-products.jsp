@@ -53,7 +53,7 @@
                     <ul>
                         <% if (user != null) { %>
                         <% if (user.getIsAdmin().equals("1")) { %>
-                        <li><p>Xin chào <%= user.getName() %></p></li>
+                        <li><a href="../tien_ich/my-account.jsp">Xin chào <%=user.getName()%></a></li>
                         <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
                         <%} else {%>
                         <li><p>Xin chào <%= user.getName() %></p></li>

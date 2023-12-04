@@ -44,6 +44,9 @@ public class RegisterUser extends HttpServlet {
         } else if (!password.equals(rePass)) {
             session.setAttribute("failedRegister","Mật khẩu không trùng khớp");
             resp.sendRedirect("account/registration.jsp");
+        } else if (!validatePhoneNumber(contact)){
+            session.setAttribute("failedRegister","Số điện thoại không tồn tại");
+            resp.sendRedirect("account/registration.jsp");
         } else {
             boolean isAdd = dao.registerUser(user);
             if (isAdd) {
@@ -76,5 +79,9 @@ public class RegisterUser extends HttpServlet {
             // Xử lý ngoại lệ nếu cần thiết
         }
         return null;
+    }
+
+    public boolean validatePhoneNumber(String contact) {
+        return contact.matches("\\d{10}");
     }
 }
