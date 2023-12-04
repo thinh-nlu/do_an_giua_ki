@@ -1,5 +1,9 @@
+<%@ page import="model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
+<%
+    User user = (User) session.getAttribute("success");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -53,8 +57,13 @@
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="login-register">
                     <ul>
+                        <% if (user != null) { %>
+                        <li><p>Xin chào <%= user.getName() %></p></li>
+                        <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
+                        <% } else { %>
                         <li><a href="account/registration.jsp">Đăng Kí</a></li>
                         <li><a href="account/login.jsp">Đăng Nhập</a></li>
+                        <% } %>
                     </ul>
                 </div>
             </div>
@@ -540,10 +549,85 @@
 
 
     <!-- Start Footer  -->
-<footer>
-    <div id="container_footer"></div>
-    <jsp:include page="include/footer.jsp"/>
-</footer>
+    <div class="footer-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-top-box">
+                    <h3>Thời gian kinh doan</h3>
+                    <ul class="list-time">
+                        <li>Thứ hai- Thứ sáu: 08.00 đến 17.00</li> <li>Thứ bảy: 10.00 đến 20.00</li> <li>Chủ nhật: <span>Đóng cửa</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-top-box">
+                    <h3>Bản tin</h3>
+                    <form class="newsletter-box">
+                        <div class="form-group">
+                            <input class="" type="email" name="Email" placeholder="Địa chỉ E-mail*" />
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                        <button class="btn hvr-hover" type="submit">Gửi</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-top-box">
+                    <h3>Các trang truyền thông</h3>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-widget">
+                    <h4>Freshshop</h4>
+                    <p>Ở đây chất lượng được đặt lên hàng đầu </p>
+                    <p>Sức khỏe khách hàng là ưu tiên của chúng tôi </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-link">
+                    <h4>Thông tin</h4>
+                    <ul>
+                        <li><a href="#">Liên hệ chúng tôi</a></li>
+                        <li><a href="#">Dịch vụ chăm sóc khách hàng </a></li>
+                        <li><a href="#">Our Sitemap</a></li>
+                        <li><a href="#">Điều khoản và điều kiện</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Thông tin giao hàng</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-link-contact">
+                    <h4>Liên hệ với chúng tôi</h4>
+                    <ul>
+                        <li>
+                            <p><i class="fas fa-map-marker-alt"></i>Địa chỉ: 47 đường số 17 <br>Phường Linh Trung<br> Thành phố Thủ Đức</p>
+                        </li>
+                        <li>
+                            <p><i class="fas fa-phone-square"></i>Liện hệ: <a href="tel:+1-888705770"></a></p>
+                        </li>
+                        <li>
+                            <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com"></a></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- End Footer  -->
 
 

@@ -34,18 +34,18 @@ public class RegisterUser extends HttpServlet {
         HttpSession session = req.getSession();
         UserDAO dao = new UserDAO(DBConnect.getConnection());
         if (password.length() <= 7) {
-            session.setAttribute("failed","Vui lòng nhập mật khẩu có ít nhất 8 kí tự");
+            session.setAttribute("failedRegister","Vui lòng nhập mật khẩu có ít nhất 8 kí tự");
             resp.sendRedirect("account/registration.jsp");
         } else if (!password.equals(rePass)) {
-            session.setAttribute("failed","Mật khẩu không trùng khớp");
+            session.setAttribute("failedRegister","Mật khẩu không trùng khớp");
             resp.sendRedirect("account/registration.jsp");
         } else {
             boolean isAdd = dao.registerUser(user);
             if (isAdd) {
-                session.setAttribute("success","Đăng kí thành công");
+                session.setAttribute("successRegister","Đăng kí thành công");
                 resp.sendRedirect("account/registration.jsp");
             } else {
-                session.setAttribute("failed","Hệ thống đang gặp lỗi vui lòng thử lại sau");
+                session.setAttribute("failedRegister","Hệ thống đang gặp lỗi vui lòng thử lại sau");
                 resp.sendRedirect("account/registration.jsp");
             }
         }
