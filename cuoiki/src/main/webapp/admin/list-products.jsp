@@ -6,8 +6,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
 <%
+    String spageid = request.getParameter("page");
+    int pageid = (spageid != null && !spageid.isEmpty()) ? Integer.parseInt(spageid) : 1;
+    int totalPerPage =16;
+    int activePage = pageid;
+    int previousPage = pageid-1;
+    int nextPage = pageid+1;
+    if(pageid==1){}
+    else{
+        pageid=pageid-1;
+        pageid=pageid* totalPerPage +1;
+    }
     ProductDAO dao = new ProductDAO(DBConnect.getConnection());
-    List<Product> list = dao.getAllProduct();
+    List<Product> list = dao.getRecords(pageid, totalPerPage);
+    List<Product> allList = dao.getAllProduct();
+    double totalProducts = allList.size();
+    int totalPage = (int) Math.ceil(totalProducts /totalPerPage);
     User user = (User) session.getAttribute("success");
 %>
 <!DOCTYPE html>
@@ -151,8 +165,9 @@
     <!-- End Navigation -->
 </header>
 <!-- End Main Top -->
-<h3 class="text-center text-dark pb-3 display-4 font-weight-normal" >Tất cả sản phẩm</h3>
-<div class="px-lg-5 pt-xl-5">
+<h3 class="text-center text-dark pt-xl-3 display-4 font-weight-normal" >Tất cả sản phẩm</h3>
+
+<div class="px-lg-5 pt-xl-1">
     <table class="table table-striped text-center ">
         <thead class="bg-dark">
         <tr class="text-light">
@@ -187,6 +202,26 @@
 
   </tbody>
     </table>
+    <nav aria-label="...">
+        <ul class="pagination pb-5 justify-content-center">
+            <li class="page-item  <%= (activePage==1)?"disabled":"enable"%>">
+                <a class="page-link" href="list-products.jsp?page=<%= previousPage %>" aria-label="Previous">
+                    <i class="bi-arrow-left"></i>
+                </a>
+            </li>
+            <% for (int i = 1; i <= totalPage; i++) { %>
+            <li class="page-item <%= (i == activePage) ? "active" : "" %>">
+                <a class="page-link" href="list-products.jsp?page=<%= i %>"><%= i %></a>
+            </li>
+            <% } %>
+            <li class="page-item <%= (activePage==totalPage)?"disabled":"enable"%>">
+                <a class="page-link" href="list-products.jsp?page=<%= nextPage %>" aria-label="Next">
+                    <i class="bi-arrow-right"></i>
+                </a>
+            </li>
+        </ul>
+
+    </nav>
 </div>
 
 </body>
