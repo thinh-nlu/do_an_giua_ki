@@ -7,8 +7,6 @@
 <%@ page isELIgnored = "false" %>
 
 <%
-
-
     String spageid=request.getParameter("page");
     int pageid = (spageid != null && !spageid.isEmpty()) ? Integer.parseInt(spageid) : 1;
     int totalPerPage =16;
@@ -22,18 +20,18 @@
     }
 
     ProductDAO dao = new ProductDAO(DBConnect.getConnection());
+    List<Product> products = dao.getAllProduct();
+    List<Product> searchListSuccess = (List<Product>) session.getAttribute("searchListSuccess");
+    String searchListFailed = (String) session.getAttribute("searchListFailed");
     List<Product> products= dao.getRecords(pageid, totalPerPage);
     List<Product> product= dao.getAllProduct();
     double totalProducts = product.size();
     int totalPage = (int) Math.ceil(totalProducts /totalPerPage);
     User user = (User) session.getAttribute("success");
-
-
 %>
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -65,9 +63,7 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
-
 <body>
 <div id="container_header"></div>
 <div class="main-top">
@@ -132,6 +128,25 @@
                         </li>
                         <li class="nav-item active"><a class="nav-link" href="gallery.jsp">Cửa Hàng</a></li>
                         <li class="nav-item"><a class="nav-link" href="contact-us.jsp">Liên Hệ</a></li>
+                        <li class="nav-item">
+                            <form method="post" action="${pageContext.request.contextPath}/searchProduct">
+                                <div class="input-group rounded">
+                                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" id="keyword" name="keyword">
+                                    <input type="submit" value="Search" class="btn btn-outline-success" name="search_data_product">
+                                </div>
+                            </form>
+                            <c:if test="${not empty searchListSuccess}">
+                                <p class="text-center text-success"></p>
+                                <c:remove var="searchListSuccess" scope="session"/>
+                            </c:if>
+                            <c:if test="${not empty searchListFailed}">
+                                <p class="text-center text-danger">${searchListFailed}</p>
+                                <c:remove var="searchListFailed" scope="session"/>
+                            </c:if>
+                            <%
+                                session.removeAttribute("searchListFailed");
+                            %>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -139,7 +154,6 @@
                 <!-- Start Atribute Navigation -->
                 <div class="attr-nav">
                     <ul>
-                        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
                         <li class="side-menu"><a href="tien_ich/cart.jsp">
 						<i class="fa fa-shopping-bag"></i>
                             <span class="badge">3</span>
@@ -236,7 +250,32 @@
 
             <div class="row special-list">
                 <%
-                    if(products != null) {
+                    if(searchListSuccess!=null)  {
+                        for (Product p1: searchListSuccess) {
+                %>
+                <div class="col-lg-3 col-md-6 special-grid bulbs">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <img src="./DataWeb/<%=p1.getImage()%>" class="img-fluid" alt="Image">
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="shop-detail.jsp" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
+                                </ul>
+                                <a class="cart" href="#">Thêm  giỏ hàng</a>
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <h4><%=p1.getTitle()+" - "+p1.getUnitPrice()+p1.getUnit()%></h4>
+                            <h5><%=p1.getPrice()%></h5>
+                        </div>
+                    </div>
+                </div>
+                <%
+                        }
+                    session.removeAttribute("searchListSuccess");
+                } else {
                         for (Product p: products) {
                 %>
                 <div class="col-lg-3 col-md-6 special-grid bulbs">
@@ -258,8 +297,10 @@
                         </div>
                     </div>
                 </div>
+
                 <%
                     }
+
                     }
                 %>
             </div>
