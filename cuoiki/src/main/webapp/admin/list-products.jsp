@@ -152,6 +152,14 @@
 </header>
 <!-- End Main Top -->
 <h3 class="text-center text-dark pb-3 display-4 font-weight-normal" >Tất cả sản phẩm</h3>
+<c:if test="${not empty successUpdate}">
+    <p class="text-center text-success">${successUpdate}</p>
+    <c:remove var="successUpdate" scope="session"/>
+</c:if>
+<c:if test="${not empty failedUpdate}">
+    <p class="text-center text-danger">${failedUpdate}</p>
+    <c:remove var="failedUpdate" scope="session"/>
+</c:if>
 <div class="px-lg-5 pt-xl-5">
     <table class="table table-striped text-center ">
         <thead class="bg-dark">
@@ -178,7 +186,7 @@
             <td><%=p.getPrice()%></td>
             <td><%=p.getPrice()+"/"+p.getUnitPrice()+p.getUnit()%></td>
             <td><a href="edit_products.jsp?id=<%=p.getId()%>" class='text-dark'><i class=" bi bi-pencil-square"> </i></a></td>
-            <td><a href="#" class='text-dark'><i class="bi bi-trash"></i></a></td>
+            <td><a href="../delete?id=<%=p.getId()%>" class='text-dark'><i class="bi bi-trash"></i></a></td>
         <%
             }
             }

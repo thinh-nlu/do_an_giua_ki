@@ -35,14 +35,14 @@ public class UpdateProduct extends HttpServlet {
             boolean isUpdate = dao.updateProduct(p);
             if (isUpdate) {
                 session.setAttribute("successUpdate","Cập nhật sản phẩm thành công");
-                resp.sendRedirect("admin/edit_products.jsp");
+                resp.sendRedirect("admin/list-products.jsp");
             } else {
                 session.setAttribute("failedUpdate","Cập nhật sản phẩm thất bại");
-                resp.sendRedirect("admin/list-edit_products.jsp");
+                resp.sendRedirect("admin/list-products.jsp");
             }
         } else {
             session.setAttribute("failedUpdate","Chưa có dữ liệu nào được cập nhật");
-            resp.sendRedirect("admin/edit_products.jsp");
+            resp.sendRedirect("admin/list-products.jsp");
         }
     }
 
