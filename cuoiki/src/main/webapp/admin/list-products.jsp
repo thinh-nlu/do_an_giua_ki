@@ -177,7 +177,7 @@
 
             <td><%=p.getPrice()%></td>
             <td><%=p.getPrice()+"/"+p.getUnitPrice()+p.getUnit()%></td>
-            <td><a href="#" class='text-dark'><i class=" bi bi-pencil-square"> </i></a></td>
+            <td><a href="edit_products.jsp?id=<%=p.getId()%>" class='text-dark'><i class=" bi bi-pencil-square"> </i></a></td>
             <td><a href="#" class='text-dark'><i class="bi bi-trash"></i></a></td>
         <%
             }

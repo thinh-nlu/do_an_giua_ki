@@ -101,11 +101,58 @@ public class ProductDAO {
         return products;
     }
 
+    public Product getProductById(int id) {
+        Product product = null;
+        query = "select * from products where id = ?";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setInt(1,id);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                product = new Product();
+                product.setId(rs.getInt(1));
+                product.setTitle(rs.getString(2));
+                product.setImage(rs.getString(3));
+                product.setPrice(rs.getString(4));
+                product.setUnit(rs.getString(5));
+                product.setCategoryId(rs.getString(6));
+                product.setKeyword(rs.getString(7));
+                product.setStatus(rs.getString(8));
+                product.setDateInsert(rs.getTimestamp(9));
+                product.setQuantity(rs.getString(10));
+                product.setUnitPrice(rs.getString(11));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return product;
+    }
 
+    public boolean updateProduct(Product p) {
+        boolean isUpdate = false;
+        query = "UPDATE products SET title = ?, price = ?, unit = ?, categoryId = ?, keyword = ?, quantity = ?, unitPrice = ? WHERE id = ?";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1,p.getTitle());
+            ps.setString(2,p.getPrice());
+            ps.setString(3,p.getUnit());
+            ps.setString(4,p.getCategoryId());
+            ps.setString(5,p.getKeyword());
+            ps.setString(6,p.getQuantity());
+            ps.setString(7,p.getUnitPrice());
+            ps.setInt(8,p.getId());
+            int i = ps.executeUpdate();
+            isUpdate = i == 1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return isUpdate;
+    }
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO(DBConnect.getConnection());
         List<Product> list = dao.getAllProduct();
-        System.out.println(list);
+        Product p = dao.getProductById(9);
+        System.out.println(p);
     }
 }

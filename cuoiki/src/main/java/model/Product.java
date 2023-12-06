@@ -31,6 +31,20 @@ public class Product {
         this.unitPrice = unitPrice;
     }
 
+    public Product(int id, String title, String price, String unit, String image, String categoryId, String keyword, Timestamp timestamp, String quantity, String status, String unitPrice) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+        this.unit = unit;
+        this.image = image;
+        this.categoryId = categoryId;
+        this.keyword = keyword;
+        this.timestamp = timestamp;
+        this.quantity = quantity;
+        this.status = status;
+        this.unitPrice = unitPrice;
+    }
+
     public Timestamp getTimestamp() {
         return timestamp;
     }
