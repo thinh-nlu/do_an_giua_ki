@@ -111,8 +111,8 @@
                     <li class="nav-item">
                         <form method="post" action="${pageContext.request.contextPath}/searchProduct">
                             <div class="input-group rounded">
-                                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" id="keyword" name="keyword">
-                                <input type="submit" value="Search" class="btn btn-outline-success" name="search_data_product">
+                                <input type="search" class="form-control rounded" placeholder="Tìm kiếm sản phẩm" aria-label="Search" aria-describedby="search-addon" id="keyword" name="keyword">
+                                <input type="submit" value="Tìm kiếm" class="btn btn-outline-success" name="search_data_product">
                             </div>
                         </form>
                         <c:if test="${not empty searchListSuccess}">
