@@ -1,5 +1,9 @@
+<%@ page import="model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
+<%
+    User user = (User) session.getAttribute("success");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +31,7 @@
     <link rel="stylesheet" href="../css/responsive.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/custom.css">
+    <link rel="stylesheet" href="../css/admin-style.css">
     <link rel="stylesheet" href="../asset/bootstrap-icons-1.11.1/bootstrap-icons.css">
 
     <!--[if lt IE 9]>
@@ -36,7 +41,41 @@
     <link rel="stylesheet" href="../css/admin-style.css">
 </head>
 <body>
-<jsp:include page="../include/header.jsp"/>
+<!-- Start Main Top -->
+<div class="main-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="our-link">
+                    <ul>
+                        <li><a href="../tien_ich/my-account.jsp"><i class="fa fa-user s_color"></i> Tài khoản của tôi</a></li>
+                        <li><a href="../contact-us.jsp"><i class="fas fa-headset"></i> Liên hệ </a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="login-register">
+                    <ul>
+                        <% if (user != null) { %>
+                        <% if (user.getIsAdmin().equals("1")) { %>
+                        <li><a href="../tien_ich/my-account.jsp">Xin chào <%=user.getName()%></a></li>
+                        <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
+                        <%} else {%>
+                        <li><p>Xin chào <%= user.getName() %></p></li>
+                        <li><a href="../admin/admin.jsp">Trang Quản Lí</a></li>
+                        <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
+                        <%}%>
+                        <% } else { %>
+                        <li><a href="../account/registration.jsp">Đăng Kí</a></li>
+                        <li><a href="../account/login.jsp">Đăng Nhập</a></li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Main Top -->
 <header class="main-header">
     <!-- Start Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
@@ -46,7 +85,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand " href="../index.jsp"><img src="../images/logo1.png" class="logo " style="width: 200px;height: 108px" alt="" ></a>
+                <a class="navbar-brand " href="../index.jsp"><img src="../images/icon.png" class="logo " style="width: 200px;height: 108px" alt="" ></a>
             </div>
             <!-- End Header Navigation -->
 
@@ -115,6 +154,10 @@
     </nav>
     <!-- End Navigation -->
 </header>
+<div class="content">
+    <h2>Chào mừng đến với trang quản lí</h2>
+    <p>Đây là trang chính của hệ thống quản lí. Hãy chọn chức năng phía dưới để tiếp tục.</p>
+</div>
 <div class="navbar1 navbar-expand-lg">
     <ul class="navbar-nav mx-auto" data-in="fadeInDown" data-out="fadeOutUp">
         <li class="nav-item">
@@ -134,12 +177,6 @@
         </li>
     </ul>
 </div>
-
-<div class="content">
-    <h2>Chào mừng đến với trang quản lí</h2>
-    <p>Đây là trang chính của hệ thống quản lí. Hãy chọn chức năng phía trên để tiếp tục.</p>
-</div>
-<jsp:include page="../include/footer.jsp"/>
 <!-- All JS Files -->
 <script src="../js/jquery-3.2.1.min.js"></script>
 <script src="../js/popper.min.js"></script>

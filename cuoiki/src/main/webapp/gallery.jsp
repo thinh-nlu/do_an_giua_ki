@@ -2,18 +2,36 @@
 <%@ page import="database.DBConnect" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.Product" %>
+<%@ page import="model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
+
 <%
+    String spageid=request.getParameter("page");
+    int pageid = (spageid != null && !spageid.isEmpty()) ? Integer.parseInt(spageid) : 1;
+    int totalPerPage =16;
+    int activePage = pageid;
+    int previousPage = pageid-1;
+    int nextPage = pageid+1;
+    if(pageid==1){}
+    else{
+        pageid=pageid-1;
+        pageid=pageid* totalPerPage +1;
+    }
+
     ProductDAO dao = new ProductDAO(DBConnect.getConnection());
     List<Product> products = dao.getAllProduct();
     List<Product> searchListSuccess = (List<Product>) session.getAttribute("searchListSuccess");
     String searchListFailed = (String) session.getAttribute("searchListFailed");
+    List<Product> products= dao.getRecords(pageid, totalPerPage);
+    List<Product> product= dao.getAllProduct();
+    double totalProducts = product.size();
+    int totalPage = (int) Math.ceil(totalProducts /totalPerPage);
+    User user = (User) session.getAttribute("success");
 %>
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -45,9 +63,7 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
-
 <body>
 <div id="container_header"></div>
 <div class="main-top">
@@ -64,8 +80,19 @@
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="login-register">
                     <ul>
+                        <% if (user != null) { %>
+                        <% if (user.getIsAdmin().equals("1")) { %>
+                        <li><a href="tien_ich/my-account.jsp">Xin chào <%=user.getName()%></a></li>
+                        <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
+                        <%} else {%>
+                        <li><p>Xin chào <%= user.getName() %></p></li>
+                        <li><a href="admin/admin.jsp">Trang Quản Lí</a></li>
+                        <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
+                        <%}%>
+                        <% } else { %>
                         <li><a href="account/registration.jsp">Đăng Kí</a></li>
                         <li><a href="account/login.jsp">Đăng Nhập</a></li>
+                        <% } %>
                     </ul>
                 </div>
             </div>
@@ -282,28 +309,24 @@
     </div>
     <!-- End Gallery  -->
 <nav aria-label="...">
-    <ul class="pagination pb-5 justify-content-center ">
-        <li class="page-item disabled">
-            <a class="page-link" href="#" aria-label="Previous">
+    <ul class="pagination pb-5 justify-content-center">
+        <li class="page-item  <%= (activePage==1)?"disabled":"enable"%>">
+            <a class="page-link" href="gallery.jsp?page=<%= previousPage %>" aria-label="Previous">
                 <i class="bi-arrow-left"></i>
             </a>
         </li>
-        <li class="page-item active"><a class="page-link" href="gallery_1.html">1</a></li>
-        <li class="page-item"><a class="page-link" href="gallery/gallery_2.html">2</a></li>
-        <li class="page-item"><a class="page-link" href="gallery/gallery_3.html">3</a></li>
-        <li class="page-item"><a class="page-link" href="gallery/gallery_4.html">4</a></li>
-        <li class="page-item"><a class="page-link" href="gallery/gallery_5.html">5</a></li>
-        <li class="page-item"><a class="page-link" href="gallery/gallery_6.html">6</a></li>
-        <li class="page-item"><a class="page-link" href="gallery/gallery_7.html">7</a></li>
-        <li class="page-item"><a class="page-link" href="gallery/gallery_8.html">8</a></li>
-        <li class="page-item"><a class="page-link" href="gallery/gallery_9.html">9</a></li>
-
-        <li class="page-item">
-            <a class="page-link" href="gallery/gallery_2.html" aria-label="Next">
+        <% for (int i = 1; i <= totalPage; i++) { %>
+        <li class="page-item <%= (i == activePage) ? "active" : "" %>">
+            <a class="page-link" href="gallery.jsp?page=<%= i %>"><%= i %></a>
+        </li>
+        <% } %>
+        <li class="page-item <%= (activePage==totalPage)?"disabled":"enable"%>">
+            <a class="page-link" href="gallery.jsp?page=<%= nextPage %>" aria-label="Next">
                 <i class="bi-arrow-right"></i>
             </a>
         </li>
     </ul>
+
 </nav>
 
     <!-- Start Instagram Feed  -->
@@ -395,10 +418,85 @@
 
 
     <!-- Start Footer  -->
-<footer>
-    <div id="container_footer"></div>
-    <jsp:include page="include/footer.jsp"/>
-</footer>
+<div class="footer-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-top-box">
+                    <h3>Thời gian kinh doan</h3>
+                    <ul class="list-time">
+                        <li>Thứ hai- Thứ sáu: 08.00 đến 17.00</li> <li>Thứ bảy: 10.00 đến 20.00</li> <li>Chủ nhật: <span>Đóng cửa</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-top-box">
+                    <h3>Bản tin</h3>
+                    <form class="newsletter-box">
+                        <div class="form-group">
+                            <input class="" type="email" name="Email" placeholder="Địa chỉ E-mail*" />
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                        <button class="btn hvr-hover" type="submit">Gửi</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-top-box">
+                    <h3>Các trang truyền thông</h3>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-widget">
+                    <h4>Freshshop</h4>
+                    <p>Ở đây chất lượng được đặt lên hàng đầu </p>
+                    <p>Sức khỏe khách hàng là ưu tiên của chúng tôi </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-link">
+                    <h4>Thông tin</h4>
+                    <ul>
+                        <li><a href="#">Liên hệ chúng tôi</a></li>
+                        <li><a href="#">Dịch vụ chăm sóc khách hàng </a></li>
+                        <li><a href="#">Our Sitemap</a></li>
+                        <li><a href="#">Điều khoản và điều kiện</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Thông tin giao hàng</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="footer-link-contact">
+                    <h4>Liên hệ với chúng tôi</h4>
+                    <ul>
+                        <li>
+                            <p><i class="fas fa-map-marker-alt"></i>Địa chỉ: 47 đường số 17 <br>Phường Linh Trung<br> Thành phố Thủ Đức</p>
+                        </li>
+                        <li>
+                            <p><i class="fas fa-phone-square"></i>Liện hệ: <a href="tel:+1-888705770"></a></p>
+                        </li>
+                        <li>
+                            <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com"></a></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- End Footer  -->
 
     <a href="#" id="back-to-top" title="Back to top" style="display: none;"><i class="bi-arrow-up-short"></i></a>

@@ -2,11 +2,27 @@
 <%@ page import="java.util.List" %>
 <%@ page import="dao.ProductDAO" %>
 <%@ page import="database.DBConnect" %>
+<%@ page import="model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
 <%
+    String spageid = request.getParameter("page");
+    int pageid = (spageid != null && !spageid.isEmpty()) ? Integer.parseInt(spageid) : 1;
+    int totalPerPage =16;
+    int activePage = pageid;
+    int previousPage = pageid-1;
+    int nextPage = pageid+1;
+    if(pageid==1){}
+    else{
+        pageid=pageid-1;
+        pageid=pageid* totalPerPage +1;
+    }
     ProductDAO dao = new ProductDAO(DBConnect.getConnection());
-    List<Product> list = dao.getAllProduct();
+    List<Product> list = dao.getRecords(pageid, totalPerPage);
+    List<Product> allList = dao.getAllProduct();
+    double totalProducts = allList.size();
+    int totalPage = (int) Math.ceil(totalProducts /totalPerPage);
+    User user = (User) session.getAttribute("success");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +50,41 @@
 
 </head>
 <body class="">
-<jsp:include page="../include/header.jsp"/>
+<!-- Start Main Top -->
+<div class="main-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="our-link">
+                    <ul>
+                        <li><a href="../tien_ich/my-account.jsp"><i class="fa fa-user s_color"></i> Tài khoản của tôi</a></li>
+                        <li><a href="../contact-us.jsp"><i class="fas fa-headset"></i> Liên hệ </a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="login-register">
+                    <ul>
+                        <% if (user != null) { %>
+                        <% if (user.getIsAdmin().equals("1")) { %>
+                        <li><a href="../tien_ich/my-account.jsp">Xin chào <%=user.getName()%></a></li>
+                        <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
+                        <%} else {%>
+                        <li><p>Xin chào <%= user.getName() %></p></li>
+                        <li><a href="../admin/admin.jsp">Trang Quản Lí</a></li>
+                        <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
+                        <%}%>
+                        <% } else { %>
+                        <li><a href="../account/registration.jsp">Đăng Kí</a></li>
+                        <li><a href="../account/login.jsp">Đăng Nhập</a></li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Main Top -->
 <!-- Start Main Top -->
 <header class="main-header">
     <!-- Start Navigation -->
@@ -116,7 +166,18 @@
 </header>
 <!-- End Main Top -->
 <h3 class="text-center text-dark pb-3 display-4 font-weight-normal" >Tất cả sản phẩm</h3>
+<c:if test="${not empty successUpdate}">
+    <p class="text-center text-success">${successUpdate}</p>
+    <c:remove var="successUpdate" scope="session"/>
+</c:if>
+<c:if test="${not empty failedUpdate}">
+    <p class="text-center text-danger">${failedUpdate}</p>
+    <c:remove var="failedUpdate" scope="session"/>
+</c:if>
 <div class="px-lg-5 pt-xl-5">
+<h3 class="text-center text-dark pt-xl-3 display-4 font-weight-normal" >Tất cả sản phẩm</h3>
+
+<div class="px-lg-5 pt-xl-1">
     <table class="table table-striped text-center ">
         <thead class="bg-dark">
         <tr class="text-light">
@@ -141,8 +202,8 @@
 
             <td><%=p.getPrice()%></td>
             <td><%=p.getPrice()+"/"+p.getUnitPrice()+p.getUnit()%></td>
-            <td><a href="#" class='text-dark'><i class=" bi bi-pencil-square"> </i></a></td>
-            <td><a href="#" class='text-dark'><i class="bi bi-trash"></i></a></td>
+            <td><a href="edit_products.jsp?id=<%=p.getId()%>" class='text-dark'><i class=" bi bi-pencil-square"> </i></a></td>
+            <td><a href="../delete?id=<%=p.getId()%>" class='text-dark'><i class="bi bi-trash"></i></a></td>
         <%
             }
             }
@@ -151,6 +212,26 @@
 
   </tbody>
     </table>
+    <nav aria-label="...">
+        <ul class="pagination pb-5 justify-content-center">
+            <li class="page-item  <%= (activePage==1)?"disabled":"enable"%>">
+                <a class="page-link" href="list-products.jsp?page=<%= previousPage %>" aria-label="Previous">
+                    <i class="bi-arrow-left"></i>
+                </a>
+            </li>
+            <% for (int i = 1; i <= totalPage; i++) { %>
+            <li class="page-item <%= (i == activePage) ? "active" : "" %>">
+                <a class="page-link" href="list-products.jsp?page=<%= i %>"><%= i %></a>
+            </li>
+            <% } %>
+            <li class="page-item <%= (activePage==totalPage)?"disabled":"enable"%>">
+                <a class="page-link" href="list-products.jsp?page=<%= nextPage %>" aria-label="Next">
+                    <i class="bi-arrow-right"></i>
+                </a>
+            </li>
+        </ul>
+
+    </nav>
 </div>
 
 </body>
