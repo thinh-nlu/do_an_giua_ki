@@ -8,6 +8,24 @@
   User user = (User) session.getAttribute("success");
   UserDAO dao = new UserDAO(DBConnect.getConnection());
   List<User> users = dao.getAllUser();
+=======
+  String spageid = request.getParameter("page");
+  int pageid = (spageid != null && !spageid.isEmpty()) ? Integer.parseInt(spageid) : 1;
+  int totalPerPage =16;
+  int activePage = pageid;
+  int previousPage = pageid-1;
+  int nextPage = pageid+1;
+  if(pageid==1){}
+  else{
+    pageid=pageid-1;
+    pageid=pageid* totalPerPage +1;
+  }
+  UserDAO dao = new UserDAO(DBConnect.getConnection());
+  List<User> users = dao.getRecords(pageid, totalPerPage);
+  List<User> allList = dao.getAllUser();
+  double totalProducts = allList.size();
+  int totalPage = (int) Math.ceil(totalProducts /totalPerPage);
+  User user = (User) session.getAttribute("success");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -181,6 +199,26 @@
     %>
     </tbody>
   </table>
+  <nav aria-label="...">
+    <ul class="pagination pb-5 justify-content-center">
+      <li class="page-item  <%= (activePage==1)?"disabled":"enable"%>">
+        <a class="page-link" href="list-user.jsp?page=<%= previousPage %>" aria-label="Previous">
+          <i class="bi-arrow-left"></i>
+        </a>
+      </li>
+      <% for (int i = 1; i <= totalPage; i++) { %>
+      <li class="page-item <%= (i == activePage) ? "active" : "" %>">
+        <a class="page-link" href="list-user.jsp?page=<%= i %>"><%= i %></a>
+      </li>
+      <% } %>
+      <li class="page-item <%= (activePage==totalPage)?"disabled":"enable"%>">
+        <a class="page-link" href="list-user.jsp?page=<%= nextPage %>" aria-label="Next">
+          <i class="bi-arrow-right"></i>
+        </a>
+      </li>
+    </ul>
+
+  </nav>
 </div>
 </body>
 </html>

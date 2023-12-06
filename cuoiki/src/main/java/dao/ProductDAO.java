@@ -162,7 +162,6 @@ public class ProductDAO {
         }
         return isDelete;
     }
-
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO(DBConnect.getConnection());
         List<Product> list = dao.getAllProduct();

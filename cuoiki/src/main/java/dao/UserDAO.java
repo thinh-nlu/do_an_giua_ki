@@ -1,6 +1,7 @@
 package dao;
 
 import database.DBConnect;
+import model.Product;
 import model.User;
 
 import java.nio.charset.StandardCharsets;
@@ -89,6 +90,31 @@ public class UserDAO {
         }
         return users;
     }
+    public List<User> getRecords(int start, int total) {
+        List<User> users = new ArrayList<>();
+        query = "select * from users limit " + (start-1) + "," + total;
+        User u = null;
+        try {
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                u = new User();
+                u.setId(rs.getInt(1));
+                u.setName(rs.getString(2));
+                u.setEmail(rs.getString(3));
+                u.setPassword(rs.getString(4));
+                u.setContact(rs.getString(5));
+                u.setIsAdmin(rs.getString(6));
+                u.setTimestamp(rs.getTimestamp(7));
+                users.add(u);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return users;
+    }
+
+
 
     private String hashPassword(String password) {
         try {
