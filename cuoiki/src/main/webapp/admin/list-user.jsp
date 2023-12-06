@@ -5,6 +5,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
 <%
+  User user = (User) session.getAttribute("success");
+  UserDAO dao = new UserDAO(DBConnect.getConnection());
+  List<User> users = dao.getAllUser();
+=======
   String spageid = request.getParameter("page");
   int pageid = (spageid != null && !spageid.isEmpty()) ? Integer.parseInt(spageid) : 1;
   int totalPerPage =16;
