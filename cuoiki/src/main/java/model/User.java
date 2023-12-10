@@ -10,15 +10,25 @@ public class User {
     private String contact;
     private String isAdmin;
     private Timestamp timestamp;
+    private String isActive;
+
+    public String getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(String isActive) {
+        this.isActive = isActive;
+    }
 
     public User(){}
 
-    public User(String name, String email, String password, String contact, String isAdmin) {
+    public User(String name, String email, String password, String contact, String isAdmin, String isActive) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.contact = contact;
         this.isAdmin = isAdmin;
+        this.isActive = isActive;
     }
 
     public int getId() {
