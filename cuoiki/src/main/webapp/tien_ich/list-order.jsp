@@ -107,17 +107,7 @@
                             <input type="submit" value="Tìm kiếm" class="btn btn-outline-success" name="search_data_product">
                         </div>
                     </form>
-                    <c:if test="${not empty searchListSuccess}">
-                        <p class="text-center text-success"></p>
-                        <c:remove var="searchListSuccess" scope="session"/>
-                    </c:if>
-                    <c:if test="${not empty searchListFailed}">
-                        <p class="text-center text-danger">${searchListFailed}</p>
-                        <c:remove var="searchListFailed" scope="session"/>
-                    </c:if>
-                    <%
-                        session.removeAttribute("searchListFailed");
-                    %>
+
                 </li>
             </div>
             <!-- /.navbar-collapse -->
