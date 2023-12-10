@@ -32,6 +32,9 @@ public class LoginUser extends HttpServlet {
         if (user == null) {
             session.setAttribute("failed","Tài khoản không tồn tại");
             resp.sendRedirect("account/login.jsp");
+        } else if (user.getIsActive().equals("0")) {
+            session.setAttribute("failed","Tài Khoản Đã Bị Chặn");
+            resp.sendRedirect("account/login.jsp");
         } else if (!passwordHash.equals(passwordHashFromDB)) {
             session.setAttribute("failed","Mật khẩu không chính xác");
             resp.sendRedirect("account/login.jsp");

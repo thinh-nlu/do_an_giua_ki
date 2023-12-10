@@ -27,7 +27,7 @@ public class UserDAO {
 
     public boolean registerUser(User user) {
         boolean isAdd = false;
-        query = "insert into users(username,email,password,contact,isAdmin,date) values (?,?,?,?,?,NOW())";
+        query = "insert into users(username,email,password,contact,isAdmin,date,isActive) values (?,?,?,?,?,NOW(),?)";
         try {
             ps = con.prepareStatement(query);
             ps.setString(1,user.getName());
@@ -35,7 +35,7 @@ public class UserDAO {
             ps.setString(3,user.getPassword());
             ps.setString(4,user.getContact());
             ps.setString(5,user.getIsAdmin());
-
+            ps.setString(6, user.getIsActive());
             int i = ps.executeUpdate();
             isAdd = i == 1;
         } catch (SQLException e) {
@@ -60,6 +60,30 @@ public class UserDAO {
                 user.setContact(rs.getString(5));
                 user.setIsAdmin(rs.getString(6));
                 user.setTimestamp(rs.getTimestamp(7));
+                user.setIsActive(rs.getString(8));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return user;
+    }
+
+    public User getUserById(int id) {
+        User user = new User();
+        query = "select * from users where id = ?";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setInt(1,id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                user.setId(rs.getInt(1));
+                user.setName(rs.getString(2));
+                user.setEmail(rs.getString(3));
+                user.setPassword(rs.getString(4));
+                user.setContact(rs.getString(5));
+                user.setIsAdmin(rs.getString(6));
+                user.setTimestamp(rs.getTimestamp(7));
+                user.setIsActive(rs.getString(8));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -83,6 +107,7 @@ public class UserDAO {
                 u.setContact(rs.getString(5));
                 u.setIsAdmin(rs.getString(6));
                 u.setTimestamp(rs.getTimestamp(7));
+                u.setIsActive(rs.getString(8));
                 users.add(u);
             }
         } catch (SQLException e) {
@@ -106,12 +131,28 @@ public class UserDAO {
                 u.setContact(rs.getString(5));
                 u.setIsAdmin(rs.getString(6));
                 u.setTimestamp(rs.getTimestamp(7));
+                u.setIsActive(rs.getString(8));
                 users.add(u);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return users;
+    }
+
+    public boolean blockUser(String isActive, int id) {
+        boolean isUpdate = false;
+        query = "UPDATE users SET isActive = ? WHERE id = ?";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1,isActive);
+            ps.setInt(2,id);
+            int i = ps.executeUpdate();
+            isUpdate = i == 1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return isUpdate;
     }
 
 

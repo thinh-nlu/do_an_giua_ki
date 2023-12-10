@@ -7,8 +7,6 @@
 <%
   User user = (User) session.getAttribute("success");
   UserDAO dao = new UserDAO(DBConnect.getConnection());
-  List<User> users = dao.getAllUser();
-=======
   String spageid = request.getParameter("page");
   int pageid = (spageid != null && !spageid.isEmpty()) ? Integer.parseInt(spageid) : 1;
   int totalPerPage =16;
@@ -20,12 +18,11 @@
     pageid=pageid-1;
     pageid=pageid* totalPerPage +1;
   }
-  UserDAO dao = new UserDAO(DBConnect.getConnection());
   List<User> users = dao.getRecords(pageid, totalPerPage);
   List<User> allList = dao.getAllUser();
   double totalProducts = allList.size();
   int totalPage = (int) Math.ceil(totalProducts /totalPerPage);
-  User user = (User) session.getAttribute("success");
+  String isActive = "";
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -170,35 +167,60 @@
 <!-- End Main Top -->
 <h3 class="text-center text-dark pb-3 display-4 font-weight-normal" >Danh sách khách hàng</h3>
 <div class="px-lg-5 pt-xl-5 mb-5">
-  <table class="table table-striped text-center ">
-    <thead class="bg-dark">
-    <tr class="text-light">
-      <th>ID</th>
-      <th>Tên Người Dùng </th>
-      <th>Email </th>
-      <th>Số Điện Thoại</th>
-      <th>Xóa</th>
-    </tr>
-    </thead>
-    <tbody class="bg-light text-dark">
-    <%
-      if(!users.isEmpty()) {
-        for (User u: users) {
-    %>
-    <tr class='text-center text-dark font-weight-normal  '>
-      <td><%=u.getId()%></td>
-      <td><%=u.getName()%></td>
-      <td><%=u.getEmail()%></td>
-      <td><%=u.getContact()%></td>
-      <td><a href="#" class='text-dark'><i class="bi bi-trash"></i></a></td>
+  <form method="post" action="../blockUser">
+    <table class="table table-striped text-center ">
+      <thead class="bg-dark">
+      <tr class="text-light">
+        <th>ID</th>
+        <th>Tên Người Dùng </th>
+        <th>Email </th>
+        <th>Số Điện Thoại</th>
+        <th>Xóa</th>
+        <th>Trạng Thai</th>
+      </tr>
+      </thead>
+      <tbody class="bg-light text-dark">
+      <%
+        if(!users.isEmpty()) {
+          for (User u: users) {
+            isActive = u.getIsActive();
+            int id = u.getId();
+            String buttonId = "active_" + id;
+            String buttonValue = isActive.equals("1") ? "block" : "active";
+      %>
+      <tr class='text-center text-dark font-weight-normal  '>
+        <td><%=id%></td>
+        <td><%=u.getName()%></td>
+        <td><%=u.getEmail()%></td>
+        <td><%=u.getContact()%></td>
+        <td><a href="#" class='text-dark'><i class="bi bi-trash"></i></a></td>
+        <td>
+          <%
+            if(isActive.equals("1")) {
+          %>
+          <!-- Nút Active -->
+          <a class="btn btn-success" href="../blockUser?id=<%=id%>" >
+            <i class="bi bi-check-circle"></i> Đang Hoạt Động
+          </a>
+          <%
+            } else {
+          %>
+                  <!-- Nút Block -->
+                  <a class="btn btn-danger" href="../blockUser?id=<%=id%>">
+                    <i class="bi bi-x-circle"></i> Chặn
+                  </a>
+          <%}%>
+        </td>
 
-    </tr>
-    <%
-      }
-      }
-    %>
-    </tbody>
-  </table>
+
+      </tr>
+      <%
+          }
+        }
+      %>
+      </tbody>
+    </table>
+  </form>
   <nav aria-label="...">
     <ul class="pagination pb-5 justify-content-center">
       <li class="page-item  <%= (activePage==1)?"disabled":"enable"%>">
