@@ -167,6 +167,14 @@
 <!-- End Main Top -->
 <h3 class="text-center text-dark pb-3 display-4 font-weight-normal" >Danh sách khách hàng</h3>
 <div class="px-lg-5 pt-xl-5 mb-5">
+  <c:if test="${not empty deleteSuccess}">
+    <p class="text-center text-success">${deleteSuccess}</p>
+    <c:remove var="deleteSuccess" scope="session"/>
+  </c:if>
+  <c:if test="${not empty deleteFailed}">
+    <p class="text-center text-danger">${deleteFailed}</p>
+    <c:remove var="deleteFailed" scope="session"/>
+  </c:if>
   <form method="post" action="../blockUser">
     <table class="table table-striped text-center ">
       <thead class="bg-dark">
@@ -185,15 +193,13 @@
           for (User u: users) {
             isActive = u.getIsActive();
             int id = u.getId();
-            String buttonId = "active_" + id;
-            String buttonValue = isActive.equals("1") ? "block" : "active";
       %>
       <tr class='text-center text-dark font-weight-normal  '>
         <td><%=id%></td>
         <td><%=u.getName()%></td>
         <td><%=u.getEmail()%></td>
         <td><%=u.getContact()%></td>
-        <td><a href="#" class='text-dark'><i class="bi bi-trash"></i></a></td>
+        <td><a href="../deleteUser?id=<%=id%>" class='text-dark'><i class="bi bi-trash"></i></a></td>
         <td>
           <%
             if(isActive.equals("1")) {

@@ -179,6 +179,19 @@ public class UserDAO {
         return null;
     }
 
+    public boolean deleteUser(int id) {
+        boolean isDelete = false;
+        query = "delete from users where id = ?";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setInt(1,id);
+            int i = ps.executeUpdate();
+            isDelete = i == 1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return isDelete;
+    }
     public static void main(String[] args) {
         UserDAO dao = new UserDAO(DBConnect.getConnection());
         List<User> users = dao.getAllUser();
