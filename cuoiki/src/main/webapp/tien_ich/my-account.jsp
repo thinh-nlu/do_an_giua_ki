@@ -103,7 +103,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="cart.jsp">Giỏ Hàng</a></li>
                             <li><a href="checkout.jsp">Thanh Toán</a></li>
-                            <li><a href="my-account.html">Tài Khoản</a></li>
+                            <li><a href="my-account.jsp">Tài Khoản</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="../gallery.jsp">Cửa Hàng</a></li>
@@ -257,23 +257,38 @@
                     <div class="container rounded bg-white mt-5">
                         <div class="row">
                             <div class="col-md-4 border-right">
-                                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" src="https://i.imgur.com/0eg0aG0.jpg" width="90"><span class="font-weight-bold">John Doe</span><span class="text-black-50">john_doe12@bbb.com</span></div>
+                                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" src="https://secure.gravatar.com/avatar/02dce7358deff589577dfc8a60342636?s=256&d=mm&r=g" width="90"><span class="font-weight-bold"><%= user.getName()%></span><span class="text-black-50"><%= user.getEmail()%></span></div>
                             </div>
                             <div class="col-md-8">
                                 <div class="p-3 py-5">
+                                    <form action="../updateAccount" method="post">
 
+                                        <c:if test="${not empty successUpdateAccount}">
+                                            <p class="text-center text-success">${successUpdateAccount}</p>
+                                            <c:remove var="successRegister" scope="session"/>
+                                        </c:if>
+                                        <c:if test="${not empty failedUpdateAccount}">
+                                            <p class="text-center text-danger">${failedUpdateAccount}</p>
+                                            <c:remove var="failedRegister" scope="session"/>
+                                        </c:if>
 
-                                    <div class="row mt-3">
+                                        <div class="row mt-3">
 
-                                        <div class="col-md-6"><input type="text" class="form-control" placeholder="email" value=""></div>
+                                            <div class="col-md-6"><input name="name" id="name" type="text" class="form-control" placeholder="Tên" value="<%=user.getName()%>"></div>
 
-                                    </div>
-                                    <div class="row mt-3">
+                                        </div>
+                                        <div class="row mt-3">
 
-                                        <div class="col-md-6"><input type="text" class="form-control" placeholder="Số điện thoại" value=""></div>
+                                            <div class="col-md-6"><input name="email" id="email" type="text" class="form-control" placeholder="email" value="<%=user.getEmail()%>"></div>
 
-                                    </div>
-                                    <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="button">Lưu thông tin</button></div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <input name="id" type="hidden" id="id" value="<%=user.getId()%>">
+                                            <div class="col-md-6"><input name="contact" id="contact" type="text" class="form-control" placeholder="Số điện thoại" value="<%=user.getContact()%>"></div>
+
+                                        </div>
+                                        <div class="mt-5 text-right"><input class="btn btn-primary profile-button" type="submit" value="Lưu Thông Tin"></div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -283,25 +298,27 @@
                     <div class="container rounded bg-white mt-5">
                         <div class="row">
                             <div class="col-md-4 border-right">
-                                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" src="https://i.imgur.com/0eg0aG0.jpg" width="90"><span class="font-weight-bold">John Doe</span><span class="text-black-50">john_doe12@bbb.com</span><span>United States</span></div>
+                                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" src="https://secure.gravatar.com/avatar/02dce7358deff589577dfc8a60342636?s=256&d=mm&r=g" width="90"><span class="font-weight-bold"><%= user.getName()%></span><span class="text-black-50"><%= user.getEmail()%></span></div>
                             </div>
                             <div class="col-md-8">
                                 <div class="p-3 py-5">
 
+                                    <form action="../updatePassword" method="post">
                                     <div class="row mt-2">
-                                        <div class="col-md-6"><input type="password" class="form-control" placeholder="Nhập Mật Khẩu Cũ" value=""></div>
+                                        <div class="col-md-6"><input name="password" id="password" type="password" class="form-control" placeholder="Nhập Mật Khẩu Cũ" value=""></div>
 
                                     </div>
                                     <div class="row mt-3">
-                                        <div class="col-md-6"><input type="password" class="form-control" placeholder="Nhập Mật Khẩu Mới" value=""></div>
+                                        <div class="col-md-6"><input name="newpassword" id="newpassword" type="password" class="form-control" placeholder="Nhập Mật Khẩu Mới" value=""></div>
 
                                     </div>
                                     <div class="row mt-3">
-                                        <div class="col-md-6"><input type="password" class="form-control" placeholder="Xác Nhận Mật Khẩu Mới" value=""></div>
+                                        <div class="col-md-6"><input name="confirmpasword" id="confirmpassword" type="password" class="form-control" placeholder="Xác Nhận Mật Khẩu Mới" value=""></div>
 
                                     </div>
-
-                                    <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="button">Lưu thông tin</button></div>
+                                        <input name="id" type="hidden" id="id1" value="<%=user.getId()%>">
+                                        <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="submit    ">Lưu thông tin</button></div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -408,13 +425,7 @@
 <!-- Start Footer  -->
 <footer>
     <div id="container_footer"></div>
-    <script>
-        fetch("../include/footer.html")
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("container_footer").innerHTML = data;
-            });
-    </script>
+    <jsp:include page="../include/footer.jsp"/>
 </footer>
 <!-- End Footer  -->
 <!-- End copyright  -->
