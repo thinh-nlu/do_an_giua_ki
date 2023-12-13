@@ -110,23 +110,13 @@
                     <li class="nav-item"><a class="nav-link" href="../contact-us.jsp">Liên hệ </a></li>
                 </ul>
                 <li class="nav-item">
-                    <form method="post" action="${pageContext.request.contextPath}/searchProduct">
+                    <form method="post" action="../searchProduct">
                         <div class="input-group rounded">
-                            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" id="keyword" name="keyword">
-                            <input type="submit" value="Search" class="btn btn-outline-success" name="search_data_product">
+                            <input type="search" class="form-control rounded" placeholder="Tìm kiếm sản phẩm" aria-label="Search" aria-describedby="search-addon" id="keyword" name="keyword">
+                            <input type="submit" value="Tìm kiếm" class="btn btn-outline-success" name="search_data_product">
                         </div>
                     </form>
-                    <c:if test="${not empty searchListSuccess}">
-                        <p class="text-center text-success"></p>
-                        <c:remove var="searchListSuccess" scope="session"/>
-                    </c:if>
-                    <c:if test="${not empty searchListFailed}">
-                        <p class="text-center text-danger">${searchListFailed}</p>
-                        <c:remove var="searchListFailed" scope="session"/>
-                    </c:if>
-                    <%
-                        session.removeAttribute("searchListFailed");
-                    %>
+
                 </li>
             </div>
             <!-- /.navbar-collapse -->
@@ -245,6 +235,24 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="login-register">
+                    <ul>
+                        <% if (user != null) { %>
+                        <!-- Người dùng đã đăng nhập -->
+                        <li><p>Xin chào <%= user.getName() %></p></li>
+                        <li><a href="../admin/admin.jsp">Trang Quản Lí</a></li>
+                        <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
+                        <% } else { %>
+                        <!-- Người dùng chưa đăng nhập -->
+                        <script>
+                            alert("Bạn cần đăng nhập để sử dụng chức năng này.");
+                            window.location.href = "../index.jsp";
+                        </script>
+                        <% } %>
+                    </ul>
+                </div>
+
                 <div class="collapse col align-self-center" id="profile">
                     <div class="container rounded bg-white mt-5">
                         <div class="row">
