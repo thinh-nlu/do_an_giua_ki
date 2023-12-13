@@ -153,11 +153,28 @@ public class UserDAO {
             throw new RuntimeException(e);
         }
         return isUpdate;
+
+    }
+   
+    public boolean updatePassword(User u) {
+        boolean isUpdate = false;
+        query = "UPDATE users SET password = ? WHERE id = ?";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1,u.getPassword());
+            ps.setInt(2,u.getId());
+
+            int i = ps.executeUpdate();
+            isUpdate = i == 1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return isUpdate;
     }
 
 
 
-    private String hashPassword(String password) {
+    public String hashPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] encodedHash = digest.digest(
