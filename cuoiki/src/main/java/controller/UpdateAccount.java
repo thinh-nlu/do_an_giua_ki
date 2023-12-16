@@ -49,7 +49,7 @@ public class UpdateAccount extends HttpServlet {
 
 
 
-        if (checkChangingUser(u, id)) {
+
             boolean isUpdate = dao.updateUser(u);
             if (isUpdate) {
                 session.setAttribute("successUpdateAccount", "Cập nhật thông tin thành công");
@@ -60,14 +60,10 @@ public class UpdateAccount extends HttpServlet {
                 session.setAttribute("failedUpdateAccount", "Cập nhật thông tin thất bại");
                 resp.sendRedirect("tien_ich/my-account.jsp");
             }
-        }
+
     }
 
-    private boolean checkChangingUser(User u, int id) {
-        User user = dao.getUserById(id);
-        if(!user.equals(u)) return true;
-        return false;
-    }
+
 }
 
 

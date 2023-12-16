@@ -304,7 +304,16 @@
                                 <div class="p-3 py-5">
 
                                     <form action="../updatePassword" method="post">
-                                    <div class="row mt-2">
+                                        <c:if test="${not empty successUpdatePassword}">
+                                            <p class="text-center text-success">${successUpdatePassword}</p>
+                                            <c:remove var="successRegister" scope="session"/>
+                                        </c:if>
+                                        <c:if test="${not empty failedUpdatePassword}">
+                                            <p class="text-center text-danger">${failedUpdatePassword}</p>
+                                            <c:remove var="failedRegister" scope="session"/>
+                                        </c:if>
+
+                                        <div class="row mt-2">
                                         <div class="col-md-6"><input name="password" id="password" type="password" class="form-control" placeholder="Nhập Mật Khẩu Cũ" value=""></div>
 
                                     </div>
@@ -313,11 +322,11 @@
 
                                     </div>
                                     <div class="row mt-3">
-                                        <div class="col-md-6"><input name="confirmpasword" id="confirmpassword" type="password" class="form-control" placeholder="Xác Nhận Mật Khẩu Mới" value=""></div>
+                                        <div class="col-md-6"><input name="confirmpassword" id="confirmpassword" type="password" class="form-control" placeholder="Xác Nhận Mật Khẩu Mới" value=""></div>
 
                                     </div>
                                         <input name="id" type="hidden" id="id1" value="<%=user.getId()%>">
-                                        <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="submit    ">Lưu thông tin</button></div>
+                                        <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="submit">Lưu thông tin</button></div>
                                     </form>
                                 </div>
                             </div>
