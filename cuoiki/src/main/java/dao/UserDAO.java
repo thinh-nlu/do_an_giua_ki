@@ -155,7 +155,7 @@ public class UserDAO {
         return isUpdate;
 
     }
-   
+
     public boolean updatePassword(User u) {
         boolean isUpdate = false;
         query = "UPDATE users SET password = ? WHERE id = ?";
@@ -171,10 +171,27 @@ public class UserDAO {
         }
         return isUpdate;
     }
+    public boolean updateUser(User u) {
+        boolean isUpdate = false;
+        query = "UPDATE users SET username = ?, email = ?, contact = ? WHERE id = ?";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1,u.getName());
+            ps.setString(2,u.getEmail());
+            ps.setString(3,u.getContact());
+            ps.setInt(4,u.getId());
+
+            int i = ps.executeUpdate();
+            isUpdate = i == 1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return isUpdate;
+    }
 
 
 
-    public String hashPassword(String password) {
+    private String hashPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] encodedHash = digest.digest(
