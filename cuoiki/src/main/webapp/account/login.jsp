@@ -172,7 +172,6 @@
 							<p class="text-center text-danger">${failed}</p>
 							<c:remove var="failed" scope="session"/>
 						</c:if>
-
 						<form method="post" action="../login" class="mt-3" id="formLogin">
 							<div class="form-col md-3">
 								<div class="form-group">
@@ -189,7 +188,7 @@
 									<label class="form-check-label" for="flexCheckDefault">
 										Lưu Mật Khẩu
 									</label>
-									<a href="forgotPassword.jsp" class="ml-5">Quên mật khẩu</a>
+									<a href="registration.jsp" class="ml-5">Quên mật khẩu</a>
 								</div>
 
 								</div>

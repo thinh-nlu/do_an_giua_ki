@@ -25,7 +25,6 @@
 
     List<Product> product= dao.getAllProduct();
     double totalProducts = product.size();
-    List<Product> products= dao.getRecords(pageid, totalPerPage);
     int totalPage = (int) Math.ceil(totalProducts /totalPerPage);
     User user = (User) session.getAttribute("success");
 %>

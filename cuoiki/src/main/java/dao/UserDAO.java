@@ -1,6 +1,7 @@
 package dao;
 
 import database.DBConnect;
+import model.Product;
 import model.User;
 
 import java.nio.charset.StandardCharsets;
@@ -170,8 +171,6 @@ public class UserDAO {
         }
         return isUpdate;
     }
-
-
     public boolean updateUser(User u) {
         boolean isUpdate = false;
         query = "UPDATE users SET username = ?, email = ?, contact = ? WHERE id = ?";
