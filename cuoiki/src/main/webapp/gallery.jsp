@@ -20,6 +20,7 @@
     }
 
     ProductDAO dao = new ProductDAO(DBConnect.getConnection());
+
     List<Product> searchListSuccess = (List<Product>) session.getAttribute("searchListSuccess");
     String searchListFailed = (String) session.getAttribute("searchListFailed");
     List<Product> products= dao.getRecords(pageid, totalPerPage);
