@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,13 +26,7 @@
 </head>
 <body class="">
 <div id="container_header"></div>
-<script>
-  fetch("../include/header.html")
-          .then(response => response.text())
-          .then(data => {
-            document.getElementById("container_header").innerHTML = data;
-          });
-</script>
+
 <!-- Start Main Top -->
 <header class="main-header">
   <!-- Start Navigation -->
@@ -172,13 +167,7 @@
 </div>
 <footer>
   <div id="container_footer"></div>
-  <script>
-    fetch("../include/footer.html")
-            .then(response => response.text())
-            .then(data => {
-              document.getElementById("container_footer").innerHTML = data;
-            });
-  </script>
+
 </footer>
 </body>
 </html>
