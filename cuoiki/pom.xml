@@ -54,6 +54,12 @@
           <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
           <version>3.0.0</version>
       </dependency>
+      <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+      <dependency>
+          <groupId>javax.mail</groupId>
+          <artifactId>mail</artifactId>
+          <version>1.4.7</version>
+      </dependency>
 
   </dependencies>
 
