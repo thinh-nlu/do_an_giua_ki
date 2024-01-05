@@ -1,8 +1,14 @@
 <%@ page import="model.User" %>
+<%@ page import="cart.CartProduct" %>
+<%@ page import="cart.Cart" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="model.Product" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
 <%
     User user = (User) session.getAttribute("success");
+    CartProduct cartProduct = (CartProduct) session.getAttribute("cart");
+    if(cartProduct == null) cartProduct = new CartProduct();
 %>
 <!DOCTYPE html>
 
@@ -127,7 +133,7 @@
                     <ul>
                         <li class="side-menu"><a href="../tien_ich/cart.jsp">
 						<i class="fa fa-shopping-bag"></i>
-                            <span class="badge">3</span>
+                            <span class="badge"><%= cartProduct.getTotal()%></span>
 							<p>Giỏ Hàng</p>
 					</a></li>
                     </ul>
@@ -194,12 +200,16 @@
         </div>
     </div>
     <!-- End All Title Box -->
-
     <!-- Start Cart  -->
     <div class="cart-box-main">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
+                    <%
+                        if(cartProduct.getData().isEmpty()) {
+                    %>
+                    <h2 class="text-center text-danger">Chưa có sản phẩm nào trong giỏ hàng</h2>
+                    <%}else{%>
                     <div class="table-main table-responsive">
                         <table class="table">
                             <thead>
@@ -213,23 +223,24 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <%
+                                for (Map.Entry<Integer, Cart> entry: cartProduct.getData().entrySet()) {
+                                    Product product = entry.getValue().getProduct();
+                                    double totalPrice = Double.parseDouble(product.getPrice()) * Double.valueOf(entry.getValue().getQuantity());
+                            %>
                                 <tr>
                                     <td class="thumbnail-img">
-                                        <a href="#">
-									<img class="img-fluid" src="../images/img-pro-01.jpg" alt="" />
-								</a>
+                                        <img class="img-fluid" src="../DataWeb/<%=product.getImage()%>" alt="" />
                                     </td>
                                     <td class="name-pr">
-                                        <a href="#">
-									cà rốt
-								</a>
+                                        <%=product.getTitle()%>
                                     </td>
                                     <td class="price-pr">
-                                        <p>60.000đ</p>
+                                        <p><%=product.getPrice()%></p>
                                     </td>
-                                    <td class="quantity-box"><input type="number" size="4" value="1" min="0" step="1" class="c-input-text qty text"></td>
+                                    <td class="quantity-box"><input type="number" size="4" value="<%=entry.getValue().getQuantity()%>" min="0" step="1" class="c-input-text qty text"></td>
                                     <td class="total-pr">
-                                        <p>60.000đ</p>
+                                        <p><%=totalPrice%></p>
                                     </td>
                                     <td class="remove-pr">
                                         <a href="#">
@@ -237,57 +248,13 @@
 								</a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="thumbnail-img">
-                                        <a href="#">
-									<img class="img-fluid" src="../images/img-pro-02.jpg" alt="" />
-								</a>
-                                    </td>
-                                    <td class="name-pr">
-                                        <a href="#">
-									cà chua
-								</a>
-                                    </td>
-                                    <td class="price-pr">
-                                        <p>60.000đ</p>
-                                    </td>
-                                    <td class="quantity-box"><input type="number" size="4" value="1" min="0" step="1" class="c-input-text qty text"></td>
-                                    <td class="total-pr">
-                                        <p>60.000đ</p>
-                                    </td>
-                                    <td class="remove-pr">
-                                        <a href="#">
-									<i class="fas fa-times"></i>
-								</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="thumbnail-img">
-                                        <a href="#">
-									<img class="img-fluid" src="../images/img-pro-03.jpg" alt="" />
-								</a>
-                                    </td>
-                                    <td class="name-pr">
-                                        <a href="#">
-									Nho xanh
-								</a>
-                                    </td>
-                                    <td class="price-pr">
-                                        <p>60.000đ</p>
-                                    </td>
-                                    <td class="quantity-box"><input type="number" size="4" value="1" min="0" step="1" class="c-input-text qty text"></td>
-                                    <td class="total-pr">
-                                        <p>60.000đ</p>
-                                    </td>
-                                    <td class="remove-pr">
-                                        <a href="#">
-									<i class="fas fa-times"></i>
-								</a>
-                                    </td>
-                                </tr>
+                            <%
+                                }
+                            %>
                             </tbody>
                         </table>
                     </div>
+                    <%}%>
                 </div>
             </div>
 

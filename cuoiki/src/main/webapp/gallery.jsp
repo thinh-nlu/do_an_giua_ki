@@ -22,9 +22,9 @@
     ProductDAO dao = new ProductDAO(DBConnect.getConnection());
 
     List<Product> searchListSuccess = (List<Product>) session.getAttribute("searchListSuccess");
-    String searchListFailed = (String) session.getAttribute("searchListFailed");
 
-    List<Product> product= dao.getAllProduct();
+    List<Product> product = dao.getAllProduct();
+    List<Product> products= dao.getRecords(pageid, totalPerPage);
     double totalProducts = product.size();
     int totalPage = (int) Math.ceil(totalProducts /totalPerPage);
     User user = (User) session.getAttribute("success");
@@ -263,7 +263,7 @@
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
-                                <a class="cart" href="#">Thêm  giỏ hàng</a>
+                                <a class="cart" href="${pageContext.request.contextPath}/add_cart?id=<%= p1.getId() %>">Thêm  giỏ hàng</a>
                             </div>
                         </div>
                         <div class="why-text">
@@ -288,7 +288,7 @@
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
-                                <a class="cart" href="#">Thêm  giỏ hàng</a>
+                                <a class="cart" href="${pageContext.request.contextPath}/add_cart?id=<%= p.getId() %>">Thêm  giỏ hàng</a>
                             </div>
                         </div>
                         <div class="why-text">
