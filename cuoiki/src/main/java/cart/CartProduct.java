@@ -41,4 +41,21 @@ public class CartProduct {
     public void setData(Map<Integer, Cart> data) {
         this.data = data;
     }
+
+    public void removeProduct(int key) {
+        this.data.remove(key);
+    }
+
+    public double totalPriceAllProduct() {
+        double total = 0.0;
+        for(Map.Entry<Integer, Cart> entry: data.entrySet()) {
+            total += entry.getValue().getQuantity() * Double.parseDouble(entry.getValue().getProduct().getPrice());
+        }
+        return total;
+    }
+
+    public static void main(String[] args) {
+        CartProduct cartProduct = new CartProduct();
+        System.out.println(cartProduct.totalPriceAllProduct());
+    }
 }

@@ -203,13 +203,13 @@
     <!-- Start Cart  -->
     <div class="cart-box-main">
         <div class="container">
+            <%
+                if(cartProduct.getData().isEmpty()) {
+            %>
+            <h2 class="text-center text-danger">Chưa có sản phẩm nào trong giỏ hàng</h2>
+            <%}else{%>
             <div class="row">
                 <div class="col-lg-12">
-                    <%
-                        if(cartProduct.getData().isEmpty()) {
-                    %>
-                    <h2 class="text-center text-danger">Chưa có sản phẩm nào trong giỏ hàng</h2>
-                    <%}else{%>
                     <div class="table-main table-responsive">
                         <form method="post" action="../update_quantity">
                             <table class="table">
@@ -247,19 +247,16 @@
                                         <p><%=totalPrice%></p>
                                     </td>
                                     <td class="remove-pr">
-                                        <button type="submit">
-                                            <i class="fas fa-times"></i>
+                                        <button type="submit" class="border-0">
+                                            <i class="bi bi-file-arrow-up-fill"></i>
                                         </button>
                                     </td>
                                     <td class="remove-pr">
-                                        <a href="#">
+                                        <a href="../deleteCartProduct?id=<%=product.getId()%>">
                                             <i class="fas fa-times"></i>
                                         </a>
                                     </td>
                                 </tr>
-                                <%
-                                    }
-                                %>
                                 </tbody>
                             </table>
                         </form>
@@ -271,23 +268,19 @@
                 <div class="col-lg-8 col-sm-12"></div>
                 <div class="col-lg-4 col-sm-12">
                     <div class="order-box">
-
+                        <%
+                            double totalPrice = cartProduct.totalPriceAllProduct();
+                            double percent = 5.0;
+                            double tax = (totalPrice / 100) * percent;
+                        %>
                         <div class="d-flex">
                             <h4>Tổng giá tiền</h4>
-                            <div class="ml-auto font-weight-bold"> 180.000đ </div>
-                        </div>
-                        <div class="d-flex">
-                            <h4>Giảm giá</h4>
-                            <div class="ml-auto font-weight-bold"> 40.000đ </div>
+                            <div class="ml-auto font-weight-bold"> <%=totalPrice + "đ"%> </div>
                         </div>
                         <hr class="my-1">
                         <div class="d-flex">
-                            <h4>Phiếu giảm giá</h4>
-                            <div class="ml-auto font-weight-bold"> 10.000đ</div>
-                        </div>
-                        <div class="d-flex">
                             <h4>Thuế</h4>
-                            <div class="ml-auto font-weight-bold"> 5.000đ </div>
+                            <div class="ml-auto font-weight-bold"> <%= tax+"đ"%> </div>
                         </div>
                         <div class="d-flex">
                             <h4>Phí giao hàng</h4>
@@ -296,13 +289,15 @@
                         <hr>
                         <div class="d-flex gr-total">
                             <h5>Thành tiền</h5>
-                            <div class="ml-auto h5"> 135.000đ </div>
+                            <div class="ml-auto h5"> <%=totalPrice + tax  + "đ"%> </div>
                         </div>
                         <hr> </div>
                 </div>
                 <div class="col-12 d-flex shopping-box"><a href="checkout.jsp" class="ml-auto btn hvr-hover">Thanh Toán</a> </div>
             </div>
-
+            <%
+                }
+            %>
         </div>
     </div>
     <!-- End Cart -->
