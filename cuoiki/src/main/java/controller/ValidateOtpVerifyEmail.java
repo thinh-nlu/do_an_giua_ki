@@ -30,7 +30,7 @@ public class ValidateOtpVerifyEmail extends HttpServlet {
 
 
         UserDAO dao = new UserDAO(DBConnect.getConnection());
-        int value=Integer.parseInt(request.getParameter("otp"));
+        int value=Integer.parseInt(request.getParameter("otp").trim());
         HttpSession session=request.getSession();
         User user = (User) session.getAttribute("user");
         int otp=(int)session.getAttribute("otp");

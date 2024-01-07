@@ -1,7 +1,10 @@
 <%@ page import="model.User" %>
+<%@ page import="cart.CartProduct" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
 <%
+    CartProduct cartProduct = (CartProduct) session.getAttribute("cart");
+    if(cartProduct == null) cartProduct = new CartProduct();
     User user = (User) session.getAttribute("success");
 %>
 <!DOCTYPE html>
@@ -123,9 +126,9 @@
                 <!-- Start Atribute Navigation -->
                 <div class="attr-nav">
                     <ul>
-\                        <li class="side-menu"><a href="tien_ich/cart.jsp">
+                        <li class="side-menu"><a href="tien_ich/cart.jsp">
 						<i class="fa fa-shopping-bag"></i>
-                            <span class="badge">3</span>
+                            <span class="badge"><%=cartProduct.getTotal()%>></span>
 							<p>Giỏ Hàng</p>
 					</a></li>
                     </ul>
