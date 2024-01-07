@@ -1,8 +1,11 @@
 <%@ page import="model.User" %>
+<%@ page import="cart.CartProduct" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
 <%
     User user = (User) session.getAttribute("success");
+    CartProduct cartProduct = (CartProduct) session.getAttribute("cart");
+    if(cartProduct == null) cartProduct = new CartProduct();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -124,7 +127,7 @@
                         <li class="side-menu">
 							<a href="tien_ich/cart.jsp">
 								<i class="fa fa-shopping-bag"></i>
-								<span class="badge">0</span>
+								<span class="badge"><%=cartProduct.getTotal()%></span>
 								<p>Giỏ Hàng</p>
 							</a>
 						</li>

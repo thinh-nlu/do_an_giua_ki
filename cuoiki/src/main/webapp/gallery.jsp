@@ -3,10 +3,13 @@
 <%@ page import="java.util.List" %>
 <%@ page import="model.Product" %>
 <%@ page import="model.User" %>
+<%@ page import="cart.CartProduct" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
 
 <%
+    CartProduct cartProduct = (CartProduct) session.getAttribute("cart");
+    if(cartProduct == null) cartProduct = new CartProduct();
     String spageid=request.getParameter("page");
     int pageid = (spageid != null && !spageid.isEmpty()) ? Integer.parseInt(spageid) : 1;
     int totalPerPage =16;
@@ -156,7 +159,7 @@
                     <ul>
                         <li class="side-menu"><a href="tien_ich/cart.jsp">
 						<i class="fa fa-shopping-bag"></i>
-                            <span class="badge">3</span>
+                            <span class="badge"><%=cartProduct.getTotal()%></span>
 							<p>Giỏ Hàng</p>
 					</a></li>
                     </ul>
