@@ -44,6 +44,7 @@ public class ValidateOtpVerifyEmail extends HttpServlet {
             boolean isAdd = dao.registerUser(user);
             if (isAdd) {
                 session.setAttribute("successRegister","Đăng kí thành công mời bạn đăng nhập");
+                session.removeAttribute("failedRegister");
             } else {
                 session.setAttribute("failedRegister","Hệ thống đang gặp lỗi vui lòng thử lại sau");
             }
