@@ -48,7 +48,6 @@ public class UpdateProduct extends HttpServlet {
 
     private boolean checkChangingProduct(Product p, int id) {
         Product product = dao.getProductById(id);
-        if(!product.equals(p)) return true;
-        return false;
+        return !product.equals(p);
     }
 }

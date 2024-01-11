@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class DBConnect {
 
     private static Connection con;
-    private static String uri = "jdbc:mysql://" + DBConfig.host + ":" + DBConfig.port + "/" + DBConfig.dbname;
+    private static final String uri = "jdbc:mysql://" + DBConfig.host + ":" + DBConfig.port + "/" + DBConfig.dbname;
     public static Jdbi jdbi;
 
     public static Jdbi getJdbi() {

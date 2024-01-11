@@ -39,7 +39,7 @@
             // Navbar Center 
             // ------------------------------------------------------------------------------ //
             if( getNav.hasClass("brand-center")){                
-                var postsArr = new Array(),
+                var postsArr = [],
                     index = $("nav.brand-center"),
                     $postsList = index.find('ul.navbar-nav');
 				
