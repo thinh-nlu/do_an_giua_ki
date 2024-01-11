@@ -108,7 +108,7 @@
             <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Tiện Ích</a>
             <ul class="dropdown-menu">
               <li><a href="../tien_ich/cart.jsp">Giỏ Hàng</a></li>
-              <li><a href="../tien_ich/checkout.jsp">Thanh Toán</a></li>
+              <li><a href="../tien_ich/address.jsp">Thanh Toán</a></li>
               <li><a href="../tien_ich/my-account.jsp">Tài Khoản</a></li>
             </ul>
           </li>
