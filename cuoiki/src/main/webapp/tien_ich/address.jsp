@@ -1,11 +1,14 @@
 <%@ page import="model.User" %>
 <%@ page import="cart.CartProduct" %>
+<%@ page import="model.Address" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
 <%
     CartProduct cartProduct = (CartProduct) session.getAttribute("cart");
     if(cartProduct == null) cartProduct = new CartProduct();
     User user = (User) session.getAttribute("success");
+    Address a = (Address) session.getAttribute("address");
+    String saveAddressTest = (String) session.getAttribute("saveAddressTest");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,6 +88,17 @@
 
     <!-- Start Main Top -->
     <header class="main-header">
+        <%
+            if(saveAddressTest != null) {
+        %>
+        <script>
+            alert("<%=saveAddressTest%>")
+        </script>
+
+        <%
+            session.removeAttribute("saveAddressTest");
+            }
+        %>
         <!-- Start Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
             <div class="container">
@@ -106,7 +120,7 @@
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tiện ích <i class="bi bi-list "></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="cart.jsp">Giỏ Hàng</a></li>
-                                <li><a href="checkout.jsp">Thanh Toán</a></li>
+                                <li><a href="address.jsp">Thanh Toán</a></li>
                                 <li><a href="my-account.jsp">Tài Khoản</a></li>
                             </ul>
                         </li>
@@ -202,94 +216,91 @@
     <div class="cart-box-main">
         <div class="container">
             <div class="row">
-                <div class="col-sm-6 col-lg-6 mb-3">
+                <div class="col-sm-6 col-lg-6 mb-3 mx-auto">
                     <div class="checkout-address">
                         <div class="title-left">
-                            <h3>Địa chỉ thanh toán</h3>
+                            <h3>Địa chỉ giao hàng</h3>
                         </div>
-                        <form class="needs-validation" novalidate>
+                        <form class="needs-validation" novalidate action="../saveAddress" method="post">
+                            <%
+                                if(a!= null && a.getSaveInfo().equals("save")) {
+                            %>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="firstName">Họ *</label>
-                                    <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="<%=a.getFirstName()%>" required>
                                     <div class="invalid-feedback">Vui lòng nhập họ</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="lastName">Tên *</label>
-                                    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="<%=a.getLastName()%>" required>
                                     <div class="invalid-feedback">Vui lòng nhập tên</div>
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="username">Tên đăng nhập *</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="username" placeholder="" required>
-                                    <div class="invalid-feedback" style="width: 100%;">Vui lòng nhập tên đăng nhập</div>
+                                <label for="email">Email *</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="" value="<%=a.getEmail()%>">
+                                <div class="invalid-feedback">Vui lòng nhập địa chỉ email</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contact">Số điện thoại *</label>
+                                <input type="number" class="form-control" id="contact" name="contact" placeholder="" value="<%=a.getContact()%>">
+                                <div class="invalid-feedback">Vui lòng nhập số điện thoại</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="address">Đỉa chỉ *</label>
+                                <input type="text" class="form-control" id="address" name="address" value="<%=a.getAddress()%>" placeholder="" required>
+                                <div class="invalid-feedback">Vui lòng nhập địa chỉ của bạn</div>
+                            </div>
+                            <hr class="mb-4">
+                            <%} else {%>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Họ *</label>
+                                    <input type="text" class="form-control" name="firstName" placeholder="" value="" required>
+                                    <div class="invalid-feedback">Vui lòng nhập họ</div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName">Tên *</label>
+                                    <input type="text" class="form-control" name="lastName" placeholder="" value="" required>
+                                    <div class="invalid-feedback">Vui lòng nhập tên</div>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="email">Email *</label>
-                                <input type="email" class="form-control" id="email" placeholder="">
+                                <input type="email" class="form-control" name="email" placeholder="" value="<%=user.getEmail()%>">
                                 <div class="invalid-feedback">Vui lòng nhập địa chỉ email</div>
                             </div>
                             <div class="mb-3">
+                                <label for="contact">Số điện thoại *</label>
+                                <input type="number" class="form-control" name="contact" placeholder="" value="<%=user.getContact()%>">
+                                <div class="invalid-feedback">Vui lòng nhập số điện thoại</div>
+                            </div>
+                            <div class="mb-3">
                                 <label for="address">Đỉa chỉ *</label>
-                                <input type="text" class="form-control" id="address" placeholder="" required>
+                                <input type="text" class="form-control" name="address" placeholder="" required>
                                 <div class="invalid-feedback">Vui lòng nhập địa chỉ của bạn</div>
                             </div>
                             <hr class="mb-4">
+                            <%}%>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="same-address">
-                                <label class="custom-control-label" for="same-address">Địa chỉ giao hàng giống với địa chỉ thanh toán của tôi</label>
-                            </div>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="save-info">
+                                <input type="checkbox" class="custom-control-input" id="save-info" name="save-info" value="save">
                                 <label class="custom-control-label" for="save-info">Lưu thông tin</label>
                             </div>
                             <hr class="mb-4">
                             <div class="title"> <span>Phương thức thanh toán</span> </div>
                             <div class="d-block my-3">
                                 <div class="custom-control custom-radio">
-                                    <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+                                    <input name="paymentMethod" type="radio" id="credit" class="custom-control-input" value="credit" checked required>
                                     <label class="custom-control-label" for="credit">Credit card</label>
                                 </div>
                                 <div class="custom-control custom-radio">
-                                    <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
+                                    <input name="paymentMethod" type="radio" id="paypal" class="custom-control-input" value="paypal" required>
                                     <label class="custom-control-label" for="paypal">Paypal</label>
                                 </div>
                             </div>
+                            <input type="submit" class="btn hvr-hover" value="Xác nhận">
                             <hr class="mb-1"> </form>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-6 mb-3">
-                    <div class="row">
-                        <div class="col-md-12 col-lg-12">
-                        </div>
-                        <div class="col-md-12 col-lg-12">
-                            <div class="order-box">
-                                <div class="title-left">
-                                    <h3>Đơn hàng của bạn</h3>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="font-weight-bold">Sản phẩm</div>
-                                    <div class="ml-auto font-weight-bold">Tổng tiền</div>
-                                </div>
-                                <hr class="my-1">
-                                <div class="d-flex">
-                                    <h4>Tổng</h4>
-                                    <div class="ml-auto font-weight-bold"> 20 000 VND </div>
-                                </div>
-                                <div class="d-flex">
-                                    <h4>Giảm giá</h4>
-                                    <div class="ml-auto font-weight-bold"> 5 000 VND </div>
-                                </div>
-                                <div class="d-flex gr-total">
-                                    <h5>Tổng tền thanh toán</h5>
-                                    <div class="ml-auto h5"> 15 000 VND </div>
-                                </div>
-                                <hr> </div>
-                        </div>
-                        <div class="col-12 d-flex shopping-box"> <a href="checkout.html" class="ml-auto btn hvr-hover">Thanh toán</a> </div>
                     </div>
                 </div>
             </div>

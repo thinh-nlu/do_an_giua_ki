@@ -109,7 +109,7 @@
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tiện ích <i class="bi bi-list "></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="cart.jsp">Giỏ hàng</a></li>
-                                <li><a href="checkout.jsp">Thanh toán</a></li>
+                                <li><a href="address.jsp">Thanh toán</a></li>
                                 <li><a href="my-account.jsp">Tài Khoản</a></li>
                             </ul>
                         </li>
@@ -293,11 +293,23 @@
                         </div>
                         <hr> </div>
                 </div>
-                <div class="col-12 d-flex shopping-box"><a href="checkout.jsp" class="ml-auto btn hvr-hover">Thanh Toán</a> </div>
-            </div>
-            <%
+                <%
+                    if(user != null) {
+                %>
+                <div class="col-12 d-flex shopping-box"><a href="address.jsp" class="ml-auto btn hvr-hover">Thanh Toán</a> </div>
+                <%
+                    } else {
+                %>
+                <div class="col-12 d-flex shopping-box"><a href="../account/login.jsp" onclick="showAlert()" class="ml-auto btn hvr-hover">Thanh Toán</a> </div>
+                <script>
+                    function showAlert() {
+                        alert("Bạn cần đăng nhập trước khi thanh toán!");
+                    }
+                </script>
+                <%}
                 }
-            %>
+                %>
+            </div>
         </div>
     </div>
     <!-- End Cart -->
