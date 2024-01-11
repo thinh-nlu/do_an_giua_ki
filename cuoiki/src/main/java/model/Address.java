@@ -11,6 +11,8 @@ public class Address {
     private String saveInfo;
     private String paymentMethod;
 
+    public Address(){}
+
     public Address(int id,int userId, String firstName, String lastName, String email, String contact, String address, String saveInfo, String paymentMethod) {
         this.id = id;
         this.userId = userId;

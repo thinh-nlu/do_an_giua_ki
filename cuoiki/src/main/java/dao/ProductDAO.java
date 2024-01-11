@@ -14,7 +14,7 @@ public class ProductDAO {
     private String query = "";
     private PreparedStatement ps;
     private ResultSet rs;
-    private Connection con;
+    private final Connection con;
 
     public ProductDAO(Connection con) {
         this.con = con;

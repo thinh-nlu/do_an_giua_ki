@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Address;
 import model.User;
+import java.util.List;
 
 import java.io.IOException;
 
@@ -21,6 +22,7 @@ public class SaveAddress extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         dao = new AddressDAO(DBConnect.getConnection());
         boolean isAdd = false;
+        List<Address> listAddress = dao.getAllAddress();
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("success");
         Address a;
@@ -35,14 +37,21 @@ public class SaveAddress extends HttpServlet {
 
         a = new Address(user.getId(), firstName, lastName, email, contact, address, saveInfo, paymentMethod);
 
-        isAdd = dao.insertToAddress(a);
-
+        for (Address d: listAddress) {
+            if (user.getId() != d.getUserId()) {
+                isAdd = dao.insertToAddress(a);
+            } else {
+                isAdd = dao.updateAddress(d);
+            }
+        }
         if(isAdd) {
             session.setAttribute("saveAddressText", "Bạn đã cập nhật thông tin thành công");
             session.setAttribute("address", a);
         } else {
             session.setAttribute("saveAddressText", "Hệ thống đang gặp lỗi. Vui lòng thử lại sau");
         }
-        resp.sendRedirect("index.jsp");
+        System.out.println(req.getContextPath());
+
+        resp.sendRedirect(req.getContextPath()+"/createOrder");
     }
 }

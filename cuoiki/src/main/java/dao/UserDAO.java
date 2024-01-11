@@ -19,7 +19,7 @@ public class UserDAO {
     private String query = "";
     private PreparedStatement ps;
     private ResultSet rs;
-    private Connection con;
+    private final Connection con;
 
     public UserDAO(Connection con) {
         this.con = con;
