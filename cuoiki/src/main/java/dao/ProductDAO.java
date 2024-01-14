@@ -162,10 +162,40 @@ public class ProductDAO {
         }
         return isDelete;
     }
+    public List<Product> getProductsByCategory(String categoryId) {
+        List<Product> products = new ArrayList<>();
+        query = "select * from products where categoryId = ?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, categoryId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Product product = new Product();
+                    product.setId(rs.getInt(1));
+                    product.setTitle(rs.getString(2));
+                    product.setImage(rs.getString(3));
+                    product.setPrice(rs.getString(4));
+                    product.setUnit(rs.getString(5));
+                    product.setCategoryId(rs.getString(6));
+                    product.setKeyword(rs.getString(7));
+                    product.setStatus(rs.getString(8));
+                    product.setDateInsert(rs.getTimestamp(9));
+                    product.setQuantity(rs.getString(10));
+                    product.setUnitPrice(rs.getString(11));
+                    products.add(product);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return products;
+    }
+
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO(DBConnect.getConnection());
         List<Product> list = dao.getAllProduct();
         Product p = dao.getProductById(9);
-        System.out.println(p);
+        List<Product> productsByCategory = dao.getProductsByCategory("rau");
+        System.out.println(productsByCategory);
     }
+
 }

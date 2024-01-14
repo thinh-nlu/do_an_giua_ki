@@ -238,11 +238,21 @@
                 <div class="col-lg-12">
                     <div class="special-menu text-center">
                         <div class="button-group filter-button-group">
-                            <button class="active" data-filter="*">Tất cả sản phẩm</button>
-                            <button data-filter=".bulbs">Các loại hạt</button>
-                            <button data-filter=".fruits">Trái cây</button>
-							<button data-filter=".podded-vegetables">Rau quả</button>
-							<button data-filter=".root-and-tuberous">Rau củ</button>
+                            <a href="${pageContext.request.contextPath}/gallery.jsp">
+                                <button>Tất cả</button>
+                            </a>
+                            <a href="${pageContext.request.contextPath}/filterProduct?categoryId=hat">
+                                <button>Hạt</button>
+                            </a>
+                            <a href="${pageContext.request.contextPath}/filterProduct?categoryId=qua">
+                                <button>Trái cây</button>
+                            </a>
+                            <a href="${pageContext.request.contextPath}/filterProduct?categoryId=rau">
+                                <button>Rau</button>
+                            </a>
+                            <a href="${pageContext.request.contextPath}/filterProduct?categoryId=cu">
+                                <button>Củ</button>
+                            </a>
                         </div>
                     </div>
                 </div>
