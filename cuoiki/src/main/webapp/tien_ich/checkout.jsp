@@ -1,17 +1,22 @@
-<%@ page import="model.User" %>
 <%@ page import="cart.CartProduct" %>
-<%@ page import="model.Address" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="cart.Cart" %>
-<%@ page import="model.Product" %>
-<%@ page import="model.Order" %>
+<%@ page import="java.util.List" %>
+<%@ page import="model.*" %>
+<%@ page import="dao.OrderDetailDAO" %>
+<%@ page import="database.DBConnect" %>
+<%@ page import="dao.ProductDAO" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
 <%
     CartProduct cartProduct = (CartProduct) session.getAttribute("cart");
     if(cartProduct == null) cartProduct = new CartProduct();
+    OrderDetailDAO dao = new OrderDetailDAO(DBConnect.getConnection());
+    ProductDAO productDAO = new ProductDAO(DBConnect.getConnection());
     User user = (User) session.getAttribute("success");
     Order order = (Order) session.getAttribute("createOrder");
+    List<OrderDetail> orderDetails = new ArrayList<>();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -91,6 +96,17 @@
 
 <!-- Start Main Top -->
 <header class="main-header">
+    <%
+        if(user == null || order == null || orderDetails.isEmpty()) {
+    %>
+    <script>
+        alert("Hãy bắt đầu mua sắm")
+        window.location.href = "../gallery.jsp";
+    </script>
+    <%
+        }else{
+         orderDetails = dao.getDetailOfOrder(order.getId());
+    %>
     <!-- Start Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
         <div class="container">
@@ -221,13 +237,12 @@
                             </div>
                             <div class="rounded p-2 bg-light">
                                 <%
-                                    for(Map.Entry<Integer, Cart> entry: cartProduct.getData().entrySet()) {
-                                        Product product = entry.getValue().getProduct();
-                                        double quantity = entry.getValue().getQuantity();
+                                    for (OrderDetail o: orderDetails) {
+                                        Product p = productDAO.getProductById(o.getProductId());
                                 %>
                                 <div class="media mb-2 border-bottom">
-                                    <div class="media-body"> <a href="detail.html"><%=product.getTitle()%></a>
-                                            <div class="small text-muted"><%=product.getPrice()%><span class="mx-2">|</span><%=quantity%> <span class="mx-2">|</span><%=String.valueOf(Double.parseDouble(product.getPrice()) * quantity)%></div>
+                                    <div class="media-body"> <a href="detail.html"><%=p.getTitle()%></a>
+                                            <div class="small text-muted"><%=p.getPrice()%><span class="mx-2">|</span><%=o.getQuantity()%> <span class="mx-2">|</span><%=String.valueOf(Double.parseDouble(p.getPrice()) * o.getQuantity())%></div>
                                     </div>
                                 </div>
                                 <%
@@ -261,7 +276,7 @@
                 </div>
             </div>
         </div>
-
+        <%}%>
     </div>
 </div>
 <!-- End Cart -->

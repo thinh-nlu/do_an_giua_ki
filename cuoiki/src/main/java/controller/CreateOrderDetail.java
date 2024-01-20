@@ -34,11 +34,13 @@ public class CreateOrderDetail extends HttpServlet {
         if(order != null) {
             for (Map.Entry<Integer, Cart> entry: cartProduct.getData().entrySet()) {
                 Product product = entry.getValue().getProduct();
-                orderDetail = new OrderDetail(product.getId(),order.getId());
+                int quantity = entry.getValue().getQuantity();
+                orderDetail = new OrderDetail(product.getId(),order.getId(),quantity);
                 isAdd = dao.insertToOrderDetail(orderDetail);
             }
             if (isAdd) {
                 session.setAttribute("createOrderDetail", orderDetail);
+                session.setAttribute("createOrder",order);
             }
         }
         resp.sendRedirect("tien_ich/checkout.jsp");
