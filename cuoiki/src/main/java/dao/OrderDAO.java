@@ -35,4 +35,26 @@ public class OrderDAO {
         }
         return isAdd;
     }
+
+    public Order getOrderByInvoiceNumber(String invoiceNumber) {
+        Order o = null;
+        query = "select * from orders where invoice_number = ?";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1,invoiceNumber);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                o = new Order();
+                o.setId(rs.getInt(1));
+                o.setUserId(rs.getInt(2));
+                o.setInvoiceNumber(rs.getString(3));
+                o.setAmountDue(rs.getString(4));
+                o.setOrderDate(rs.getTimestamp(5));
+                o.setOrderStatus(rs.getString(6));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return o;
+    }
 }

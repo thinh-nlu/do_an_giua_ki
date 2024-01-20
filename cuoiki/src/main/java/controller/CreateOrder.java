@@ -34,7 +34,7 @@ public class CreateOrder extends HttpServlet {
         isAdd = dao.insertOrder(order);
         if(isAdd) {
             session.setAttribute("createOrder",order);
-            resp.sendRedirect("tien_ich/checkout.jsp");
+            resp.sendRedirect(req.getContextPath()+"/createOrderDetail");
         }
     }
 
