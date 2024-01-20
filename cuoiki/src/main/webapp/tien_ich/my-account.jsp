@@ -105,7 +105,8 @@
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tiện ích <i class="bi bi-list "></i></a>
                         <ul class="dropdown-menu">
                             <li><a href="cart.jsp">Giỏ Hàng</a></li>
-                            <li><a href="address.jsp">Thanh Toán</a></li>
+                            <li><a href="address.jsp">Địa chỉ</a></li>
+                            <li><a href="checkout.jsp">Thanh toán</a></li>
                             <li><a href="my-account.jsp">Tài Khoản</a></li>
                         </ul>
                     </li>
