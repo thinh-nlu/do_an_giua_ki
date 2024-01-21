@@ -17,6 +17,7 @@
     User user = (User) session.getAttribute("success");
     Order order = (Order) session.getAttribute("createOrder");
     List<OrderDetail> orderDetails = new ArrayList<>();
+    String messageBuyProduct = (String) session.getAttribute("buyProductMessage");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -97,7 +98,14 @@
 <!-- Start Main Top -->
 <header class="main-header">
     <%
-        if(user == null || order == null || orderDetails.isEmpty()) {
+        if(messageBuyProduct!=null) {
+    %>
+    <script>
+        alert(<%=messageBuyProduct%>)
+    </script>
+    <%}%>
+    <%
+        if(user == null || order == null) {
     %>
     <script>
         alert("Hãy bắt đầu mua sắm")
@@ -272,7 +280,7 @@
                             </div>
                             <hr> </div>
                     </div>
-                    <div class="col-12 d-flex shopping-box"> <a href="checkout.jsp" class="ml-auto btn hvr-hover">Thanh toán</a> </div>
+                    <div class="col-12 d-flex shopping-box"> <a href="../buy_product?order_id=<%=order.getId()%>" class="ml-auto btn hvr-hover">Thanh toán</a> </div>
                 </div>
             </div>
         </div>

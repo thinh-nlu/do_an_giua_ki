@@ -198,4 +198,18 @@ public class ProductDAO {
         System.out.println(productsByCategory);
     }
 
+    public boolean updateQuantity(Product product, int quantity) {
+        boolean isUpdate = false;
+        query = "update products set quantity = ? where id = ?";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setInt(1,Integer.parseInt(product.getQuantity()) - quantity);
+            ps.setInt(2,product.getId());
+            int i = ps.executeUpdate();
+            isUpdate = i == 1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return isUpdate;
+    }
 }
