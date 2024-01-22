@@ -1,11 +1,19 @@
 <%@ page import="model.User" %>
 <%@ page import="cart.CartProduct" %>
+<%@ page import="model.Order" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+<%@ page import="dao.OrderDAO" %>
+<%@ page import="database.DBConnect" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
 <%
     CartProduct cartProduct = (CartProduct) session.getAttribute("cart");
     if(cartProduct == null) cartProduct = new CartProduct();
     User user = (User) session.getAttribute("success");
+    List<Order> orderList = new ArrayList<>();
+    OrderDAO dao = new OrderDAO(DBConnect.getConnection());
+    if(user!=null) orderList = dao.getListOrderByUser(user.getId());
 %>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
@@ -175,79 +183,44 @@
 
 <div class="px-lg-5 pt-xl-5">
     <h3 class="text-center text-dark pb-3 display-4 font-weight-normal" >Đơn hàng của bạn</h3>
+    <%
+        if(orderList.isEmpty()) {
+    %>
+    <h2 class="text-center text-danger">Không có đơn hàng nào</h2>
+    <%}else{%>
     <table class="table table-striped text-center  ">
         <thead class="bg-dark">
         <tr class="text-light">
-            <th>Số thứ tự</th>
+            <th>STT</th>
             <th>Tổng tiền</th>
-            <th>Tổng sản phẩm </th>
             <th>Hoá đơn</th>
-            <th>Ngày</th>
+            <th>Thời gian</th>
             <th>Trạng thái</th>
-            <th>Xóa đơn hàng</th>
+            <th>Chi tiết</th>
         </tr>
         </thead>
         <tbody class="bg-light text-dark">
-
+        <%
+            int count = 0;
+        %>
+        <%for(Order o: orderList) {
+            count ++;
+        %>
         <tr class='text-center text-dark font-weight-normal  '>
-            <td>1</td>
-            <td> 120.000đ </td>
-            <td>Bắp nữ hoàng - 250g(x1)</br>Bí đỏ-450g(x2) </td>
-
-            <td> 12093810920812 </td>
-            <td> 14/11/2023 </td>
-            <td>Đã thanh toán</td>
-            <td><a href="#" class='text-dark'><i class="bi bi-trash"></i></a></td>
-
+            <td><%=count%></td>
+            <td><%=o.getAmountDue() + "VND"%></td>
+            <td><%=o.getInvoiceNumber()%></td>
+            <td><%=o.getOrderDate()%></td>
+            <td><%=o.getOrderStatus().equals("complete") ? "Đã thanh toán" : "Đang chờ xử lý"%></td>
+            <td><a href="#" class='text-dark'><i class="bi bi-arrow-right-circle"></i></a></td>
+        <%
+        }%>
         </tr>
-        <tr class='text-center text-dark font-weight-normal  '>
-            <td>2</td>
-            <td>80.000đ</td>
-            <td>Bơ - 900g(x1) </br> Cà chua -500g(x2)</td>
-
-            <td> 1239123120931 </td>
-            <td> 14/10/2023 </td>
-            <td>Đã thanh toán </td>
-            <td><a href="#" class='text-dark'><i class="bi bi-trash"></i></a></td>
-
-        </tr>
-        <tr class='text-center text-dark font-weight-normal  '>
-            <td>3</td>
-            <td>96.000đ</td>
-            <td>Khế chua- 300g(x2)</br> Khổ qua bào - 300g(x1) </br> Khoai lang-1kg(x1)</td>
-
-            <td> 102938012389081</td>
-            <td> 04/07/2023 </td>
-            <td>Đã thanh toán</td>
-            <td><a href="#" class='text-dark'><i class="bi bi-trash"></i></a></td>
-
-        </tr>
-        <tr class='text-center text-dark font-weight-normal  '>
-            <td>4</td>
-            <td>23.000đ</td>
-            <td>Khoai tây -1kg(x1)</td>
-
-            <td> 1029489312389681</td>
-            <td> 14/11/2023 </td>
-            <td>Đã thanh toán</td>
-            <td><a href="#" class='text-dark'><i class="bi bi-trash"></i></a></td>
-
-        </tr>
-        <tr class='text-center text-dark font-weight-normal  '>
-            <td>5</td>
-            <td>123.000đ</td>
-            <td>Xoài- 1kg(x2)</br>  Nấm mỡ nâu-150g(x1)</td>
-
-            <td> 102931290301923</td>
-            <td> 09/11/2023 </td>
-            <td>Đã thanh toán</td>
-            <td><a href="#" class='text-dark'><i class="bi bi-trash"></i></a></td>
-
-        </tr>
-
-
         </tbody>
     </table>
+    <%
+    }
+    %>
 </div>
 
 <!-- Start Footer  -->
