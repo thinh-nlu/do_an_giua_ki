@@ -5,15 +5,17 @@
 <%@ page import="java.util.List" %>
 <%@ page import="dao.OrderDAO" %>
 <%@ page import="database.DBConnect" %>
+<%@ page import="model.OrderDetail" %>
+<%@ page import="dao.ProductDAO" %>
+<%@ page import="model.Product" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
 <%
     CartProduct cartProduct = (CartProduct) session.getAttribute("cart");
     if(cartProduct == null) cartProduct = new CartProduct();
     User user = (User) session.getAttribute("success");
-    List<Order> orderList = new ArrayList<>();
-    OrderDAO dao = new OrderDAO(DBConnect.getConnection());
-    if(user!=null) orderList = dao.getListOrderByUser(user.getId());
+    List<OrderDetail> list = (List<OrderDetail>) session.getAttribute("orderDetail");
+    ProductDAO dao = new ProductDAO(DBConnect.getConnection());
 %>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
@@ -88,11 +90,11 @@
         <div class="container">
             <!-- Start Header Navigation -->
             <div class="navbar-header">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-bars"></i>
-            </button>
-            <a class="navbar-brand" href="../index.jsp"><img src="../images/logo1.png" class="logo" style="width: 200px;height: 108px" alt=""></a>
-        </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="../index.jsp"><img src="../images/logo1.png" class="logo" style="width: 200px;height: 108px" alt=""></a>
+            </div>
             <!-- End Header Navigation -->
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -182,45 +184,32 @@
 <!-- End Top Search -->
 
 <div class="px-lg-5 pt-xl-5">
-    <h3 class="text-center text-dark pb-3 display-4 font-weight-normal" >Đơn hàng của bạn</h3>
-    <%
-        if(orderList.isEmpty()) {
-    %>
-    <h2 class="text-center text-danger">Không có đơn hàng nào</h2>
-    <%}else{%>
+    <h3 class="text-center text-dark pb-3 display-4 font-weight-normal" >Chi tiết đơn hàng</h3>
     <table class="table table-striped text-center  ">
         <thead class="bg-dark">
         <tr class="text-light">
             <th>STT</th>
+            <th>Sản phẩm</th>
+            <th>Số lượng</th>
             <th>Tổng tiền</th>
-            <th>Hoá đơn</th>
-            <th>Thời gian</th>
-            <th>Trạng thái</th>
-            <th>Chi tiết</th>
         </tr>
         </thead>
         <tbody class="bg-light text-dark">
         <%
             int count = 0;
-        %>
-        <%for(Order o: orderList) {
-            count ++;
+            for(OrderDetail o: list) {
+                Product p = dao.getProductById(o.getProductId());
+                count ++;
         %>
         <tr class='text-center text-dark font-weight-normal  '>
             <td><%=count%></td>
-            <td><%=o.getAmountDue() + "VND"%></td>
-            <td><%=o.getInvoiceNumber()%></td>
-            <td><%=o.getOrderDate()%></td>
-            <td><%=o.getOrderStatus().equals("complete") ? "Đã thanh toán" : "Đang chờ xử lý"%></td>
-            <td><a href="../orderDetail?orderId=<%=o.getId()%>" class='text-dark'><i class="bi bi-arrow-right-circle"></i></a></td>
-        <%
-        }%>
+            <td><%=p.getTitle()%></td>
+            <td><%=o.getQuantity()%></td>
+            <td><%=o.getQuantity() * Double.valueOf(p.getPrice())%></td>
         </tr>
+        <%}%>
         </tbody>
     </table>
-    <%
-    }
-    %>
 </div>
 
 <!-- Start Footer  -->
