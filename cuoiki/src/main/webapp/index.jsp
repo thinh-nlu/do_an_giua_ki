@@ -114,6 +114,7 @@
                                 <li><a href="tien_ich/address.jsp">Địa chỉ</a></li>
                                 <li><a href="tien_ich/checkout.jsp">Thanh Toán</a></li>
                                 <li><a href="tien_ich/my-account.jsp">Tài Khoản</a></li>
+                                <li><a href="tien_ich/wishlist.jsp">Yêu Thích</a></li>
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="gallery.jsp">Cửa Hàng</a></li>

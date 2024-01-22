@@ -128,6 +128,7 @@
                                 <li><a href="tien_ich/address.jsp">Địa chỉ</a></li>
                                 <li><a href="tien_ich/checkout.jsp">Thanh Toán</a></li>
                                 <li><a href="tien_ich/my-account.jsp">Tài Khoản</a></li>
+                                <li><a href="tien_ich/wishlist.jsp">Yêu thích</a></li>
                             </ul>
                         </li>
                         <li class="nav-item active"><a class="nav-link" href="gallery.jsp">Cửa Hàng</a></li>
@@ -275,7 +276,7 @@
                                 <ul>
                                     <li><a href="${pageContext.request.contextPath }/product-details?id=<%= p1.getId() %>" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
+                                    <li><a href="${pageContext.request.contextPath}/add_wishlist?productId=<%= p1.getId() %>" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
                                 <a class="cart" href="${pageContext.request.contextPath}/add_cart?id=<%= p1.getId() %>">Thêm vào giỏ hàng</a>
                             </div>
@@ -300,7 +301,7 @@
                                 <ul>
                                     <li><a href="${pageContext.request.contextPath }/product-details?id=<%= p.getId() %>" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
+                                    <li><a href="${pageContext.request.contextPath}/add_wishlist?productId=<%= p.getId() %>" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
                                 <a class="cart" href="${pageContext.request.contextPath}/add_cart?id=<%= p.getId() %>">Thêm  giỏ hàng</a>
                             </div>

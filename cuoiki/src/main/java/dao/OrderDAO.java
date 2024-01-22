@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderDAO {
     private String query = "";
@@ -93,5 +95,29 @@ public class OrderDAO {
             throw new RuntimeException(e);
         }
         return isUpdate;
+    }
+
+    public List<Order> getListOrderByUser(int userId) {
+        List<Order> list = new ArrayList<>();
+        Order o;
+        query = "select * from orders where user_id = ?";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setInt(1,userId);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                o = new Order();
+                o.setId(rs.getInt(1));
+                o.setUserId(rs.getInt(2));
+                o.setInvoiceNumber(rs.getString(3));
+                o.setAmountDue(rs.getString(4));
+                o.setOrderDate(rs.getTimestamp(5));
+                o.setOrderStatus(rs.getString(6));
+                list.add(o);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
     }
 }

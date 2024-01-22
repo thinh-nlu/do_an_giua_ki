@@ -1,11 +1,24 @@
 <%@ page import="model.User" %>
+<%@ page import="cart.CartProduct" %>
+<%@ page import="model.Order" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+<%@ page import="dao.OrderDAO" %>
+<%@ page import="database.DBConnect" %>
+<%@ page import="model.OrderDetail" %>
+<%@ page import="dao.ProductDAO" %>
+<%@ page import="model.Product" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
 <%
+    CartProduct cartProduct = (CartProduct) session.getAttribute("cart");
+    if(cartProduct == null) cartProduct = new CartProduct();
     User user = (User) session.getAttribute("success");
+    List<OrderDetail> list = (List<OrderDetail>) session.getAttribute("orderDetail");
+    ProductDAO dao = new ProductDAO(DBConnect.getConnection());
 %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,14 +44,7 @@
     <link rel="stylesheet" href="../css/responsive.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/custom.css">
-    <link rel="stylesheet" href="../css/admin-style.css">
     <link rel="stylesheet" href="../asset/bootstrap-icons-1.11.1/bootstrap-icons.css">
-
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <link rel="stylesheet" href="../css/admin-style.css">
 </head>
 <body>
 <!-- Start Main Top -->
@@ -76,6 +82,8 @@
     </div>
 </div>
 <!-- End Main Top -->
+
+<!-- Start Main Top -->
 <header class="main-header">
     <!-- Start Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
@@ -85,41 +93,47 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand " href="../index.jsp"><img src="../images/icon.png" class="logo " style="width: 200px;height: 108px" alt="" ></a>
+                <a class="navbar-brand" href="../index.jsp"><img src="../images/logo1.png" class="logo" style="width: 200px;height: 108px" alt=""></a>
             </div>
             <!-- End Header Navigation -->
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                    <li class="nav-item active"><a class="nav-link" href="../index.jsp">Trang Chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.jsp">Trang Chủ</a></li>
                     <li class="nav-item"><a class="nav-link" href="../about.jsp">Giới Thiệu</a></li>
-                    <li class="dropdown">
+                    <li class="dropdown active">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tiện ích <i class="bi bi-list "></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="../tien_ich/cart.jsp">Giỏ Hàng</a></li>
-                            <li><a href="../tien_ich/address.jsp">Thanh Toán</a></li>
-                            <li><a href="../tien_ich/my-account.jsp">Tài Khoản</a></li>
-                            <li><a href="../tien_ich/wishlist.jsp">Yêu thích</a></li>
+                            <li><a href="cart.jsp">Giỏ Hàng</a></li>
+                            <li><a href="address.jsp">Địa chỉ</a></li>
+                            <li><a href="checkout.jsp">Thanh toán</a></li>
+                            <li><a href="my-account.jsp">Tài Khoản</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="../gallery.jsp">Cửa Hàng</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../contact-us.jsp">Liên Hệ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../contact-us.jsp">Liên hệ </a></li>
                 </ul>
+                <li class="nav-item">
+                    <form method="post" action="../searchProduct">
+                        <div class="input-group rounded">
+                            <input type="search" class="form-control rounded" placeholder="Tìm kiếm sản phẩm" aria-label="Search" aria-describedby="search-addon" id="keyword" name="keyword">
+                            <input type="submit" value="Tìm kiếm" class="btn btn-outline-success" name="search_data_product">
+                        </div>
+                    </form>
+
+                </li>
             </div>
             <!-- /.navbar-collapse -->
 
             <!-- Start Atribute Navigation -->
             <div class="attr-nav">
                 <ul>
-                    <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                    <li class="side-menu">
-                        <a href="#">
-                            <i class="fa fa-shopping-bag"></i>
-                            <span class="badge">0</span>
-                            <p>Giỏ Hàng</p>
-                        </a>
-                    </li>
+                    <li class="side-menu"><a href="cart.jsp">
+                        <i class="fa fa-shopping-bag"></i>
+                        <span class="badge"><%=cartProduct.getTotal()%></span>
+                        <p>Giỏ hàng</p>
+                    </a></li>
                 </ul>
             </div>
             <!-- End Atribute Navigation -->
@@ -155,34 +169,63 @@
     </nav>
     <!-- End Navigation -->
 </header>
-<div class="content">
-    <h2>Chào mừng đến với trang quản lí</h2>
-    <p>Đây là trang chính của hệ thống quản lí. Hãy chọn chức năng phía dưới để tiếp tục.</p>
+<!-- End Main Top -->
+
+<!-- Start Top Search -->
+<div class="top-search">
+    <div class="container">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+            <input type="text" class="form-control" placeholder="Search">
+            <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+        </div>
+    </div>
 </div>
-<div class="navbar1 navbar-expand-lg">
-    <ul class="navbar-nav mx-auto" data-in="fadeInDown" data-out="fadeOutUp">
-        <li class="nav-item">
-            <a href="insert-product.jsp" class="nav-link">Thêm sản phẩm</a>
-        </li>
-        <li class="nav-item">
-            <a href="edit_products.jsp" class="nav-link">Chỉnh sửa sản phẩm</a>
-        </li>
-        <li class="nav-item">
-            <a href="list-products.jsp" class="nav-link">Danh sách sản phẩm</a>
-        </li>
-        <li class="nav-item">
-            <a href="list-user.jsp" class="nav-link">Danh sách khách hàng</a>
-        </li>
-        <li class="nav-item">
-            <a href="list-oders.jsp" class="nav-link">Danh sách đơn hàng</a>
-        </li>
-    </ul>
+<!-- End Top Search -->
+
+<div class="px-lg-5 pt-xl-5">
+    <h3 class="text-center text-dark pb-3 display-4 font-weight-normal" >Chi tiết đơn hàng</h3>
+    <table class="table table-striped text-center  ">
+        <thead class="bg-dark">
+        <tr class="text-light">
+            <th>STT</th>
+            <th>Sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Tổng tiền</th>
+        </tr>
+        </thead>
+        <tbody class="bg-light text-dark">
+        <%
+            int count = 0;
+            for(OrderDetail o: list) {
+                Product p = dao.getProductById(o.getProductId());
+                count ++;
+        %>
+        <tr class='text-center text-dark font-weight-normal  '>
+            <td><%=count%></td>
+            <td><%=p.getTitle()%></td>
+            <td><%=o.getQuantity()%></td>
+            <td><%=o.getQuantity() * Double.valueOf(p.getPrice())%></td>
+        </tr>
+        <%}%>
+        </tbody>
+    </table>
 </div>
-<!-- All JS Files -->
+
+<!-- Start Footer  -->
+<footer>
+    <div id="container_footer"></div>
+    <jsp:include page="../include/footer.jsp"/>
+</footer>
+<!-- End Footer  -->
+
+<a href="#" id="back-to-top" title="Back to top" style="display: none;"><i class="bi-arrow-up-short"></i></a>
+
+<!-- ALL JS FILES -->
 <script src="../js/jquery-3.2.1.min.js"></script>
 <script src="../js/popper.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
-<!-- All Plugins -->
+<!-- ALL PLUGINS -->
 <script src="../js/jquery.superslides.min.js"></script>
 <script src="../js/bootstrap-select.js"></script>
 <script src="../js/inewsticker.js"></script>
