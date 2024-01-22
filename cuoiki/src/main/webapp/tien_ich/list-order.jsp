@@ -107,6 +107,7 @@
                             <li><a href="address.jsp">Địa chỉ</a></li>
                             <li><a href="checkout.jsp">Thanh toán</a></li>
                             <li><a href="my-account.jsp">Tài Khoản</a></li>
+                            <li><a href="wishlist.jsp">Yêu thích</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="../gallery.jsp">Cửa Hàng</a></li>
