@@ -1,14 +1,19 @@
+
 <%@ page import="model.User" %>
-<%@ page import="cart.CartProduct" %>
-<%@ page import="model.Address" %>
+<%@ page import="model.Wishlist" %>
+<%@ page import="java.util.List" %>
+<%@ page import="dao.ProductDAO" %>
+<%@ page import="database.DBConnect" %>
+<%@ page import="model.Product" %>
+<%@ page import="dao.WishlistDAO" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
 <%
-    CartProduct cartProduct = (CartProduct) session.getAttribute("cart");
-    if(cartProduct == null) cartProduct = new CartProduct();
     User user = (User) session.getAttribute("success");
-    Address a = (Address) session.getAttribute("address");
-    String saveAddressTest = (String) session.getAttribute("saveAddressTest");
+    WishlistDAO wDao = new WishlistDAO(DBConnect.getConnection());
+    List<Wishlist> wishlistList = new ArrayList<>();
+    ProductDAO dao = new ProductDAO(DBConnect.getConnection());
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,6 +45,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/custom.css">
     <link rel="stylesheet" href="../asset/bootstrap-icons-1.11.1/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/admin-style.css">
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -65,7 +71,9 @@
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="login-register">
                     <ul>
-                        <% if (user != null) { %>
+                        <% if (user != null) {
+                           wishlistList= wDao.getAllWishlistByUserID(user.getId());
+                        %>
                         <% if (user.getIsAdmin().equals("1")) { %>
                         <li><a href="../tien_ich/my-account.jsp">Xin chào <%=user.getName()%></a></li>
                         <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
@@ -88,17 +96,6 @@
 
     <!-- Start Main Top -->
     <header class="main-header">
-        <%
-            if(saveAddressTest != null) {
-        %>
-        <script>
-            alert("<%=saveAddressTest%>")
-        </script>
-
-        <%
-            session.removeAttribute("saveAddressTest");
-            }
-        %>
         <!-- Start Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
             <div class="container">
@@ -120,7 +117,7 @@
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tiện ích <i class="bi bi-list "></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="cart.jsp">Giỏ Hàng</a></li>
-                                <li><a href="address.jsp">Thanh Toán</a></li>
+                                <li><a href="checkout.jsp">Thanh Toán</a></li>
                                 <li><a href="my-account.jsp">Tài Khoản</a></li>
                                 <li><a href="wishlist.jsp">Yêu thích</a></li>
                             </ul>
@@ -145,7 +142,7 @@
                     <ul>
                         <li class="side-menu"><a href="cart.jsp">
 						<i class="fa fa-shopping-bag"></i>
-                            <span class="badge"><%=cartProduct.getTotal()%></span>
+                            <span class="badge">0</span>
 							<p>Giỏ Hàng</p>
 					</a></li>
                     </ul>
@@ -202,10 +199,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2>Thanh Toán</h2>
+                    <h2>Yêu thích</h2>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="../gallery.jsp">Cửa Hàng</a></li>
-                        <li class="breadcrumb-item active">Thanh Toán</li>
+                        <li class="breadcrumb-item active">Yêu Thíchn</li>
                     </ul>
                 </div>
             </div>
@@ -213,101 +210,82 @@
     </div>
     <!-- End All Title Box -->
 
-    <!-- Start Cart  -->
-    <div class="cart-box-main">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-lg-6 mb-3 mx-auto">
-                    <div class="checkout-address">
-                        <div class="title-left">
-                            <h3>Địa chỉ giao hàng</h3>
-                        </div>
-                        <form class="needs-validation" novalidate action="../saveAddress" method="post">
-                            <%
-                                if(a!= null && a.getSaveInfo().equals("save")) {
+    <!-- Start wishlist  -->
+<div class="cart-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main-heading mb-10"></div>
+                <div class="table-wishlist">
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th width="45%">Tên Sản Phẩm</th>
+                            <th width="15%">Giá</th>
+                            <th width="15%">Trạng Thái</th>
+                            <th width="15%"></th>
+                            <th width="10%"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% if (wishlistList.isEmpty()) { %>
+                        <tr>
+                            <td colspan="5" class="text-center text-danger">Không có sản phẩm nào được yêu thích.</td>
+                        </tr>
+                        <% } else {
+                            for (Wishlist w: wishlistList) {
+                                Product product = dao.getProductById(w.getProduct_id());
+                        %>
+                        <tr>
+                            <td width="45%">
+                                <div class="display-flex align-center">
+                                    <div class="img-product">
+                                        <img src="../DataWeb/<%=product.getImage()%>" alt="" class="mCS_img_loaded">
+                                    </div>
+                                    <div class="name-product">
+                                        <p><%=product.getTitle()%></p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td width="15%" class="price"><%=product.getPrice()%></td>
+
+                            <%String quantityStr = product.getQuantity();
+                            try {
+                                    int quantity = Integer.parseInt(quantityStr);
+                                    if (quantity == 0) {
                             %>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="firstName">Họ *</label>
-                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="<%=a.getFirstName()%>" required>
-                                    <div class="invalid-feedback">Vui lòng nhập họ</div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="lastName">Tên *</label>
-                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="<%=a.getLastName()%>" required>
-                                    <div class="invalid-feedback">Vui lòng nhập tên</div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="email">Email *</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="" value="<%=a.getEmail()%>">
-                                <div class="invalid-feedback">Vui lòng nhập địa chỉ email</div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="contact">Số điện thoại *</label>
-                                <input type="number" class="form-control" id="contact" name="contact" placeholder="" value="<%=a.getContact()%>">
-                                <div class="invalid-feedback">Vui lòng nhập số điện thoại</div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="address">Đỉa chỉ *</label>
-                                <input type="text" class="form-control" id="address" name="address" value="<%=a.getAddress()%>" placeholder="" required>
-                                <div class="invalid-feedback">Vui lòng nhập địa chỉ của bạn</div>
-                            </div>
-                            <hr class="mb-4">
-                            <%} else {%>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="firstName">Họ *</label>
-                                    <input type="text" class="form-control" name="firstName" placeholder="" value="" required>
-                                    <div class="invalid-feedback">Vui lòng nhập họ</div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="lastName">Tên *</label>
-                                    <input type="text" class="form-control" name="lastName" placeholder="" value="" required>
-                                    <div class="invalid-feedback">Vui lòng nhập tên</div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="email">Email *</label>
-                                <input type="email" class="form-control" name="email" placeholder="" value="<%=user.getEmail()%>">
-                                <div class="invalid-feedback">Vui lòng nhập địa chỉ email</div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="contact">Số điện thoại *</label>
-                                <input type="number" class="form-control" name="contact" placeholder="" value="<%=user.getContact()%>">
-                                <div class="invalid-feedback">Vui lòng nhập số điện thoại</div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="address">Đỉa chỉ *</label>
-                                <input type="text" class="form-control" name="address" placeholder="" required>
-                                <div class="invalid-feedback">Vui lòng nhập địa chỉ của bạn</div>
-                            </div>
-                            <hr class="mb-4">
-                            <%}%>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="save-info" name="save-info" value="save">
-                                <label class="custom-control-label" for="save-info">Lưu thông tin</label>
-                            </div>
-                            <hr class="mb-4">
-                            <div class="title"> <span>Phương thức thanh toán</span> </div>
-                            <div class="d-block my-3">
-                                <div class="custom-control custom-radio">
-                                    <input name="paymentMethod" type="radio" id="credit" class="custom-control-input" value="credit" checked required>
-                                    <label class="custom-control-label" for="credit">Credit card</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input name="paymentMethod" type="radio" id="paypal" class="custom-control-input" value="paypal" required>
-                                    <label class="custom-control-label" for="paypal">Paypal</label>
-                                </div>
-                            </div>
-                            <input type="submit" class="btn hvr-hover" value="Xác nhận">
-                            <hr class="mb-1"> </form>
-                    </div>
+                            <td width="15%"><span class="badge bg-danger text-light"> Hết hàng</span> </td>
+                            <%
+                                    } else {
+                            %>
+                            <td width="15%"><span class="badge bg-success text-light"> Còn hàng</span> </td>
+                            <%
+                                    }
+                                 } catch (NumberFormatException e) {
+                            %>
+                                Không xác định
+                                <%
+                                }
+                                %>
+                            <td width="15%">
+                                <a href="${pageContext.request.contextPath}/add_cart?id=<%= w.getProduct_id() %>">
+                                    <button class="round-black-btn small-btn">Thêm vào giỏ hàng</button>
+                                </a>
+                            </td>
+                            <td width="10%" class="text-center"><a href="${pageContext.request.contextPath}/delete_wishlist?id=<%= w.getId() %>" class="trash-icon"><i class="far fa-trash-alt"></i></a></td>
+                        </tr>
+                        <% }
+                        }
+                        %>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-
         </div>
     </div>
+</div>
+
+
     <!-- End Cart -->
 
     <!-- Start Instagram Feed  -->

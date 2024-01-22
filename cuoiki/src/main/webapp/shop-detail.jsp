@@ -106,6 +106,7 @@
                             <li><a href="tien_ich/cart.jsp">Giỏ hàng</a></li>
                             <li><a href="tien_ich/address.jsp">Thanh toán</a></li>
                             <li><a href="tien_ich/my-account.jsp">Tài Khoản</a></li>
+                            <li><a href="tien_ich/wishlist.jsp">Yêu thích</a></li>
                         </ul>
                     </li>
                     <li class="nav-item active"><a class="nav-link" href="gallery.jsp">Cửa Hàng</a></li>

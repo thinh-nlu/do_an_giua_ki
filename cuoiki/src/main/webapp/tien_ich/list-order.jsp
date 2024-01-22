@@ -98,6 +98,7 @@
                             <li><a href="cart.jsp">Giỏ Hàng</a></li>
                             <li><a href="address.jsp">Thanh Toán</a></li>
                             <li><a href="my-account.jsp">Tài Khoản</a></li>
+                            <li><a href="wishlist.jsp">Yêu thích</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="../gallery.jsp">Cửa Hàng</a></li>
