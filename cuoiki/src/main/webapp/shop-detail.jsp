@@ -103,8 +103,9 @@
                     <li class="dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tiện ích <i class="bi bi-list "></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="tien_ich/cart.jsp">Giỏ hàng</a></li>
-                            <li><a href="tien_ich/address.jsp">Thanh toán</a></li>
+                            <li><a href="tien_ich/cart.jsp">Giỏ Hàng</a></li>
+                            <li><a href="tien_ich/address.jsp">Địa chỉ</a></li>
+                            <li><a href="tien_ich/checkout.jsp">Thanh Toán</a></li>
                             <li><a href="tien_ich/my-account.jsp">Tài Khoản</a></li>
                             <li><a href="tien_ich/wishlist.jsp">Yêu thích</a></li>
                         </ul>

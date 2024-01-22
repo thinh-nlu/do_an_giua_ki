@@ -4,6 +4,7 @@
 <%@ page isELIgnored = "false" %>
 <%
     User user = (User) session.getAttribute("success");
+    String messageBuyProduct = (String) session.getAttribute("buyProductMessage");
     CartProduct cartProduct = (CartProduct) session.getAttribute("cart");
     if(cartProduct == null) cartProduct = new CartProduct();
 %>
@@ -48,6 +49,13 @@
 <body>
 
 <div class="main-top">
+    <%
+        if(messageBuyProduct!=null) {
+    %>
+    <script>
+        alert(<%=messageBuyProduct%>)
+    </script>
+    <%}%>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -103,7 +111,8 @@
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tiện ích <i class="bi bi-list "></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="tien_ich/cart.jsp">Giỏ Hàng</a></li>
-                                <li><a href="tien_ich/address.jsp">Thanh Toán</a></li>
+                                <li><a href="tien_ich/address.jsp">Địa chỉ</a></li>
+                                <li><a href="tien_ich/checkout.jsp">Thanh Toán</a></li>
                                 <li><a href="tien_ich/my-account.jsp">Tài Khoản</a></li>
                                 <li><a href="tien_ich/wishlist.jsp">Yêu Thích</a></li>
                             </ul>

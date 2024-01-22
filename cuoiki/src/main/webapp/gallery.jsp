@@ -124,8 +124,9 @@
                         <li class="dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tiện ích <i class="bi bi-list "></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="tien_ich/cart.jsp">Giỏ hàng</a></li>
-                                <li><a href="tien_ich/address.jsp">Thanh toán</a></li>
+                                <li><a href="tien_ich/cart.jsp">Giỏ Hàng</a></li>
+                                <li><a href="tien_ich/address.jsp">Địa chỉ</a></li>
+                                <li><a href="tien_ich/checkout.jsp">Thanh Toán</a></li>
                                 <li><a href="tien_ich/my-account.jsp">Tài Khoản</a></li>
                                 <li><a href="tien_ich/wishlist.jsp">Yêu thích</a></li>
                             </ul>
@@ -242,11 +243,21 @@
                 <div class="col-lg-12">
                     <div class="special-menu text-center">
                         <div class="button-group filter-button-group">
-                            <button class="active" data-filter="*">Tất cả sản phẩm</button>
-                            <button data-filter=".bulbs">Các loại hạt</button>
-                            <button data-filter=".fruits">Trái cây</button>
-							<button data-filter=".podded-vegetables">Rau quả</button>
-							<button data-filter=".root-and-tuberous">Rau củ</button>
+                            <a href="${pageContext.request.contextPath}/gallery.jsp">
+                                <button>Tất cả</button>
+                            </a>
+                            <a href="${pageContext.request.contextPath}/filterProduct?categoryId=hat">
+                                <button>Hạt</button>
+                            </a>
+                            <a href="${pageContext.request.contextPath}/filterProduct?categoryId=qua">
+                                <button>Trái cây</button>
+                            </a>
+                            <a href="${pageContext.request.contextPath}/filterProduct?categoryId=rau">
+                                <button>Rau</button>
+                            </a>
+                            <a href="${pageContext.request.contextPath}/filterProduct?categoryId=cu">
+                                <button>Củ</button>
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -1,28 +1,24 @@
+<%@ page import="model.User" %>
 <%@ page import="cart.CartProduct" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="cart.Cart" %>
-<%@ page import="java.util.List" %>
-<%@ page import="model.*" %>
-<%@ page import="dao.OrderDetailDAO" %>
-<%@ page import="database.DBConnect" %>
-<%@ page import="dao.ProductDAO" %>
+<%@ page import="model.Order" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+<%@ page import="dao.OrderDAO" %>
+<%@ page import="database.DBConnect" %>
+<%@ page import="model.OrderDetail" %>
+<%@ page import="dao.ProductDAO" %>
+<%@ page import="model.Product" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
 <%
     CartProduct cartProduct = (CartProduct) session.getAttribute("cart");
     if(cartProduct == null) cartProduct = new CartProduct();
-    OrderDetailDAO dao = new OrderDetailDAO(DBConnect.getConnection());
-    ProductDAO productDAO = new ProductDAO(DBConnect.getConnection());
     User user = (User) session.getAttribute("success");
-    Order order = (Order) session.getAttribute("createOrder");
-    List<OrderDetail> orderDetails = new ArrayList<>();
-    String messageBuyProduct = (String) session.getAttribute("buyProductMessage");
+    List<OrderDetail> list = (List<OrderDetail>) session.getAttribute("orderDetail");
+    ProductDAO dao = new ProductDAO(DBConnect.getConnection());
 %>
 <!DOCTYPE html>
-<html lang="en">
-<!-- Basic -->
-
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -49,16 +45,8 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/custom.css">
     <link rel="stylesheet" href="../asset/bootstrap-icons-1.11.1/bootstrap-icons.css">
-
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
 </head>
-
 <body>
-<div id="container_header"></div>
 <!-- Start Main Top -->
 <div class="main-top">
     <div class="container-fluid">
@@ -97,24 +85,6 @@
 
 <!-- Start Main Top -->
 <header class="main-header">
-    <%
-        if(messageBuyProduct!=null) {
-    %>
-    <script>
-        alert(<%=messageBuyProduct%>)
-    </script>
-    <%}%>
-    <%
-        if(user == null || order == null) {
-    %>
-    <script>
-        alert("Hãy bắt đầu mua sắm")
-        window.location.href = "../gallery.jsp";
-    </script>
-    <%
-        }else{
-         orderDetails = dao.getDetailOfOrder(order.getId());
-    %>
     <!-- Start Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
         <div class="container">
@@ -123,7 +93,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="../index.jsp"><img src="../images/logo.png" class="logo" alt=""></a>
+                <a class="navbar-brand" href="../index.jsp"><img src="../images/logo1.png" class="logo" style="width: 200px;height: 108px" alt=""></a>
             </div>
             <!-- End Header Navigation -->
 
@@ -142,7 +112,7 @@
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="../gallery.jsp">Cửa Hàng</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../contact-us.jsp">Liên Hệ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../contact-us.jsp">Liên hệ </a></li>
                 </ul>
                 <li class="nav-item">
                     <form method="post" action="../searchProduct">
@@ -162,7 +132,7 @@
                     <li class="side-menu"><a href="cart.jsp">
                         <i class="fa fa-shopping-bag"></i>
                         <span class="badge"><%=cartProduct.getTotal()%></span>
-                        <p>Giỏ Hàng</p>
+                        <p>Giỏ hàng</p>
                     </a></li>
                 </ul>
             </div>
@@ -213,169 +183,34 @@
 </div>
 <!-- End Top Search -->
 
-<!-- Start All Title Box -->
-<div class="all-title-box">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h2>Thanh Toán</h2>
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../gallery.jsp">Cửa Hàng</a></li>
-                    <li class="breadcrumb-item active">Thanh Toán</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End All Title Box -->
-
-<!-- Start Cart  -->
-<div class="cart-box-main">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6 col-lg-6 mb-3">
-                <div class="row">
-                    <div class="col-md-12 col-lg-12">
-                    </div>
-                    <div class="col-md-12 col-lg-12">
-                        <div class="order-box">
-                            <div class="title-left">
-                                <h3>Đơn hàng của bạn</h3>
-                                <h4>Số hóa đơn: <%=order.getInvoiceNumber()%></h4>
-                            </div>
-                            <div class="rounded p-2 bg-light">
-                                <%
-                                    for (OrderDetail o: orderDetails) {
-                                        Product p = productDAO.getProductById(o.getProductId());
-                                %>
-                                <div class="media mb-2 border-bottom">
-                                    <div class="media-body"> <a href="detail.html"><%=p.getTitle()%></a>
-                                            <div class="small text-muted"><%=p.getPrice()%><span class="mx-2">|</span><%=o.getQuantity()%> <span class="mx-2">|</span><%=String.valueOf(Double.parseDouble(p.getPrice()) * o.getQuantity())%></div>
-                                    </div>
-                                </div>
-                                <%
-                                    }
-                                %>
-                            </div>
-                            <%
-                                double totalPrice = cartProduct.totalPriceAllProduct();
-                                double percent = 5.0;
-                                double tax = (totalPrice / 100) * percent;
-                            %>
-                            <div class="d-flex">
-                                <div class="ml-auto font-weight-bold">Tổng tiền</div>
-                            </div>
-                            <hr class="my-1">
-                            <div class="d-flex">
-                                <h4>Tổng</h4>
-                                <div class="ml-auto font-weight-bold"> <%= totalPrice + "đ"%> </div>
-                            </div>
-                            <div class="d-flex">
-                                <h4>Thuế</h4>
-                                <div class="ml-auto font-weight-bold"> <%= tax+"đ"%> </div>
-                            </div>
-                            <div class="d-flex gr-total">
-                                <h5>Tổng tền thanh toán</h5>
-                                <div class="ml-auto h5"> <%=totalPrice + tax  + "đ"%> </div>
-                            </div>
-                            <hr> </div>
-                    </div>
-                    <div class="col-12 d-flex shopping-box"> <a href="../buy_product?order_id=<%=order.getId()%>" class="ml-auto btn hvr-hover">Thanh toán</a> </div>
-                </div>
-            </div>
-        </div>
+<div class="px-lg-5 pt-xl-5">
+    <h3 class="text-center text-dark pb-3 display-4 font-weight-normal" >Chi tiết đơn hàng</h3>
+    <table class="table table-striped text-center  ">
+        <thead class="bg-dark">
+        <tr class="text-light">
+            <th>STT</th>
+            <th>Sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Tổng tiền</th>
+        </tr>
+        </thead>
+        <tbody class="bg-light text-dark">
+        <%
+            int count = 0;
+            for(OrderDetail o: list) {
+                Product p = dao.getProductById(o.getProductId());
+                count ++;
+        %>
+        <tr class='text-center text-dark font-weight-normal  '>
+            <td><%=count%></td>
+            <td><%=p.getTitle()%></td>
+            <td><%=o.getQuantity()%></td>
+            <td><%=o.getQuantity() * Double.valueOf(p.getPrice())%></td>
+        </tr>
         <%}%>
-    </div>
+        </tbody>
+    </table>
 </div>
-<!-- End Cart -->
-
-<!-- Start Instagram Feed  -->
-<div class="instagram-box">
-    <div class="main-instagram owl-carousel owl-theme">
-        <div class="item">
-            <div class="ins-inner-box">
-                <img src="../images/instagram-img-01.jpg" alt="" />
-                <div class="hov-in">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="ins-inner-box">
-                <img src="../images/instagram-img-02.jpg" alt="" />
-                <div class="hov-in">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="ins-inner-box">
-                <img src="../images/instagram-img-03.jpg" alt="" />
-                <div class="hov-in">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="ins-inner-box">
-                <img src="../images/instagram-img-04.jpg" alt="" />
-                <div class="hov-in">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="ins-inner-box">
-                <img src="../images/instagram-img-05.jpg" alt="" />
-                <div class="hov-in">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="ins-inner-box">
-                <img src="../images/instagram-img-06.jpg" alt="" />
-                <div class="hov-in">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="ins-inner-box">
-                <img src="../images/instagram-img-07.jpg" alt="" />
-                <div class="hov-in">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="ins-inner-box">
-                <img src="../images/instagram-img-08.jpg" alt="" />
-                <div class="hov-in">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="ins-inner-box">
-                <img src="../images/instagram-img-09.jpg" alt="" />
-                <div class="hov-in">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="ins-inner-box">
-                <img src="../images/instagram-img-05.jpg" alt="" />
-                <div class="hov-in">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Instagram Feed  -->
-
 
 <!-- Start Footer  -->
 <footer>
@@ -383,13 +218,6 @@
     <jsp:include page="../include/footer.jsp"/>
 </footer>
 <!-- End Footer  -->
-
-<!-- Start copyright  -->
-<div class="footer-copyright">
-    <p class="footer-company">All Rights Reserved. &copy; 2018 <a href="#">ThewayShop</a> Design By :
-        <a href="https://html.design/">html design</a></p>
-</div>
-<!-- End copyright  -->
 
 <a href="#" id="back-to-top" title="Back to top" style="display: none;"><i class="bi-arrow-up-short"></i></a>
 
@@ -410,5 +238,4 @@
 <script src="../js/contact-form-script.js"></script>
 <script src="../js/custom.js"></script>
 </body>
-
 </html>
