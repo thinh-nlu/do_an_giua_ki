@@ -24,10 +24,11 @@ public class AddProduct extends HttpServlet {
         String keyword = req.getParameter("product_keyword");
         String quantity = req.getParameter("quantity");
         String unitPrice = req.getParameter("unit_price");
+        String descript = req.getParameter("descrpit");
         Part part = req.getPart("product_image");
         String image = part.getSubmittedFileName();
 
-        Product p = new Product(title,price,unit,image,category,keyword,quantity,"con",unitPrice);
+        Product p = new Product(title,price,unit,image,category,keyword,quantity,"con",unitPrice,descript);
         System.out.println(p);
         ProductDAO dao = new ProductDAO(DBConnect.getConnection());
         boolean isAdd = dao.addProduct(p);

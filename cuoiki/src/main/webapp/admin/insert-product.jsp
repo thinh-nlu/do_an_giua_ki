@@ -213,6 +213,12 @@
                    required="required">
         </div>
 
+        <div class="form-outline mb-4 w-50 m-auto">
+            <label for="product_descrip" class="form-label">Mô tả sản phẩm</label>
+            <input type="text" name="product_descrip" id="product_descrip" class="form-control"
+                    required="required">
+        </div>
+
 
         <!-- submit button -->
         <div class="form-outline mb-4 w-50 m-auto pt-2">
