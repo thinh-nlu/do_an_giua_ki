@@ -31,7 +31,7 @@ public class LoginUser extends HttpServlet {
         String passwordHash = hashPassword(password);
         HttpSession session = req.getSession();
         session.setMaxInactiveInterval(30 * 60);
-        if (null == user) {
+        if (user==null) {
             session.setAttribute("failed","Tài khoản không tồn tại");
             resp.sendRedirect("account/login.jsp");
         } else if (user.getIsActive().equals("0")) {
@@ -56,7 +56,6 @@ public class LoginUser extends HttpServlet {
             }
             session.setAttribute("success",user);
             resp.sendRedirect("index.jsp");
-
         }
     }
 
