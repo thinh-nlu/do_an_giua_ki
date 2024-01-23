@@ -130,7 +130,7 @@
                     <ul>
                         <li class="side-menu"><a href="tien_ich/cart.jsp">
 						<i class="fa fa-shopping-bag"></i>
-                            <span class="badge"><%=cartProduct.getTotal()%>></span>
+                            <span class="badge"><%=cartProduct.getTotal()%></span>
 							<p>Giỏ Hàng</p>
 					</a></li>
                     </ul>
@@ -189,7 +189,7 @@
                 <div class="col-lg-12">
                     <h2>Liên Hệ</h2>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>
+                        <li class="breadcrumb-item"><a href="index.jsp">Trang Chủ</a></li>
                         <li class="breadcrumb-item active"> Liên Hệ </li>
                     </ul>
                 </div>
@@ -203,9 +203,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-sm-12">
+                    <%
+                        String success = (String) session.getAttribute("msgFeedback");
+                        session.removeAttribute("msgFeedback");
+                    %>
+
+                    <%if (success != null) {%>
+                    <script>
+                        alert('<%= success %>');
+                    </script>
+                    <% } %>
                     <div class="contact-form-right">
                         <h2>Thông tin phản hồi</h2>
-                        <form id="contactForm">
+                        <form id="form" method="post" action="${pageContext.request.contextPath}/userComment?id=0">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -215,19 +225,13 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <input type="text" placeholder="Email" id="email" class="form-control" name="name" required data-error="Vui lòng nhập email">
+                                        <input type="text" placeholder="Email" id="email" class="form-control" name="email" required data-error="Vui lòng nhập email">
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="subject" name="name" placeholder="Chủ đề" required data-error="Vui lòng nhập chủ đề">
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <textarea class="form-control" id="message" placeholder="Phản hồi của bạn" rows="4" data-error="Điền phản hồi của bạn" required></textarea>
+                                        <textarea class="form-control" id="message" name="message" placeholder="Phản hồi của bạn" rows="4" data-error="Điền phản hồi của bạn" required></textarea>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                     <div class="submit-button text-center">
