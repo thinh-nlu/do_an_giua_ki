@@ -4,6 +4,7 @@
 <%@ page import="model.Product" %>
 <%@ page import="model.User" %>
 <%@ page import="cart.CartProduct" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
 
@@ -25,6 +26,7 @@
     ProductDAO dao = new ProductDAO(DBConnect.getConnection());
 
     List<Product> searchListSuccess = (List<Product>) session.getAttribute("searchListSuccess");
+    if(searchListSuccess==null) searchListSuccess= new ArrayList<>();
 
     List<Product> product = dao.getAllProduct();
     List<Product> products= dao.getRecords(pageid, totalPerPage);
@@ -265,13 +267,13 @@
 
             <div class="row special-list">
                 <%
-                    if(searchListSuccess!=null)  {
+                    if(!searchListSuccess.isEmpty())  {
                         for (Product p1: searchListSuccess) {
                 %>
                 <div class="col-lg-3 col-md-6 special-grid bulbs">
                     <div class="products-single fix">
                         <div class="box-img-hover">
-                            <img src="./DataWeb/<%=p1.getImage()%>">
+                            <img src="./DataWeb/<%=p1.getImage()%>" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="${pageContext.request.contextPath }/product-detail?id=<%= p1.getId() %>" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
@@ -299,7 +301,7 @@
                             <img src="./DataWeb/<%=p.getImage()%>" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
-                                    <li><a href="${pageContext.request.contextPath }/product-details?id=<%= p.getId() %>" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="${pageContext.request.contextPath}/product-detail?id=<%= p.getId() %>" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="${pageContext.request.contextPath}/add_wishlist?productId=<%= p.getId() %>" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
