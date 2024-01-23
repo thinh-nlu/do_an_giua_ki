@@ -274,7 +274,7 @@
                             <img src="./DataWeb/<%=p1.getImage()%>">
                             <div class="mask-icon">
                                 <ul>
-                                    <li><a href="${pageContext.request.contextPath }/product-details?id=<%= p1.getId() %>" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="${pageContext.request.contextPath }/product-detail?id=<%= p1.getId() %>" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="${pageContext.request.contextPath}/add_wishlist?productId=<%= p1.getId() %>" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>

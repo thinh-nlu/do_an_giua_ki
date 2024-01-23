@@ -28,7 +28,7 @@
 %>
 
 <%
-    Product p1 = (Product) request.getAttribute("product");
+    Product p1 = (Product) session.getAttribute("productDetail");
 %>
 <!DOCTYPE html>
 <html lang="en">
