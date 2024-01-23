@@ -248,25 +248,7 @@
                                 </div>
                             </td>
                             <td width="15%" class="price"><%=product.getPrice()%></td>
-
-                            <%String quantityStr = product.getQuantity();
-                            try {
-                                    int quantity = Integer.parseInt(quantityStr);
-                                    if (quantity == 0) {
-                            %>
-                            <td width="15%"><span class="badge bg-danger text-light"> Hết hàng</span> </td>
-                            <%
-                                    } else {
-                            %>
-                            <td width="15%"><span class="badge bg-success text-light"> Còn hàng</span> </td>
-                            <%
-                                    }
-                                 } catch (NumberFormatException e) {
-                            %>
-                                Không xác định
-                                <%
-                                }
-                                %>
+                            <td width="15%"><span class="badge bg-danger text-light"><%=product.getQuantity().equals("0") ? "Hết hàng" : "Còn hàng"%></span></td>
                             <td width="15%">
                                 <a href="${pageContext.request.contextPath}/add_cart?id=<%= w.getProduct_id() %>">
                                     <button class="round-black-btn small-btn">Thêm vào giỏ hàng</button>
