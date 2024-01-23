@@ -46,6 +46,36 @@ public class ProductDAO {
         return isAdd;
     }
 
+    public List<Product> searchProduct(String title) {
+        List<Product> list = new ArrayList<>();
+        Product p;
+        query = "select * from products where title like ?";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1,"%" + title + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                p = new Product();
+                p.setId(rs.getInt(1));
+                p.setTitle(rs.getString(2));
+                p.setImage(rs.getString(3));
+                p.setPrice(rs.getString(4));
+                p.setUnit(rs.getString(5));
+                p.setCategoryId(rs.getString(6));
+                p.setKeyword(rs.getString(7));
+                p.setStatus(rs.getString(8));
+                p.setDateInsert(rs.getTimestamp(9));
+                p.setQuantity(rs.getString(10));
+                p.setUnitPrice(rs.getString(11));
+                p.setDescription(rs.getString(12));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+
     public List<Product> getAllProduct() {
         List<Product> products = new ArrayList<>();
         Product p = null;
@@ -198,10 +228,8 @@ public class ProductDAO {
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO(DBConnect.getConnection());
-        List<Product> list = dao.getAllProduct();
-        Product p = dao.getProductById(9);
-        List<Product> productsByCategory = dao.getProductsByCategory("rau");
-        System.out.println(productsByCategory);
+        List<Product> list = dao.searchProduct("bac ha");
+        System.out.println(list);
     }
 
     public boolean updateQuantity(Product product, int quantity) {
