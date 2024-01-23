@@ -3,6 +3,8 @@
 <%@ page isELIgnored = "false" %>
 <%
     User user = (User) session.getAttribute("success");
+    String addProduct = (String) session.getAttribute("addProduct");
+    if(addProduct==null) addProduct = "";
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,6 +67,16 @@
 <!-- End Main Top -->/>
 <!-- Start Main Top -->
 <header class="main-header">
+    <%
+        if(addProduct.equals("Thêm sản phẩm thành công")) {
+    %>
+    <h2 class="text-center text-success"><%=addProduct%></h2>
+    <%}else{%>
+    <h2 class="text-center text-danger"><%=addProduct%></h2>
+    <%
+        }
+        session.removeAttribute("addProduct");
+    %>
     <!-- Start Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
         <div class="container">
@@ -146,15 +158,6 @@
 <!-- End Main Top -->
 <div class="container mt-3">
     <h1 class="text-center">Thêm sản phẩm</h1>
-    <c:if test = "${not empty success}">
-        <p class="text-center text-success">${success}</p>
-        <c:remove var="success" scope="session"/>
-    </c:if>
-
-    <c:if test = "${not empty failed}">
-        <p class="text-center text-danger">${failed}</p>
-        <c:remove var="failed" scope="session"/>
-    </c:if>
     <!-- form -->
     <form action="../add_product" method="post" enctype="multipart/form-data">
         <!-- title -->
@@ -212,6 +215,12 @@
             <label for="unit_price" class="form-label">Đơn Giá</label>
             <input type="number" name="unit_price" id="unit_price" class="form-control"
                    required="required">
+        </div>
+
+        <div class="form-outline mb-4 w-50 m-auto">
+            <label for="product_descrip" class="form-label">Mô tả sản phẩm</label>
+            <input type="text" name="product_descrip" id="product_descrip" class="form-control"
+                    required="required">
         </div>
 
 

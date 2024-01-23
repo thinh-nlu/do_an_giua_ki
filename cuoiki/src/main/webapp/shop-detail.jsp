@@ -1,11 +1,16 @@
 <%@ page import="model.User" %>
 <%@ page import="cart.CartProduct" %>
+<%@ page import="model.Product" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
 <%
     CartProduct cartProduct = (CartProduct) session.getAttribute("cart");
     if(cartProduct == null) cartProduct = new CartProduct();
     User user = (User) session.getAttribute("success");
+%>
+
+<%
+    Product p1 = (Product) session.getAttribute("productDetail");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -205,72 +210,61 @@
                 <div class="col-xl-5 col-lg-5 col-md-6">
                     <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
                         <div class="carousel-inner" role="listbox">
-                            <div class="carousel-item active"> <img class="d-block w-100" src="images/DataWeb/Bạc%20hà.jpg" alt="First slide"> </div>
-                            <div class="carousel-item"> <img class="d-block w-100" src="images/DataWeb/Bạc%20hà%201.jpg" alt="Second slide"> </div>
-                            <div class="carousel-item"> <img class="d-block w-100" src="images/DataWeb/Bạc%20hà%202.jpg" alt="Third slide"> </div>
+                            <div class="carousel-item active"> <img class="d-block w-100" src="${pageContext.request.contextPath }/DataWeb/${product.image }" alt="First slide"> </div>
+                            <div class="carousel-item"> <img class="d-block w-100" src="${pageContext.request.contextPath }/DataWeb/${product.image }" alt="Second slide"> </div>
+                            <div class="carousel-item"> <img class="d-block w-100" src="${pageContext.request.contextPath }/DataWeb/${product.image }" alt="Third slide"> </div>
                         </div>
-                        <a class="carousel-control-prev" href="#carousel-example-1" role="button" data-slide="prev"> 
-						<i class="fa fa-angle-left" aria-hidden="true"></i>
-						<span class="sr-only">Previous</span> 
-					</a>
-                        <a class="carousel-control-next" href="#carousel-example-1" role="button" data-slide="next"> 
-						<i class="fa fa-angle-right" aria-hidden="true"></i> 
-						<span class="sr-only">Next</span> 
-					</a>
-                        <ol class="carousel-indicators">
-                            <li data-target="#carousel-example-1" data-slide-to="0" class="active">
-                                <img class="d-block w-100 img-fluid" src="images/DataWeb/Bạc%20hà.jpg" alt="" />
-                            </li>
-                            <li data-target="#carousel-example-1" data-slide-to="1">
-                                <img class="d-block w-100 img-fluid" src="images/DataWeb/Bạc%20hà%201.jpg" alt="" />
-                            </li>
-                            <li data-target="#carousel-example-1" data-slide-to="2">
-                                <img class="d-block w-100 img-fluid" src="images/DataWeb/Bạc%20hà%202.jpg" alt="" />
-                            </li>
-                        </ol>
+                        <%--  <a class="carousel-control-prev" href="#carousel-example-1" role="button" data-slide="prev">
+                         <i class="fa fa-angle-left" aria-hidden="true"></i>
+                         <span class="sr-only">Previous</span>
+                     </a>
+                         <a class="carousel-control-next" href="#carousel-example-1" role="button" data-slide="next">
+                         <i class="fa fa-angle-right" aria-hidden="true"></i>
+                         <span class="sr-only">Next</span>
+                     </a>
+                         <ol class="carousel-indicators">
+                             <li data-target="#carousel-example-1" data-slide-to="0" class="active">
+                                 <img class="d-block w-100 img-fluid" src="${pageContext.request.contextPath }/DataWeb/${product.image }" alt="" />
+                             </li>
+                             <li data-target="#carousel-example-1" data-slide-to="1">
+                                 <img class="d-block w-100 img-fluid" src="${pageContext.request.contextPath }/DataWeb/${product.image }" alt="" />
+                             </li>
+                             <li data-target="#carousel-example-1" data-slide-to="2">
+                                 <img class="d-block w-100 img-fluid" src="${pageContext.request.contextPath }/DataWeb/${product.image }" alt="" />
+                             </li>
+                         </ol> --%>
                     </div>
                 </div>
                 <div class="col-xl-7 col-lg-7 col-md-6">
                     <div class="single-product-details">
-                        <h2>Bạc Hà</h2>
-                        <h5> <del>10.000₫</del>7.000</h5>
-                        <p class="available-stock"><span> Có sẵn 20+/ <a href="#">8 đã bán</a></span><p>
-						<h4>Miêu tả sản phẩm:</h4>
-						<p>Môn to, dọc mùng, ráy dọc mùng là những tên gọi khác của môn bạc hà, một loại cây rau gia vị không thể thiếu trong những bát canh chua đậm vị, thơm ngon. Vị ngọt, giòn giòn, tính mát của bạc hà giúp tạo cảm giác ngon miệng, kích thích vị giác người ăn.Môn to, dọc mùng, ráy dọc mùng là những tên gọi khác của môn bạc hà, một loại cây rau gia vị không thể thiếu trong những bát canh chua đậm vị, thơm ngon.
-                            Vị ngọt, giòn giòn, tính mát của bạc hà giúp tạo cảm giác ngon miệng, kích thích vị giác người ăn. </p>
-						<ul>
-							<li>
-								<div class="form-group quantity-box">
-									<label class="control-label">Số lượng</label>
-									<input class="form-control" value="0" min="0" max="20" type="number">
-								</div>
-							</li>
-						</ul>
+                        <h2>${product.title }</h2>
+                        <h5>${product.price } VND</h5>
+                        <p class="available-stock"><span> Có sẵn ${product.quantity } / <a href="#">8 đã bán</a></span><p>
+                        <h4>Miêu tả sản phẩm:</h4>
+                        <p> ${product.description } </p>
+                        <ul>
+                            <li>
+                                <div class="form-group quantity-box">
+                                    <label class="control-label">Số lượng</label>
+                                    <input class="form-control" value="0" min="0" max="20" type="number">
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="price-box-bar">
+                            <div class="cart-and-bay-btn">
+                                <a class="btn hvr-hover" href="${pageContext.request.contextPath}/add_cart?id=<%= p1.getId() %>"><i class="fas fa-heart"></i> Mua ngay</a>
+                            </div>
+                        </div>
 
-						<div class="price-box-bar">
-							<div class="cart-and-bay-btn">
-								<a class="btn hvr-hover" data-fancybox-close="" href="#">Mua ngay</a>
-								<a class="btn hvr-hover" data-fancybox-close="" href="#">Thêm vào giỏ hàng</a>
-							</div>
-						</div>
-
-						<div class="add-to-btn">
-							<div class="add-comp">
-								<a class="btn hvr-hover" href="#"><i class="fas fa-heart"></i> Thêm vào danh sách yêu thích</a>
-								<a class="btn hvr-hover" href="#"><i class="fas fa-sync-alt"></i> So sánh </a>
-							</div>
-							<div class="share-bar">
-								<a class="btn hvr-hover" href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-								<a class="btn hvr-hover" href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a>
-								<a class="btn hvr-hover" href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-								<a class="btn hvr-hover" href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a>
-								<a class="btn hvr-hover" href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
-							</div>
-						</div>
+                        <div class="add-to-btn">
+                            <div class="add-comp">
+                                <a class="btn hvr-hover" href="${pageContext.request.contextPath}/add_wishlist?productId=<%= p1.getId() %>"><i class="fas fa-heart"></i> Thêm vào danh sách yêu thích</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-			
+
 			<div class="row my-5">
 				<div class="card card-outline-secondary my-4">
 					<div class="card-header">
@@ -278,7 +272,7 @@
 					</div>
 					<div class="card-body">
 						<div class="media mb-3">
-							<div class="mr-2"> 
+							<div class="mr-2">
 								<img class="rounded-circle border p-1" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2264%22%20height%3D%2264%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_160c142c97c%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_160c142c97c%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2213.5546875%22%20y%3D%2236.5%22%3E64x64%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Generic placeholder image">
 							</div>
 							<div class="media-body">
@@ -288,7 +282,7 @@
 						</div>
 						<hr>
 						<div class="media mb-3">
-							<div class="mr-2"> 
+							<div class="mr-2">
 								<img class="rounded-circle border p-1" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2264%22%20height%3D%2264%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_160c142c97c%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_160c142c97c%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2213.5546875%22%20y%3D%2236.5%22%3E64x64%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Generic placeholder image">
 							</div>
 							<div class="media-body">
@@ -298,7 +292,7 @@
 						</div>
 						<hr>
 						<div class="media mb-3">
-							<div class="mr-2"> 
+							<div class="mr-2">
 								<img class="rounded-circle border p-1" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2264%22%20height%3D%2264%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_160c142c97c%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_160c142c97c%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2213.5546875%22%20y%3D%2236.5%22%3E64x64%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Generic placeholder image">
 							</div>
 							<div class="media-body">

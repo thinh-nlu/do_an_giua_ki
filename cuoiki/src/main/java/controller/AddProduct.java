@@ -24,22 +24,24 @@ public class AddProduct extends HttpServlet {
         String keyword = req.getParameter("product_keyword");
         String quantity = req.getParameter("quantity");
         String unitPrice = req.getParameter("unit_price");
+        String descript = req.getParameter("product_descrip");
         Part part = req.getPart("product_image");
         String image = part.getSubmittedFileName();
+        String path = getServletContext().getRealPath("/DataWeb/");
+        File file = new File(path);
+        if(!file.exists()) file.mkdirs();
+        part.write(path + File.separator + image);
 
-        Product p = new Product(title,price,unit,image,category,keyword,quantity,"con",unitPrice);
+        Product p = new Product(title,price,unit,image,category,keyword,quantity,"con",unitPrice,descript);
         System.out.println(p);
         ProductDAO dao = new ProductDAO(DBConnect.getConnection());
         boolean isAdd = dao.addProduct(p);
         HttpSession session = req.getSession();
         if (isAdd) {
-            String path = getServletContext().getRealPath("");
-            //File file = new File(path);
-            part.write(path + File.separator + image);
-            session.setAttribute("success","Thêm sản phẩm thành công");
+            session.setAttribute("addProduct","Thêm sản phẩm thành công");
             resp.sendRedirect("admin/insert-product.jsp");
         } else {
-            session.setAttribute("failed","Thêm sản phẩm thất bại");
+            session.setAttribute("addProduct","Thêm sản phẩm thất bại");
             resp.sendRedirect("admin/insert-product.jsp");
         }
 

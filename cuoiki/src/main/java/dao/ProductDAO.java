@@ -22,8 +22,8 @@ public class ProductDAO {
 
     public boolean addProduct(Product p) {
         boolean isAdd = false;
-        query = "insert into products(title,image,price,unit,categoryId,keyword,status,insertDate,quantity,unitPrice) " +
-                "values(?,?,?,?,?,?,?,NOW(),?,?)";
+        query = "insert into products(title,image,price,unit,categoryId,keyword,status,insertDate,quantity,unitPrice,descrip) " +
+                "values(?,?,?,?,?,?,?,NOW(),?,?,?)";
         try {
             ps = con.prepareStatement(query);
             ps.setString(1,p.getTitle());
@@ -35,6 +35,7 @@ public class ProductDAO {
             ps.setString(7,p.getStatus());
             ps.setString(8,p.getQuantity());
             ps.setString(9,p.getUnitPrice());
+            ps.setString(10,p.getDescription());
             int i = ps.executeUpdate();
 
             isAdd = i == 1;
@@ -65,6 +66,7 @@ public class ProductDAO {
                 p.setDateInsert(rs.getTimestamp(9));
                 p.setQuantity(rs.getString(10));
                 p.setUnitPrice(rs.getString(11));
+                p.setDescription(rs.getString(12));
                 products.add(p);
             }
         } catch (SQLException e) {
@@ -93,6 +95,7 @@ public class ProductDAO {
                 p.setDateInsert(rs.getTimestamp(9));
                 p.setQuantity(rs.getString(10));
                 p.setUnitPrice(rs.getString(11));
+                p.setDescription(rs.getString(12));
                 products.add(p);
             }
         } catch (SQLException e) {
@@ -121,6 +124,7 @@ public class ProductDAO {
                 product.setDateInsert(rs.getTimestamp(9));
                 product.setQuantity(rs.getString(10));
                 product.setUnitPrice(rs.getString(11));
+                product.setDescription(rs.getString(12));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -130,7 +134,7 @@ public class ProductDAO {
 
     public boolean updateProduct(Product p) {
         boolean isUpdate = false;
-        query = "UPDATE products SET title = ?, price = ?, unit = ?, categoryId = ?, keyword = ?, quantity = ?, unitPrice = ? WHERE id = ?";
+        query = "UPDATE products SET title = ?, price = ?, unit = ?, categoryId = ?, keyword = ?, quantity = ?, unitPrice = ?, descrip = ? WHERE id = ?";
         try {
             ps = con.prepareStatement(query);
             ps.setString(1,p.getTitle());
@@ -140,7 +144,8 @@ public class ProductDAO {
             ps.setString(5,p.getKeyword());
             ps.setString(6,p.getQuantity());
             ps.setString(7,p.getUnitPrice());
-            ps.setInt(8,p.getId());
+            ps.setString(8,p.getDescription());
+            ps.setInt(9,p.getId());
             int i = ps.executeUpdate();
             isUpdate = i == 1;
         } catch (SQLException e) {
@@ -181,6 +186,7 @@ public class ProductDAO {
                     product.setDateInsert(rs.getTimestamp(9));
                     product.setQuantity(rs.getString(10));
                     product.setUnitPrice(rs.getString(11));
+                    product.setDescription(rs.getString(12));
                     products.add(product);
                 }
             }
