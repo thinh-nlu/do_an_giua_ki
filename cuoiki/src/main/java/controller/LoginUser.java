@@ -31,7 +31,7 @@ public class LoginUser extends HttpServlet {
         String passwordHash = hashPassword(password);
         HttpSession session = req.getSession();
         session.setMaxInactiveInterval(30 * 60);
-        if (null == user) {
+        if (user==null) {
             session.setAttribute("failed","Tài khoản không tồn tại");
             resp.sendRedirect("account/login.jsp");
         } else if (user.getIsActive().equals("0")) {
@@ -41,22 +41,24 @@ public class LoginUser extends HttpServlet {
             session.setAttribute("failed","Mật khẩu không chính xác");
             resp.sendRedirect("account/login.jsp");
         } else {
-            if (remember != null && remember.equals("on")){
-                Cookie cookieUser = new Cookie("cookieUser",username);
-                Cookie cookiePass = new Cookie("cookiePass",hashPassword(password));
-                Cookie cookieRem = new Cookie("cookieRem",remember);
-
+            Cookie cookieUser = new Cookie("cookieUser",username);
+            Cookie cookiePass = new Cookie("cookiePass",password);
+            Cookie cookieRem = new Cookie("cookieRem",remember);
+            if (remember != null && remember.equals("ON")){
                 cookieUser.setMaxAge(60*60*15);
                 cookiePass.setMaxAge(60*60*15);
                 cookieRem.setMaxAge(60*60*15);
-
-                resp.addCookie(cookieUser);
-                resp.addCookie(cookiePass);
-                resp.addCookie(cookieRem);
+            } else {
+                cookieUser.setMaxAge(0);
+                cookiePass.setMaxAge(0);
+                cookieRem.setMaxAge(0);
             }
+            resp.addCookie(cookieUser);
+            resp.addCookie(cookiePass);
+            resp.addCookie(cookieRem);
+
             session.setAttribute("success",user);
             resp.sendRedirect("index.jsp");
-
         }
     }
 
@@ -81,11 +83,5 @@ public class LoginUser extends HttpServlet {
         }
         return null;
     }
-
-
-
-
-
-
 
 }

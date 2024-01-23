@@ -230,28 +230,28 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="firstName">Họ *</label>
-                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="<%=a.getFirstName()%>" required>
+                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="<%=a.getFirstName()%>" required="required">
                                     <div class="invalid-feedback">Vui lòng nhập họ</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="lastName">Tên *</label>
-                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="<%=a.getLastName()%>" required>
+                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="<%=a.getLastName()%>" required="required">
                                     <div class="invalid-feedback">Vui lòng nhập tên</div>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="email">Email *</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="" value="<%=a.getEmail()%>">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="" value="<%=a.getEmail()%>" required="required">
                                 <div class="invalid-feedback">Vui lòng nhập địa chỉ email</div>
                             </div>
                             <div class="mb-3">
                                 <label for="contact">Số điện thoại *</label>
-                                <input type="number" class="form-control" id="contact" name="contact" placeholder="" value="<%=a.getContact()%>">
+                                <input type="number" class="form-control" id="contact" name="contact" placeholder="" value="<%=a.getContact()%>" required="required">
                                 <div class="invalid-feedback">Vui lòng nhập số điện thoại</div>
                             </div>
                             <div class="mb-3">
                                 <label for="address">Đỉa chỉ *</label>
-                                <input type="text" class="form-control" id="address" name="address" value="<%=a.getAddress()%>" placeholder="" required>
+                                <input type="text" class="form-control" id="address" name="address" value="<%=a.getAddress()%>" placeholder="" required="required">
                                 <div class="invalid-feedback">Vui lòng nhập địa chỉ của bạn</div>
                             </div>
                             <hr class="mb-4">
@@ -259,28 +259,28 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="firstName">Họ *</label>
-                                    <input type="text" class="form-control" name="firstName" placeholder="" value="" required>
+                                    <input type="text" class="form-control" name="firstName" placeholder="" value="" required="required">
                                     <div class="invalid-feedback">Vui lòng nhập họ</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="lastName">Tên *</label>
-                                    <input type="text" class="form-control" name="lastName" placeholder="" value="" required>
+                                    <input type="text" class="form-control" name="lastName" placeholder="" value="" required="required">
                                     <div class="invalid-feedback">Vui lòng nhập tên</div>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="email">Email *</label>
-                                <input type="email" class="form-control" name="email" placeholder="" value="<%=user.getEmail()%>">
+                                <input type="email" class="form-control" name="email" placeholder="" value="<%=user.getEmail()%>"required="required">
                                 <div class="invalid-feedback">Vui lòng nhập địa chỉ email</div>
                             </div>
                             <div class="mb-3">
                                 <label for="contact">Số điện thoại *</label>
-                                <input type="number" class="form-control" name="contact" placeholder="" value="<%=user.getContact()%>">
+                                <input type="number" class="form-control" name="contact" placeholder="" value="<%=user.getContact()%>" required="required">
                                 <div class="invalid-feedback">Vui lòng nhập số điện thoại</div>
                             </div>
                             <div class="mb-3">
                                 <label for="address">Đỉa chỉ *</label>
-                                <input type="text" class="form-control" name="address" placeholder="" required>
+                                <input type="text" class="form-control" name="address" placeholder="" required="required">
                                 <div class="invalid-feedback">Vui lòng nhập địa chỉ của bạn</div>
                             </div>
                             <hr class="mb-4">

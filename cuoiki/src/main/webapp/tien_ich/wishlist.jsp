@@ -7,10 +7,13 @@
 <%@ page import="model.Product" %>
 <%@ page import="dao.WishlistDAO" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="cart.CartProduct" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
 <%
     User user = (User) session.getAttribute("success");
+    CartProduct cartProduct = (CartProduct) session.getAttribute("cart");
+    if(cartProduct == null) cartProduct = new CartProduct();
     WishlistDAO wDao = new WishlistDAO(DBConnect.getConnection());
     List<Wishlist> wishlistList = new ArrayList<>();
     ProductDAO dao = new ProductDAO(DBConnect.getConnection());
@@ -117,6 +120,7 @@
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tiện ích <i class="bi bi-list "></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="cart.jsp">Giỏ Hàng</a></li>
+                                <li><a href="address.jsp">Giỏ Hàng</a></li>
                                 <li><a href="checkout.jsp">Thanh Toán</a></li>
                                 <li><a href="my-account.jsp">Tài Khoản</a></li>
                                 <li><a href="wishlist.jsp">Yêu thích</a></li>
@@ -142,7 +146,7 @@
                     <ul>
                         <li class="side-menu"><a href="cart.jsp">
 						<i class="fa fa-shopping-bag"></i>
-                            <span class="badge">0</span>
+                            <span class="badge"><%=cartProduct.getTotal()%></span>
 							<p>Giỏ Hàng</p>
 					</a></li>
                     </ul>
@@ -218,6 +222,13 @@
                 <div class="main-heading mb-10"></div>
                 <div class="table-wishlist">
                     <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tbody>
+                        <% if (wishlistList.isEmpty()) { %>
+                        <h2 class="text-danger text-center">Không có sản phẩm nào trong danh sách yêu thích</h2>
+                        <% } else {
+                            for (Wishlist w: wishlistList) {
+                                Product product = dao.getProductById(w.getProduct_id());
+                        %>
                         <thead>
                         <tr>
                             <th width="45%">Tên Sản Phẩm</th>
@@ -227,15 +238,6 @@
                             <th width="10%"></th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <% if (wishlistList.isEmpty()) { %>
-                        <tr>
-                            <td colspan="5" class="text-center text-danger">Không có sản phẩm nào được yêu thích.</td>
-                        </tr>
-                        <% } else {
-                            for (Wishlist w: wishlistList) {
-                                Product product = dao.getProductById(w.getProduct_id());
-                        %>
                         <tr>
                             <td width="45%">
                                 <div class="display-flex align-center">
