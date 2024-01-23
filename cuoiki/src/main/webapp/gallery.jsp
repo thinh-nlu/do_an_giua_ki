@@ -271,7 +271,7 @@
                 <div class="col-lg-3 col-md-6 special-grid bulbs">
                     <div class="products-single fix">
                         <div class="box-img-hover">
-                            <img src="./DataWeb/<%=p1.getImage()%>" class="img-fluid" alt="Image">
+                            <img src="./DataWeb/<%=p1.getImage()%>">
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="${pageContext.request.contextPath }/product-details?id=<%= p1.getId() %>" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
