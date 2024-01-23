@@ -16,10 +16,12 @@ public class Product {
     private String quantity;
     private String status;
     private String unitPrice;
+    private String descript;
+
 
     public Product() {}
 
-    public Product(String title, String price, String unit, String image, String categoryId, String keyword, String quantity, String status, String unitPrice) {
+    public Product(String title, String price, String unit, String image, String categoryId, String keyword, String quantity, String status, String unitPrice, String descript) {
         this.title = title;
         this.price = price;
         this.unit = unit;
@@ -29,6 +31,8 @@ public class Product {
         this.quantity = quantity;
         this.status = status;
         this.unitPrice = unitPrice;
+        this.descript = descript;
+
     }
 
     public Product(int id, String title, String price, String unit, String image, String categoryId, String keyword, Timestamp timestamp, String quantity, String status, String unitPrice) {
@@ -45,6 +49,14 @@ public class Product {
         this.unitPrice = unitPrice;
     }
 
+
+    public String getDescription() {
+        return descript;
+    }
+
+    public void setDescription(String descript) {
+        this.descript = descript;
+    }
     public Timestamp getTimestamp() {
         return timestamp;
     }
