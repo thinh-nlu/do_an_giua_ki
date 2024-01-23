@@ -4,10 +4,7 @@ import dao.UserDAO;
 import database.DBConnect;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 import model.User;
 
 import java.io.IOException;
@@ -18,10 +15,15 @@ import java.security.NoSuchAlgorithmException;
 @WebServlet("/login")
 public class LoginUser extends HttpServlet {
 
+
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("name").trim();
         String password = req.getParameter("password").trim();
+        String remember = req.getParameter("remember");
+
+
 
         UserDAO dao = new UserDAO(DBConnect.getConnection());
         User user = dao.getUserByUsername(username);
@@ -29,7 +31,7 @@ public class LoginUser extends HttpServlet {
         String passwordHash = hashPassword(password);
         HttpSession session = req.getSession();
         session.setMaxInactiveInterval(30 * 60);
-        if (user == null) {
+        if (null == user) {
             session.setAttribute("failed","Tài khoản không tồn tại");
             resp.sendRedirect("account/login.jsp");
         } else if (user.getIsActive().equals("0")) {
@@ -39,12 +41,26 @@ public class LoginUser extends HttpServlet {
             session.setAttribute("failed","Mật khẩu không chính xác");
             resp.sendRedirect("account/login.jsp");
         } else {
+            if (remember != null && remember.equals("on")){
+                Cookie cookieUser = new Cookie("cookieUser",username);
+                Cookie cookiePass = new Cookie("cookiePass",hashPassword(password));
+                Cookie cookieRem = new Cookie("cookieRem",remember);
+
+                cookieUser.setMaxAge(60*60*15);
+                cookiePass.setMaxAge(60*60*15);
+                cookieRem.setMaxAge(60*60*15);
+
+                resp.addCookie(cookieUser);
+                resp.addCookie(cookiePass);
+                resp.addCookie(cookieRem);
+            }
             session.setAttribute("success",user);
             resp.sendRedirect("index.jsp");
+
         }
     }
 
-    private String hashPassword(String password) {
+    public static String hashPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] encodedHash = digest.digest(
@@ -65,4 +81,11 @@ public class LoginUser extends HttpServlet {
         }
         return null;
     }
+
+
+
+
+
+
+
 }

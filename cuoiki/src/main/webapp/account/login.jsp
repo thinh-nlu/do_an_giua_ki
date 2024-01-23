@@ -6,6 +6,7 @@
 	CartProduct cartProduct = (CartProduct) session.getAttribute("cart");
 	if(cartProduct == null) cartProduct = new CartProduct();
 	User user = (User) session.getAttribute("success");
+
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -181,16 +182,16 @@
 							<div class="form-col md-3">
 								<div class="form-group">
 									<label for="name" class="mb-0">Tên Đăng Nhập</label>
-									<input type="text" class="form-control" id="name" name="name" placeholder="">
+									<input type="text" class="form-control" id="name" name="name" placeholder="" >
 								</div>
 								<div class="form-group">
 									<label for = "password" class="mb-0">Mật Khẩu</label>
-									<input type="password" class="form-control" id="password" name="password" placeholder="">
+									<input type="password" class="form-control" id="password" name="password" placeholder="" >
 								</div>
 								<div>
 									<div class="form-check mb-3">
-									<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-									<label class="form-check-label" for="flexCheckDefault">
+									<input class="form-check-input" type="checkbox"  id="remember" name="remember" >
+									<label class="form-check-label" for="remember">
 										Lưu Mật Khẩu
 									</label>
 									<a href="forgotPassword.jsp" class="ml-5">Quên mật khẩu</a>
