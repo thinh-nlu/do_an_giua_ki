@@ -5,6 +5,15 @@
 <%@ page import="model.Product" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
+<style>
+    .profile-image {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+</style>
 <%
     User user = (User) session.getAttribute("success");
     CartProduct cartProduct = (CartProduct) session.getAttribute("cart");
@@ -142,34 +151,6 @@
                 </div>
                 <!-- End Atribute Navigation -->
             </div>
-            <!-- Start Side Menu -->
-            <div class="side">
-                <a href="#" class="close-side"><i class="fa fa-times"></i></a>
-                <li class="cart-box">
-                    <ul class="cart-list">
-                        <li>
-                            <a href="#" class="photo"><img src="../images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Delica omtantur </a></h6>
-                            <p>1x - <span class="price">$80.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="../images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Omnes ocurreret</a></h6>
-                            <p>1x - <span class="price">$60.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="../images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Agam facilisis</a></h6>
-                            <p>1x - <span class="price">$40.00</span></p>
-                        </li>
-                        <li class="total">
-                            <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                            <span class="float-right"><strong>Total</strong>: $180.00</span>
-                        </li>
-                    </ul>
-                </li>
-            </div>
-            <!-- End Side Menu -->
         </nav>
         <!-- End Navigation -->
     </header>
@@ -236,7 +217,7 @@
                                 <tr>
                                     <input type="hidden" name="id" value="<%=product.getId()%>"/>
                                     <td class="thumbnail-img">
-                                        <img class="img-fluid" src="../DataWeb/<%=product.getImage()%>" alt="" />
+                                        <img class="profile-image" src="../DataWeb/<%=product.getImage()%>" alt="Image" />
                                     </td>
                                     <td class="name-pr">
                                         <%=product.getTitle()%>
@@ -259,11 +240,11 @@
                                         </a>
                                     </td>
                                 </tr>
+                                <%}%>
                                 </tbody>
                             </table>
                         </form>
                     </div>
-                    <%}%>
                 </div>
             </div>
             <div class="row my-5">
