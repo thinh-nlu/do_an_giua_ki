@@ -8,6 +8,7 @@
 	User user = (User) session.getAttribute("success");
 	String failedMessage = (String) session.getAttribute("failed");
 %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,6 +41,7 @@
 	<!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
 	<![endif]-->
 
 </head>
@@ -162,14 +164,14 @@
 </header>
 <!-- End Main Top -->
 
-<div class="main">
+<div class="main ">
 	<!-- Sign up form -->
 	<section class="signin">
 		<div class="container">
 			<div class="signin-content">
 				<div class="row justify-content-center">
 					<div class="signin-form">
-						<h2 class="form-title mt-5">Đăng Nhập</h2>
+						<h2 class="form-title mt-2">Đăng Nhập</h2>
 						<%
 							if(failedMessage!=null) {
 						%>
@@ -194,14 +196,26 @@
 										Lưu Mật Khẩu
 									</label>
 									<a href="forgotPassword.jsp" class="ml-5">Quên mật khẩu</a>
+
 								</div>
 
 								</div>
 							</div>
-							<div class="mb-5">
-								<button type="submit" class="btn hvr-hover mb-3">Đăng Nhập</button>
+							<div class="mb-2">
+								<button type="submit" class="btn hvr-hover ">Đăng Nhập</button>
+
 								<p>Bạn chưa có tài khoản? <a href="registration.jsp">Đăng Ký Ngay</a></p>
+								<h4 class="">Hoặc đăng nhập bằng :
+									<a href="#" class="btn btn-primary btn-sm"><i class=" bi-facebook bg-primary align-content-center"></i></a>
+									<a href="https://accounts.google.com/o/oauth2/auth?scope=profile email&redirect_uri=http://localhost:8080/cuoiki_war_exploded/loginGoogle&response_type=code&client_id=257156793950-querl7dnqmaq9cjfa1ou89sslsa6cof0.apps.googleusercontent.com&approval_prompt=force" class="btn btn-danger btn-sm">
+										<i class="bi-google bg-danger align-content-center"></i></a>
+
+								</h4>
+
 							</div>
+
+
+
 						</form>
 					</div>
 				</div>
