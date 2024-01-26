@@ -1,14 +1,18 @@
 <%@ page import="model.User" %>
 <%@ page import="cart.CartProduct" %>
 <%@ page import="model.Address" %>
+<%@ page import="dao.AddressDAO" %>
+<%@ page import="database.DBConnect" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
 <%
     CartProduct cartProduct = (CartProduct) session.getAttribute("cart");
     if(cartProduct == null) cartProduct = new CartProduct();
     User user = (User) session.getAttribute("success");
-    Address a = (Address) session.getAttribute("address");
-    String saveAddressTest = (String) session.getAttribute("saveAddressTest");
+    Address a = null;
+    AddressDAO dao = new AddressDAO(DBConnect.getConnection());
+    if(a==null) a = new Address();
+    String saveAddressTest = (String) session.getAttribute("saveAddressText");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,6 +56,15 @@
 <div id="container_header"></div>
 <!-- Start Main Top -->
 <div class="main-top">
+    <% if (user == null) {
+    %>
+    <script>
+        alert("Bạn cần đăng nhập để sử dụng chức năng này.");
+        window.location.href = "../index.jsp";
+    </script>
+    <%}else{
+        a = dao.getAddressByUserId(user.getId());
+    }%>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -96,8 +109,8 @@
         </script>
 
         <%
-            session.removeAttribute("saveAddressTest");
             }
+            session.removeAttribute("saveAddressTest");
         %>
         <!-- Start Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
@@ -224,71 +237,34 @@
                             <h3>Địa chỉ giao hàng</h3>
                         </div>
                         <form class="needs-validation" novalidate action="../saveAddress" method="post">
-                            <%
-                                if(a!= null && a.getSaveInfo().equals("save")) {
-                            %>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="firstName">Họ *</label>
-                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="<%=a.getFirstName()%>" required="required">
+                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="<%=a.getFirstName()==null ? "" :a.getFirstName()%>" required="required">
                                     <div class="invalid-feedback">Vui lòng nhập họ</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="lastName">Tên *</label>
-                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="<%=a.getLastName()%>" required="required">
+                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="<%=a.getLastName()==null ? "" :a.getLastName()%>" required="required">
                                     <div class="invalid-feedback">Vui lòng nhập tên</div>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="email">Email *</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="" value="<%=a.getEmail()%>" required="required">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="" value="<%=a.getEmail()==null ? "" :a.getEmail()%>" required="required">
                                 <div class="invalid-feedback">Vui lòng nhập địa chỉ email</div>
                             </div>
                             <div class="mb-3">
                                 <label for="contact">Số điện thoại *</label>
-                                <input type="number" class="form-control" id="contact" name="contact" placeholder="" value="<%=a.getContact()%>" required="required">
+                                <input type="number" class="form-control" id="contact" name="contact" placeholder="" value="<%=a.getContact()==null ? "" :a.getContact()%>" required="required">
                                 <div class="invalid-feedback">Vui lòng nhập số điện thoại</div>
                             </div>
                             <div class="mb-3">
                                 <label for="address">Đỉa chỉ *</label>
-                                <input type="text" class="form-control" id="address" name="address" value="<%=a.getAddress()%>" placeholder="" required="required">
+                                <input type="text" class="form-control" id="address" name="address" value="<%=a.getContact()==null ? "" :a.getContact()%>" placeholder="" required="required">
                                 <div class="invalid-feedback">Vui lòng nhập địa chỉ của bạn</div>
                             </div>
                             <hr class="mb-4">
-                            <%} else {%>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="firstName">Họ *</label>
-                                    <input type="text" class="form-control" name="firstName" placeholder="" value="" required="required">
-                                    <div class="invalid-feedback">Vui lòng nhập họ</div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="lastName">Tên *</label>
-                                    <input type="text" class="form-control" name="lastName" placeholder="" value="" required="required">
-                                    <div class="invalid-feedback">Vui lòng nhập tên</div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="email">Email *</label>
-                                <input type="email" class="form-control" name="email" placeholder="" value="<%=user.getEmail()%>"required="required">
-                                <div class="invalid-feedback">Vui lòng nhập địa chỉ email</div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="contact">Số điện thoại *</label>
-                                <input type="number" class="form-control" name="contact" placeholder="" value="<%=user.getContact()%>" required="required">
-                                <div class="invalid-feedback">Vui lòng nhập số điện thoại</div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="address">Đỉa chỉ *</label>
-                                <input type="text" class="form-control" name="address" placeholder="" required="required">
-                                <div class="invalid-feedback">Vui lòng nhập địa chỉ của bạn</div>
-                            </div>
-                            <hr class="mb-4">
-                            <%}%>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="save-info" name="save-info" value="save">
-                                <label class="custom-control-label" for="save-info">Lưu thông tin</label>
-                            </div>
                             <hr class="mb-4">
                             <div class="title"> <span>Phương thức thanh toán</span> </div>
                             <div class="d-block my-3">
@@ -306,7 +282,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <!-- End Cart -->

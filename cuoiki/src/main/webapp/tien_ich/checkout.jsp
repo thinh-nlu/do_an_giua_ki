@@ -103,7 +103,9 @@
     <script>
         alert(<%=messageBuyProduct%>)
     </script>
-    <%}%>
+    <%}
+        session.removeAttribute("messageBuyProduct");
+    %>
     <%
         if(user == null || order == null) {
     %>
@@ -249,7 +251,7 @@
                                         Product p = productDAO.getProductById(o.getProductId());
                                 %>
                                 <div class="media mb-2 border-bottom">
-                                    <div class="media-body"> <a href="detail.html"><%=p.getTitle()%></a>
+                                    <div class="media-body"> <%=p.getTitle()%>
                                             <div class="small text-muted"><%=p.getPrice()%><span class="mx-2">|</span><%=o.getQuantity()%> <span class="mx-2">|</span><%=String.valueOf(Double.parseDouble(p.getPrice()) * o.getQuantity())%></div>
                                     </div>
                                 </div>

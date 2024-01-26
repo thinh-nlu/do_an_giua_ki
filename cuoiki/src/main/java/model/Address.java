@@ -8,12 +8,11 @@ public class Address {
     private String email;
     private String contact;
     private String address;
-    private String saveInfo;
     private String paymentMethod;
 
     public Address(){}
 
-    public Address(int id,int userId, String firstName, String lastName, String email, String contact, String address, String saveInfo, String paymentMethod) {
+    public Address(int id,int userId, String firstName, String lastName, String email, String contact, String address, String paymentMethod) {
         this.id = id;
         this.userId = userId;
         this.firstName = firstName;
@@ -21,18 +20,16 @@ public class Address {
         this.email = email;
         this.contact = contact;
         this.address = address;
-        this.saveInfo = saveInfo;
         this.paymentMethod = paymentMethod;
     }
 
-    public Address(int userId, String firstName, String lastName, String email, String contact, String address, String saveInfo, String paymentMethod) {
+    public Address(int userId, String firstName, String lastName, String email, String contact, String address, String paymentMethod) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.contact = contact;
         this.address = address;
-        this.saveInfo = saveInfo;
         this.paymentMethod = paymentMethod;
     }
 
@@ -92,13 +89,7 @@ public class Address {
         this.contact = contact;
     }
 
-    public String getSaveInfo() {
-        return saveInfo;
-    }
 
-    public void setSaveInfo(String saveInfo) {
-        this.saveInfo = saveInfo;
-    }
 
     public String getPaymentMethod() {
         return paymentMethod;
@@ -118,7 +109,6 @@ public class Address {
                 ", email='" + email + '\'' +
                 ", contact='" + contact + '\'' +
                 ", address='" + address + '\'' +
-                ", saveInfo='" + saveInfo + '\'' +
                 ", paymentMethod='" + paymentMethod + '\'' +
                 '}';
     }

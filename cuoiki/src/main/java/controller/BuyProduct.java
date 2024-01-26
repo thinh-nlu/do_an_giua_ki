@@ -40,6 +40,7 @@ public class BuyProduct extends HttpServlet {
             updateStatusProduct = dao.updateStatus(orderId);
             cartProduct.getData().clear();
             session.setAttribute("cart",cartProduct);
+            session.setAttribute("createOrder",null);
             session.setAttribute("buyProductMessage","Đơn hàng đã được đặt thành công");
             resp.sendRedirect("index.jsp");
         } else {
