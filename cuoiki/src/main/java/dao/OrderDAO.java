@@ -38,6 +38,20 @@ public class OrderDAO {
         }
         return isAdd;
     }
+    public int getOrderRowCount() {
+        int rowCount = 0;
+        query = "select count(*) from orders";
+        try {
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                rowCount = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rowCount;
+    }
 
     public Order getOrderByInvoiceNumber(String invoiceNumber) {
         Order o = null;
@@ -145,8 +159,5 @@ public class OrderDAO {
         return list;
     }
 
-    public static void main(String[] args) {
-        OrderDAO o = new OrderDAO(DBConnect.getConnection());
-        System.out.println(o.getAllOrder());
-    }
+
 }

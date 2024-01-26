@@ -246,4 +246,18 @@ public class ProductDAO {
         }
         return isUpdate;
     }
+    public int CountProducts() {
+        int rowCount = 0;
+        query = "select count(*) from products";
+        try {
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                rowCount = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rowCount;
+    }
 }
