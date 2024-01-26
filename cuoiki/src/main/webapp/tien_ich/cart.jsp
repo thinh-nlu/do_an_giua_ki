@@ -5,15 +5,6 @@
 <%@ page import="model.Product" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
-<style>
-    .profile-image {
-        width: 70px;
-        height: 70px;
-        border-radius: 50%;
-        object-fit: cover;
-    }
-
-</style>
 <%
     User user = (User) session.getAttribute("success");
     CartProduct cartProduct = (CartProduct) session.getAttribute("cart");
@@ -55,7 +46,14 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <style>
+        .profile-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    </style>
 </head>
 
 <body>
@@ -151,6 +149,34 @@
                 </div>
                 <!-- End Atribute Navigation -->
             </div>
+            <!-- Start Side Menu -->
+            <div class="side">
+                <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+                <li class="cart-box">
+                    <ul class="cart-list">
+                        <li>
+                            <a href="#" class="photo"><img src="../images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
+                            <h6><a href="#">Delica omtantur </a></h6>
+                            <p>1x - <span class="price">$80.00</span></p>
+                        </li>
+                        <li>
+                            <a href="#" class="photo"><img src="../images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
+                            <h6><a href="#">Omnes ocurreret</a></h6>
+                            <p>1x - <span class="price">$60.00</span></p>
+                        </li>
+                        <li>
+                            <a href="#" class="photo"><img src="../images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
+                            <h6><a href="#">Agam facilisis</a></h6>
+                            <p>1x - <span class="price">$40.00</span></p>
+                        </li>
+                        <li class="total">
+                            <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                            <span class="float-right"><strong>Total</strong>: $180.00</span>
+                        </li>
+                    </ul>
+                </li>
+            </div>
+            <!-- End Side Menu -->
         </nav>
         <!-- End Navigation -->
     </header>
@@ -194,56 +220,56 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="table-main table-responsive">
-                        <form method="post" action="../update_quantity">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>Hình ảnh</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Giá</th>
-                                    <th>Số lượng</th>
-                                    <th>Tổng giá</th>
-                                    <th>Cập nhật</th>
-                                    <th>Loại bỏ</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <%
-                                    for (Map.Entry<Integer, Cart> entry: cartProduct.getData().entrySet()) {
-                                        Product product = entry.getValue().getProduct();
-                                        int quantity = entry.getValue().getQuantity();
-                                        double totalPrice = Double.parseDouble(product.getPrice()) * Double.valueOf(quantity);
-                                %>
-                                <tr>
-                                    <input type="hidden" name="id" value="<%=product.getId()%>"/>
-                                    <td class="thumbnail-img">
-                                        <img class="profile-image" src="../DataWeb/<%=product.getImage()%>" alt="Image" />
-                                    </td>
-                                    <td class="name-pr">
-                                        <%=product.getTitle()%>
-                                    </td>
-                                    <td class="price-pr">
-                                        <p><%=product.getPrice()%></p>
-                                    </td>
-                                    <td class="quantity-box"><input type="number" id="quantity" name="quantity" size="4" value="<%=entry.getValue().getQuantity()%>" min="0" step="1" class="c-input-text qty text"></td>
-                                    <td class="total-pr">
-                                        <p><%=totalPrice%></p>
-                                    </td>
-                                    <td class="remove-pr">
-                                        <button type="submit" class="border-0">
-                                            <i class="bi bi-file-arrow-up-fill"></i>
-                                        </button>
-                                    </td>
-                                    <td class="remove-pr">
-                                        <a href="../deleteCartProduct?id=<%=product.getId()%>">
-                                            <i class="fas fa-times"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <%}%>
-                                </tbody>
-                            </table>
-                        </form>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Hình ảnh</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Tổng giá</th>
+                                <th>Cập nhật</th>
+                                <th>Loại bỏ</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <%
+                                for (Map.Entry<Integer, Cart> entry: cartProduct.getData().entrySet()) {
+                                    Product product = entry.getValue().getProduct();
+                                    int quantity = entry.getValue().getQuantity();
+                                    double totalPrice = Double.parseDouble(product.getPrice()) * Double.valueOf(quantity);
+                            %>
+                            <tr>
+                                <form method="post" action="../update_quantity">
+                                <input type="hidden" name="id" value="<%=product.getId()%>"/>
+                                <td class="thumbnail-img">
+                                    <img class="profile-image" src="../DataWeb/<%=product.getImage()%>" alt="Image" />
+                                </td>
+                                <td class="name-pr">
+                                    <%=product.getTitle()%>
+                                </td>
+                                <td class="price-pr">
+                                    <p><%=product.getPrice()%></p>
+                                </td>
+                                <td class="quantity-box"><input type="number" id="quantity" name="quantity" size="4" value="<%=entry.getValue().getQuantity()%>" min="0" step="1" class="c-input-text qty text"></td>
+                                <td class="total-pr">
+                                    <p><%=totalPrice%></p>
+                                </td>
+                                <td class="remove-pr">
+                                    <button type="submit" class="border-0">
+                                        <i class="bi bi-file-arrow-up-fill"></i>
+                                    </button>
+                                </td>
+                                <td class="remove-pr">
+                                    <a href="../deleteCartProduct?id=<%=product.getId()%>">
+                                        <i class="bi bi-file-arrow-up-fill"></i>
+                                    </a>
+                                </td>
+                                </form>
+                            </tr>
+                            <%}%>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
