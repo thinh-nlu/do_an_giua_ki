@@ -155,6 +155,20 @@ public class UserDAO {
         return isUpdate;
 
     }
+    public int getUserCount() {
+        int soLuongNguoiDung = 0;
+        query = "select count(*) from users";
+        try {
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                soLuongNguoiDung = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return soLuongNguoiDung;
+    }
 
     public boolean updatePassword(User u) {
         boolean isUpdate = false;
