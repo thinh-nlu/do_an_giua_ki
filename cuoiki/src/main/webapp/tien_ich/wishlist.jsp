@@ -74,11 +74,13 @@
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="login-register">
                     <ul>
-                        <% if (user != null) { %>
-                        <% if (!user.getIsAdmin().equals("0")) { %>
+                        <% if (user != null) {
+                            wishlistList=wDao.getAllWishlistByUserID(user.getId());
+                        %>
+                        <% if (!user.getIsAdmin().equals("1") ||user.getIsAdmin().equals("2")) { %>
                         <li><a href="../tien_ich/my-account.jsp">Xin chào <%=user.getName()%></a></li>
                         <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
-                        <%} else {%>
+                        <%} else if (user.getIsAdmin().equals("0")){%>
                         <li><p>Xin chào <%= user.getName() %></p></li>
                         <li><a href="../admin/admin.jsp">Trang Quản Lí</a></li>
                         <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
@@ -118,7 +120,7 @@
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tiện ích <i class="bi bi-list "></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="cart.jsp">Giỏ Hàng</a></li>
-                                <li><a href="address.jsp">Giỏ Hàng</a></li>
+                                <li><a href="address.jsp">Địa chỉ</a></li>
                                 <li><a href="checkout.jsp">Thanh Toán</a></li>
                                 <li><a href="my-account.jsp">Tài Khoản</a></li>
                                 <li><a href="wishlist.jsp">Yêu thích</a></li>
@@ -204,7 +206,7 @@
                     <h2>Yêu thích</h2>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="../gallery.jsp">Cửa Hàng</a></li>
-                        <li class="breadcrumb-item active">Yêu Thíchn</li>
+                        <li class="breadcrumb-item active"> Yêu Thích </li>
                     </ul>
                 </div>
             </div>
