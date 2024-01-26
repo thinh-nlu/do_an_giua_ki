@@ -40,7 +40,7 @@ public class LoginGoogle extends HttpServlet {
             UserGoogle googlePojo = getUserInfo(accessToken);
             String name = googlePojo.getName();
             String email = googlePojo.getEmail();
-            User googleuser = new User(name,email,"","","1","1");
+            User googleuser = new User(name,email,"","","2","1");
             if (!userDAO.isEmailExists(email)){
                 userDAO.registerUser(googleuser);
                 session.setAttribute("success",googleuser);

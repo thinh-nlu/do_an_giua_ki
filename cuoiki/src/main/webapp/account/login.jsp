@@ -63,7 +63,7 @@
 				<div class="login-register">
 					<ul>
 						<% if (user != null) { %>
-						<% if (user.getIsAdmin().equals("1")) { %>
+						<% if (user.getIsAdmin().equals("1")||user.getIsAdmin().equals("2")) { %>
 						<li><a href="../tien_ich/my-account.jsp">Xin chào <%=user.getName()%></a></li>
 						<li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
 						<%} else {%>
@@ -206,7 +206,7 @@
 
 								<p>Bạn chưa có tài khoản? <a href="registration.jsp">Đăng Ký Ngay</a></p>
 								<h4 class="">Hoặc đăng nhập bằng :
-									<a href="#" class="btn btn-primary btn-sm"><i class=" bi-facebook bg-primary align-content-center"></i></a>
+									<a href="https://www.facebook.com/dialog/oauth?client_id=390038746860422&redirect_uri=http://localhost:8080/cuoiki_war_exploded/login_facebook" class="btn btn-primary btn-sm"><i class=" bi-facebook bg-primary align-content-center"></i></a>
 									<a href="https://accounts.google.com/o/oauth2/auth?scope=profile email&redirect_uri=http://localhost:8080/cuoiki_war_exploded/loginGoogle&response_type=code&client_id=257156793950-querl7dnqmaq9cjfa1ou89sslsa6cof0.apps.googleusercontent.com&approval_prompt=force" class="btn btn-danger btn-sm">
 										<i class="bi-google bg-danger align-content-center"></i></a>
 
