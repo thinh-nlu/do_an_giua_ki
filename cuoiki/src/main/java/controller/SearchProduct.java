@@ -23,20 +23,10 @@ public class SearchProduct extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String keyword = req.getParameter("keyword");
         ProductDAO dao = new ProductDAO(DBConnect.getConnection());
-        List<Product> products = dao.getAllProduct();
-        List<Product> display = new ArrayList<>();
+        System.out.println(keyword);
+        List<Product> display = dao.searchProduct(keyword);
         HttpSession session = req.getSession();
-        boolean found = false;
-        if (!products.isEmpty()) {
-            for (Product p : products) {
-                String[] keywordArr = p.getKeyword().split(",");
-                if (Arrays.asList(keywordArr).contains(keyword)) {
-                    display.add(p);
-                    found = true;
-                }
-            }
-        }
-        if(!found) {
+        if (display.isEmpty()) {
             session.setAttribute("searchListFailed", "Không tìm thấy sản phẩm");
         } else {
             session.setAttribute("searchListSuccess", display);
@@ -44,19 +34,5 @@ public class SearchProduct extends HttpServlet {
         resp.sendRedirect("gallery.jsp");
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        boolean searchResultAvailable = session.getAttribute("searchResultAvailable") != null &&
-                (boolean) session.getAttribute("searchResultAvailable");
-        if (searchResultAvailable) {
-            List<Product> searchResult = (List<Product>) session.getAttribute("searchListSuccess");
-            session.removeAttribute("searchListSuccess");
-
-            req.setAttribute("searchResult", searchResult);
-        }
-
-        req.getRequestDispatcher("gallery.jsp").forward(req, resp);
-    }
 }
 

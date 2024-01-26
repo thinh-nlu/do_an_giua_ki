@@ -23,6 +23,8 @@
     double totalProducts = allList.size();
     int totalPage = (int) Math.ceil(totalProducts /totalPerPage);
     User user = (User) session.getAttribute("success");
+    String updateProductMes = (String) session.getAttribute("updateProductMes");
+    if(updateProductMes == null) updateProductMes = "";
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -167,17 +169,16 @@
 </header>
 <!-- End Main Top -->
 <h3 class="text-center text-dark pb-3 display-4 font-weight-normal" >Tất cả sản phẩm</h3>
-<c:if test="${not empty successUpdate}">
-    <p class="text-center text-success">${successUpdate}</p>
-    <c:remove var="successUpdate" scope="session"/>
-</c:if>
-<c:if test="${not empty failedUpdate}">
-    <p class="text-center text-danger">${failedUpdate}</p>
-    <c:remove var="failedUpdate" scope="session"/>
-</c:if>
+<%
+    if(updateProductMes.equals("Cập nhật sản phẩm thành công")) {
+%>
+<h2 class="text-center text-success"><%=updateProductMes%></h2>
+<%}else{%>
+<h2 class="text-center text-danger"><%=updateProductMes%></h2>
+<%}
+    session.removeAttribute("updateProductMes");
+%>
 <div class="px-lg-5 pt-xl-5">
-<h3 class="text-center text-dark pt-xl-3 display-4 font-weight-normal" >Tất cả sản phẩm</h3>
-
 <div class="px-lg-5 pt-xl-1">
     <table class="table table-striped text-center ">
         <thead class="bg-dark">

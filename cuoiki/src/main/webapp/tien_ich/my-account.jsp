@@ -84,6 +84,12 @@
 
 <!-- Start Main Top -->
 <header class="main-header">
+    <% if (user == null) { %>
+    <script>
+        alert("Bạn cần đăng nhập để sử dụng chức năng này.");
+        window.location.href = "../index.jsp";
+    </script>
+    <%}%>
     <!-- Start Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
         <div class="container">
@@ -261,7 +267,6 @@
                         <% } %>
                     </ul>
                 </div>
-
                 <div class="collapse col align-self-center" id="profile">
                     <div class="container rounded bg-white mt-5">
                         <div class="row">

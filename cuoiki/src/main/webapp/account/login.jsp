@@ -7,6 +7,10 @@
 	if(cartProduct == null) cartProduct = new CartProduct();
 	User user = (User) session.getAttribute("success");
 	String failedMessage = (String) session.getAttribute("failed");
+	Cookie[] cookies = request.getCookies();
+	String username = "";
+	String password = "";
+	String remember = "";
 %>
 
 <!DOCTYPE html>
@@ -181,24 +185,38 @@
 						%>
 						<form method="post" action="../login" class="mt-3" id="formLogin">
 							<div class="form-col md-3">
+								<%
+									if(cookies!=null) {
+										for (Cookie c : cookies) {
+											if ("cookieUser".equals(c.getName())) {
+												username = c.getValue();
+											} else if ("cookiePass".equals(c.getName())) {
+												password = c.getValue();
+											} else if ("cookieRem".equals(c.getName())) {
+												remember = c.getValue();
+											}
+										}
+									}
+								%>
+
 								<div class="form-group">
 									<label for="name" class="mb-0">Tên Đăng Nhập</label>
-									<input type="text" class="form-control" id="name" name="name" placeholder="" >
+									<input type="text" class="form-control" id="name" name="name" value="<%=username%>" placeholder="" >
 								</div>
 								<div class="form-group">
 									<label for = "password" class="mb-0">Mật Khẩu</label>
-									<input type="password" class="form-control" id="password" name="password" placeholder="" >
+									<input type="password" class="form-control" id="password" name="password" value="<%=password%>" placeholder="" >
 								</div>
 								<div>
 									<div class="form-check mb-3">
-									<input class="form-check-input" type="checkbox"  id="remember" name="remember" >
+									<input class="form-check-input" type="checkbox"  id="remember" name="remember" value="ON"
+									>
 									<label class="form-check-label" for="remember">
 										Lưu Mật Khẩu
 									</label>
 									<a href="forgotPassword.jsp" class="ml-5">Quên mật khẩu</a>
 
 								</div>
-
 								</div>
 							</div>
 							<div class="mb-2">
