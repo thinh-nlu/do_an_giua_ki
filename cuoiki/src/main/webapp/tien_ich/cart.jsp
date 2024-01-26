@@ -240,6 +240,7 @@
                                     double totalPrice = Double.parseDouble(product.getPrice()) * Double.valueOf(quantity);
                             %>
                             <tr>
+                                <form method="post" action="../update_quantity">
                                 <input type="hidden" name="id" value="<%=product.getId()%>"/>
                                 <td class="thumbnail-img">
                                     <img class="profile-image" src="../DataWeb/<%=product.getImage()%>" alt="Image" />
@@ -255,22 +256,23 @@
                                     <p><%=totalPrice%></p>
                                 </td>
                                 <td class="remove-pr">
-                                    <a href="../update_quantity?id=<%=product.getId()%>">
-                                        <i class="fas fa-times"></i>
-                                    </a>
+                                    <button type="submit" class="border-0">
+                                        <i class="bi bi-file-arrow-up-fill"></i>
+                                    </button>
                                 </td>
                                 <td class="remove-pr">
                                     <a href="../deleteCartProduct?id=<%=product.getId()%>">
                                         <i class="bi bi-file-arrow-up-fill"></i>
                                     </a>
                                 </td>
+                                </form>
                             </tr>
+                            <%}%>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            <%}%>
             <div class="row my-5">
                 <div class="col-lg-8 col-sm-12"></div>
                 <div class="col-lg-4 col-sm-12">

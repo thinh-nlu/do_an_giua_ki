@@ -17,7 +17,7 @@ import java.util.Map;
 public class UpdateQuantity extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         CartProduct cartProduct = (CartProduct) session.getAttribute("cart");
 
