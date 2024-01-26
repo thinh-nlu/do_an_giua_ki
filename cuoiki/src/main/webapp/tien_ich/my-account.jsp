@@ -62,7 +62,7 @@
                 <div class="login-register">
                     <ul>
                         <% if (user != null) { %>
-                        <% if (user.getIsAdmin().equals("1")) { %>
+                        <% if (!user.getIsAdmin().equals("0")) { %>
                         <li><a href="../tien_ich/my-account.jsp">Xin chào <%=user.getName()%></a></li>
                         <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
                         <%} else {%>
@@ -207,8 +207,19 @@
 
 <!-- Start My Account  -->
 <div class="my-account-box-main">
+    <div class="login-register">
+        <ul>
+            <% if (user == null) { %>
+            <script>
+                alert("Bạn cần đăng nhập để sử dụng chức năng này.");
+                window.location.href = "../index.jsp";
+            </script>
+            <% } %>
+        </ul>
+    </div>
     <div class="container">
         <div class="my-account-page">
+            <%if(!user.getIsAdmin().equals("2")) {%>
             <div class="row">
                 <div class="col-lg-4 col-md-12">
                     <div class="account-box">
@@ -326,11 +337,21 @@
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
-
+            <%}else{%>
+            <div class="text-center">
+                <div class="account-box">
+                    <div class="service-box">
+                        <div class="service-icon">
+                            <a href="list-order.jsp"> <i class="bi bi-person-fill fa-10x "></i> </a>
+                        </div>
+                        <div class="service-desc">
+                            <h4>Danh sách đơn hàng</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%}%>
         </div>
     </div>
 </div>

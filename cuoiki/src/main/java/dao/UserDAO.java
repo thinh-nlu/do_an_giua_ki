@@ -226,6 +226,89 @@ public class UserDAO {
         }
         return isDelete;
     }
+    public boolean isEmailExists(String email) {
+        boolean exists = false;
+        query = "select count(*) from users where email = ?";
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                exists = count > 0;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return exists;
+    }
+    public boolean isPasswordNull(String email) {
+        boolean isNull = false;
+        query = "select password from users where email = ?";
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String password = rs.getString("password");
+                isNull = (password == null || password.trim().isEmpty());
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return isNull;
+    }
+    public boolean isUsernameExist(String username) {
+        boolean exists = false;
+        query = "select count(*) from users where username = ?";
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                exists = count > 0;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return exists;
+    }
+    public boolean isFbUser(String name) {
+        boolean isNull = false;
+        query = "select email, password from users where username = ?";
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, name);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+
+                // Kiểm tra xem email và password có đều là null hay không
+                isNull = (email == null || email.trim().isEmpty()) && (password == null || password.trim().isEmpty());
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return isNull;
+    }
+
+
+
+
     public static void main(String[] args) {
         UserDAO dao = new UserDAO(DBConnect.getConnection());
         List<User> users = dao.getAllUser();

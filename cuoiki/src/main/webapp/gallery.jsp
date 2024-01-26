@@ -95,7 +95,7 @@
                 <div class="login-register">
                     <ul>
                         <% if (user != null) { %>
-                        <% if (user.getIsAdmin().equals("1")) { %>
+                        <% if (!user.getIsAdmin().equals("0")) { %>
                         <li><a href="tien_ich/my-account.jsp">Xin chào <%=user.getName()%></a></li>
                         <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
                         <%} else {%>
@@ -310,10 +310,13 @@
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="${pageContext.request.contextPath}/product-detail?id=<%= p.getId() %>" data-toggle="tooltip" data-placement="right" title="Chi tiết sản phẩm"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="So sánh"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="${pageContext.request.contextPath}/add_wishlist?productId=<%= p.getId() %>" data-toggle="tooltip" data-placement="right" title="Thêm vào danh sách yêu thích"><i class="far fa-heart"></i></a></li>
                                 </ul>
+                                <%if (Integer.parseInt(p.getQuantity()) > 0) { %>
                                 <a class="cart" href="${pageContext.request.contextPath}/add_cart?id=<%= p.getId() %>">Thêm  giỏ hàng</a>
+                                <%}else{%>
+                                <h2 class="text-danger"> Đã Hết Hàng </h2>
+                                <%}%>
                             </div>
                         </div>
                         <div class="why-text">

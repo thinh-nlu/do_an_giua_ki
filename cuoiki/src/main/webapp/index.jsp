@@ -70,7 +70,7 @@
                 <div class="login-register">
                     <ul>
                         <% if (user != null) { %>
-                        <% if (user.getIsAdmin().equals("1")) { %>
+                        <% if (!user.getIsAdmin().equals("0")) { %>
                         <li><a href="tien_ich/my-account.jsp">Xin chào <%=user.getName()%></a></li>
                         <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
                         <%} else {%>

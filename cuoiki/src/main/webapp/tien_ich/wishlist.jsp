@@ -74,10 +74,8 @@
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="login-register">
                     <ul>
-                        <% if (user != null) {
-                           wishlistList= wDao.getAllWishlistByUserID(user.getId());
-                        %>
-                        <% if (user.getIsAdmin().equals("1")) { %>
+                        <% if (user != null) { %>
+                        <% if (!user.getIsAdmin().equals("0")) { %>
                         <li><a href="../tien_ich/my-account.jsp">Xin chào <%=user.getName()%></a></li>
                         <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
                         <%} else {%>
