@@ -62,10 +62,10 @@
                 <div class="login-register">
                     <ul>
                         <% if (user != null) { %>
-                        <% if (user.getIsAdmin().equals("1")) { %>
+                        <% if (user.getIsAdmin().equals("1")||user.getIsAdmin().equals("2")) { %>
                         <li><a href="../tien_ich/my-account.jsp">Xin chào <%=user.getName()%></a></li>
                         <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
-                        <%} else {%>
+                        <%} else if (user.getIsAdmin().equals("0")){%>
                         <li><p>Xin chào <%= user.getName() %></p></li>
                         <li><a href="../admin/admin.jsp">Trang Quản Lí</a></li>
                         <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
@@ -222,6 +222,8 @@
                         </div>
                     </div>
                 </div>
+                <% if (user != null) { %>
+                <% if (!user.getIsAdmin().equals("2")) { %>
                 <div class="col-lg-4 col-md-12">
                     <div class="account-box">
                         <div class="service-box">
@@ -245,6 +247,25 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <% } %>
+                <% } %>
+
+                <div class="login-register">
+                    <ul>
+                        <% if (user != null) { %>
+                        <!-- Người dùng đã đăng nhập -->
+                        <li><p>Xin chào <%= user.getName() %></p></li>
+                        <li><a href="../admin/admin.jsp">Trang Quản Lí</a></li>
+                        <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
+                        <% } else { %>
+                        <!-- Người dùng chưa đăng nhập -->
+                        <script>
+                            alert("Bạn cần đăng nhập để sử dụng chức năng này.");
+                            window.location.href = "../index.jsp";
+                        </script>
+                        <% } %>
+                    </ul>
                 </div>
                 <div class="collapse col align-self-center" id="profile">
                     <div class="container rounded bg-white mt-5">
