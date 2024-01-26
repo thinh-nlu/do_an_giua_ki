@@ -46,7 +46,14 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <style>
+        .profile-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    </style>
 </head>
 
 <body>
@@ -213,59 +220,57 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="table-main table-responsive">
-                        <form method="post" action="../update_quantity">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>Hình ảnh</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Giá</th>
-                                    <th>Số lượng</th>
-                                    <th>Tổng giá</th>
-                                    <th>Cập nhật</th>
-                                    <th>Loại bỏ</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <%
-                                    for (Map.Entry<Integer, Cart> entry: cartProduct.getData().entrySet()) {
-                                        Product product = entry.getValue().getProduct();
-                                        int quantity = entry.getValue().getQuantity();
-                                        double totalPrice = Double.parseDouble(product.getPrice()) * Double.valueOf(quantity);
-                                %>
-                                <tr>
-                                    <input type="hidden" name="id" value="<%=product.getId()%>"/>
-                                    <td class="thumbnail-img">
-                                        <img class="img-fluid" src="../DataWeb/<%=product.getImage()%>" alt="" />
-                                    </td>
-                                    <td class="name-pr">
-                                        <%=product.getTitle()%>
-                                    </td>
-                                    <td class="price-pr">
-                                        <p><%=product.getPrice()%></p>
-                                    </td>
-                                    <td class="quantity-box"><input type="number" id="quantity" name="quantity" size="4" value="<%=entry.getValue().getQuantity()%>" min="0" step="1" class="c-input-text qty text"></td>
-                                    <td class="total-pr">
-                                        <p><%=totalPrice%></p>
-                                    </td>
-                                    <td class="remove-pr">
-                                        <button type="submit" class="border-0">
-                                            <i class="bi bi-file-arrow-up-fill"></i>
-                                        </button>
-                                    </td>
-                                    <td class="remove-pr">
-                                        <a href="../deleteCartProduct?id=<%=product.getId()%>">
-                                            <i class="fas fa-times"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </form>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Hình ảnh</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Tổng giá</th>
+                                <th>Cập nhật</th>
+                                <th>Loại bỏ</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <%
+                                for (Map.Entry<Integer, Cart> entry: cartProduct.getData().entrySet()) {
+                                    Product product = entry.getValue().getProduct();
+                                    int quantity = entry.getValue().getQuantity();
+                                    double totalPrice = Double.parseDouble(product.getPrice()) * Double.valueOf(quantity);
+                            %>
+                            <tr>
+                                <input type="hidden" name="id" value="<%=product.getId()%>"/>
+                                <td class="thumbnail-img">
+                                    <img class="profile-image" src="../DataWeb/<%=product.getImage()%>" alt="Image" />
+                                </td>
+                                <td class="name-pr">
+                                    <%=product.getTitle()%>
+                                </td>
+                                <td class="price-pr">
+                                    <p><%=product.getPrice()%></p>
+                                </td>
+                                <td class="quantity-box"><input type="number" id="quantity" name="quantity" size="4" value="<%=entry.getValue().getQuantity()%>" min="0" step="1" class="c-input-text qty text"></td>
+                                <td class="total-pr">
+                                    <p><%=totalPrice%></p>
+                                </td>
+                                <td class="remove-pr">
+                                    <a href="../update_quantity?id=<%=product.getId()%>">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                </td>
+                                <td class="remove-pr">
+                                    <a href="../deleteCartProduct?id=<%=product.getId()%>">
+                                        <i class="bi bi-file-arrow-up-fill"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <%}%>
                 </div>
             </div>
+            <%}%>
             <div class="row my-5">
                 <div class="col-lg-8 col-sm-12"></div>
                 <div class="col-lg-4 col-sm-12">
