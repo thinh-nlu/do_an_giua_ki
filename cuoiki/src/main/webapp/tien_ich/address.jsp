@@ -11,7 +11,6 @@
     User user = (User) session.getAttribute("success");
     Address a = null;
     AddressDAO dao = new AddressDAO(DBConnect.getConnection());
-    if(a==null) a = new Address();
     String saveAddressTest = (String) session.getAttribute("saveAddressText");
 %>
 <!DOCTYPE html>
@@ -64,7 +63,8 @@
     </script>
     <%}else{
         a = dao.getAddressByUserId(user.getId());
-    }%>
+       }
+    %>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -216,7 +216,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2>Thanh Toán</h2>
+                    <h2>Địa chỉ</h2>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="../gallery.jsp">Cửa Hàng</a></li>
                         <li class="breadcrumb-item active">Thanh Toán</li>
@@ -226,7 +226,6 @@
         </div>
     </div>
     <!-- End All Title Box -->
-
     <!-- Start Cart  -->
     <div class="cart-box-main">
         <div class="container">
@@ -240,28 +239,28 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="firstName">Họ *</label>
-                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="<%=a.getFirstName()==null ? "" :a.getFirstName()%>" required="required">
+                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="<%=a==null ? "" :a.getFirstName()%>" required="required">
                                     <div class="invalid-feedback">Vui lòng nhập họ</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="lastName">Tên *</label>
-                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="<%=a.getLastName()==null ? "" :a.getLastName()%>" required="required">
+                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="<%=a==null ? "" :a.getLastName()%>" required="required">
                                     <div class="invalid-feedback">Vui lòng nhập tên</div>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="email">Email *</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="" value="<%=a.getEmail()==null ? "" :a.getEmail()%>" required="required">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="" value="<%=a==null ? "" :a.getEmail()%>" required="required">
                                 <div class="invalid-feedback">Vui lòng nhập địa chỉ email</div>
                             </div>
                             <div class="mb-3">
                                 <label for="contact">Số điện thoại *</label>
-                                <input type="number" class="form-control" id="contact" name="contact" placeholder="" value="<%=a.getContact()==null ? "" :a.getContact()%>" required="required">
+                                <input type="number" class="form-control" id="contact" name="contact" placeholder="" value="<%=a==null ? "" :a.getContact()%>" required="required">
                                 <div class="invalid-feedback">Vui lòng nhập số điện thoại</div>
                             </div>
                             <div class="mb-3">
                                 <label for="address">Đỉa chỉ *</label>
-                                <input type="text" class="form-control" id="address" name="address" value="<%=a.getContact()==null ? "" :a.getContact()%>" placeholder="" required="required">
+                                <input type="text" class="form-control" id="address" name="address" value="<%=a==null ? "" :a.getAddress()%>" placeholder="" required="required">
                                 <div class="invalid-feedback">Vui lòng nhập địa chỉ của bạn</div>
                             </div>
                             <hr class="mb-4">
@@ -285,7 +284,6 @@
         </div>
     </div>
     <!-- End Cart -->
-
     <!-- Start Instagram Feed  -->
     <div class="instagram-box">
         <div class="main-instagram owl-carousel owl-theme">
