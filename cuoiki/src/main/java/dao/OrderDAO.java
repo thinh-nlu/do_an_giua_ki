@@ -136,8 +136,28 @@ public class OrderDAO {
         return list;
     }
 
-    public static void main(String[] args) {
-        OrderDAO orderDAO = new OrderDAO(DBConnect.getConnection());
-        orderDAO.getOrderRowCount();
+    public List<Order> getAllOrder() {
+        List<Order> list = new ArrayList<>();
+        Order o;
+        query = "select * from orders";
+        try {
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                o = new Order();
+                o.setId(rs.getInt(1));
+                o.setUserId(rs.getInt(2));
+                o.setInvoiceNumber(rs.getString(3));
+                o.setAmountDue(rs.getString(4));
+                o.setOrderDate(rs.getTimestamp(5));
+                o.setOrderStatus(rs.getString(6));
+                list.add(o);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
     }
+
+
 }
