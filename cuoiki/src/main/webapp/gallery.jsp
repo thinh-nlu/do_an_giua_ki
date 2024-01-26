@@ -8,6 +8,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored = "false" %>
 
+<style>
+    .btn-filter {
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .btn-filter:hover {
+        transform: translateY(-10px);
+    }
+</style>
 <%
     CartProduct cartProduct = (CartProduct) session.getAttribute("cart");
     if(cartProduct == null) cartProduct = new CartProduct();
@@ -246,19 +255,19 @@
                     <div class="special-menu text-center">
                         <div class="button-group filter-button-group">
                             <a href="${pageContext.request.contextPath}/gallery.jsp">
-                                <button>Tất cả</button>
+                                <button class="btn btn-filter">Tất cả</button>
                             </a>
                             <a href="${pageContext.request.contextPath}/filterProduct?categoryId=hat">
-                                <button>Hạt</button>
+                                <button class="btn btn-filter">Hạt</button>
                             </a>
                             <a href="${pageContext.request.contextPath}/filterProduct?categoryId=qua">
-                                <button>Trái cây</button>
+                                <button class="btn btn-filter">Trái cây</button>
                             </a>
                             <a href="${pageContext.request.contextPath}/filterProduct?categoryId=rau">
-                                <button>Rau</button>
+                                <button class="btn btn-filter" >Rau</button>
                             </a>
                             <a href="${pageContext.request.contextPath}/filterProduct?categoryId=cu">
-                                <button>Củ</button>
+                                <button class="btn btn-filter" >Củ</button>
                             </a>
                         </div>
                     </div>
