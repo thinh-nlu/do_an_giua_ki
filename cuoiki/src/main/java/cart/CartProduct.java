@@ -18,7 +18,7 @@ public class CartProduct {
 
     public boolean add(int id, int quantity) {
         Product product = dao.getProductById(id);
-        if(product == null) return false;
+        if(product == null || Integer.parseInt(product.getQuantity()) == 0) return false;
         Cart cart = null;
         if(data.containsKey(id)){
             cart = data.get(id);
