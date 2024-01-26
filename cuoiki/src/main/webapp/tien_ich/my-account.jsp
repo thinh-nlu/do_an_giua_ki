@@ -62,10 +62,10 @@
                 <div class="login-register">
                     <ul>
                         <% if (user != null) { %>
-                        <% if (user.getIsAdmin().equals("1")||user.getIsAdmin().equals("2")) { %>
+                        <% if (!user.getIsAdmin().equals("0")) { %>
                         <li><a href="../tien_ich/my-account.jsp">Xin chào <%=user.getName()%></a></li>
                         <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
-                        <%} else if (user.getIsAdmin().equals("0")){%>
+                        <%} else {%>
                         <li><p>Xin chào <%= user.getName() %></p></li>
                         <li><a href="../admin/admin.jsp">Trang Quản Lí</a></li>
                         <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
@@ -207,8 +207,19 @@
 
 <!-- Start My Account  -->
 <div class="my-account-box-main">
+    <div class="login-register">
+        <ul>
+            <% if (user == null) { %>
+            <script>
+                alert("Bạn cần đăng nhập để sử dụng chức năng này.");
+                window.location.href = "../index.jsp";
+            </script>
+            <% } %>
+        </ul>
+    </div>
     <div class="container">
         <div class="my-account-page">
+            <%if(!user.getIsAdmin().equals("2")) {%>
             <div class="row">
                 <div class="col-lg-4 col-md-12">
                     <div class="account-box">
@@ -222,8 +233,6 @@
                         </div>
                     </div>
                 </div>
-                <% if (user != null) { %>
-                <% if (!user.getIsAdmin().equals("2")) { %>
                 <div class="col-lg-4 col-md-12">
                     <div class="account-box">
                         <div class="service-box">
@@ -247,25 +256,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <% } %>
-                <% } %>
-
-                <div class="login-register">
-                    <ul>
-                        <% if (user != null) { %>
-                        <!-- Người dùng đã đăng nhập -->
-                        <li><p>Xin chào <%= user.getName() %></p></li>
-                        <li><a href="../admin/admin.jsp">Trang Quản Lí</a></li>
-                        <li><a href="${pageContext.request.contextPath}/logout">Đăng Xuất</a></li>
-                        <% } else { %>
-                        <!-- Người dùng chưa đăng nhập -->
-                        <script>
-                            alert("Bạn cần đăng nhập để sử dụng chức năng này.");
-                            window.location.href = "../index.jsp";
-                        </script>
-                        <% } %>
-                    </ul>
                 </div>
                 <div class="collapse col align-self-center" id="profile">
                     <div class="container rounded bg-white mt-5">
@@ -347,11 +337,21 @@
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
-
+            <%}else{%>
+            <div class="text-center">
+                <div class="account-box">
+                    <div class="service-box">
+                        <div class="service-icon">
+                            <a href="list-order.jsp"> <i class="bi bi-person-fill fa-10x "></i> </a>
+                        </div>
+                        <div class="service-desc">
+                            <h4>Danh sách đơn hàng</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%}%>
         </div>
     </div>
 </div>
