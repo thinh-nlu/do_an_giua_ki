@@ -35,7 +35,7 @@ public class SaveAddress extends HttpServlet {
         String paymentMethod = req.getParameter("paymentMethod");
 
         if(a==null) {
-            a = new Address(user.getId(), firstName, lastName, email, contact, address, paymentMethod);
+            a = new Address(user.getId(), firstName, lastName, address, paymentMethod, email, contact);
             isAdd = dao.insertToAddress(a);
         } else {
             isAdd = true;

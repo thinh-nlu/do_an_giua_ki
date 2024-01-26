@@ -23,14 +23,14 @@ public class Address {
         this.paymentMethod = paymentMethod;
     }
 
-    public Address(int userId, String firstName, String lastName, String email, String contact, String address, String paymentMethod) {
+    public Address(int userId, String firstName, String lastName, String address, String paymentMethod, String email, String contact) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
-        this.contact = contact;
         this.address = address;
         this.paymentMethod = paymentMethod;
+        this.email = email;
+        this.contact = contact;
     }
 
     public int getUserId() {

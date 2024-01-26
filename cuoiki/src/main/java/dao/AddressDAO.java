@@ -74,13 +74,14 @@ public class AddressDAO {
             rs= ps.executeQuery();
             while(rs.next()) {
                 a = new Address();
-                a.setUserId(rs.getInt(1));
-                a.setFirstName(rs.getString(2));
-                a.setLastName(rs.getString(3));
-                a.setAddress(rs.getString(4));
-                a.setPaymentMethod(rs.getString(5));
-                a.setEmail(rs.getString(6));
-                a.setContact(rs.getString(7));
+                a.setId(rs.getInt(1));
+                a.setUserId(rs.getInt(2));
+                a.setFirstName(rs.getString(3));
+                a.setLastName(rs.getString(4));
+                a.setAddress(rs.getString(5));
+                a.setPaymentMethod(rs.getString(6));
+                a.setEmail(rs.getString(7));
+                a.setContact(rs.getString(8));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
