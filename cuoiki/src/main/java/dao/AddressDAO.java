@@ -44,7 +44,7 @@ public class AddressDAO {
     public List<Address> getAllAddress() {
         List<Address> list = new ArrayList<>();
         Address a;
-        query = "SELECT * FROM address";
+        query = "SELECT id, user_id, first_name, last_name, address, method_payment, email, contact FROM address";
         try {
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
@@ -70,7 +70,7 @@ public class AddressDAO {
 
     public Address getAddressByUserId(int id) {
         Address a = null;
-        query = "SELECT * FROM address WHERE user_id = ?";
+        query = "SELECT id, user_id, first_name, last_name, address, method_payment, email, contact FROM address WHERE user_id = ?";
         try {
             ps = con.prepareStatement(query);
             ps.setInt(1, id);
