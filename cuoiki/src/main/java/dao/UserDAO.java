@@ -46,13 +46,14 @@ public class UserDAO {
     }
 
     public User getUserByUsername(String username) {
-        User user = new User();
+        User user=null;
         query = "SELECT id, username, email, password, contact, isAdmin, date, isActive FROM users WHERE username = ?";
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, username);
             rs = ps.executeQuery();
             while (rs.next()) {
+                user = new User();
                 user.setId(rs.getInt(1));
                 user.setName(rs.getString(2));
                 user.setEmail(rs.getString(3));
@@ -70,13 +71,14 @@ public class UserDAO {
 
 
     public User getUserById(int id) {
-        User user = new User();
+        User user=null;
         query = "SELECT id, username, email, password, contact, isAdmin, date, isActive FROM users WHERE id = ?";
         try {
             ps = con.prepareStatement(query);
             ps.setInt(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
+                user = new User();
                 user.setId(rs.getInt(1));
                 user.setName(rs.getString(2));
                 user.setEmail(rs.getString(3));
