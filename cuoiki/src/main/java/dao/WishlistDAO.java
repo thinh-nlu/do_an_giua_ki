@@ -51,20 +51,20 @@ public class WishlistDAO {
     }
 
 
-    public List<Wishlist> getAllWishlistByUserID(int userId){
+    public List<Wishlist> getAllWishlistByUserID(int userId) {
         List<Wishlist> list = new ArrayList<>();
         Wishlist w;
-        query = "select * from wishlist where user_id = ?";
+        query = "SELECT id, user_id, product_id, timestamp FROM wishlist WHERE user_id = ?";
         try {
             ps = con.prepareStatement(query);
-            ps.setInt(1,userId);
+            ps.setInt(1, userId);
             rs = ps.executeQuery();
             while (rs.next()) {
                 w = new Wishlist();
-                w.setId(rs.getInt(1));
-                w.setUser_id(rs.getInt(2));
-                w.setProduct_id(rs.getInt(3));
-                w.setTimestamp(rs.getTimestamp(4));
+                w.setId(rs.getInt("id"));
+                w.setUser_id(rs.getInt("user_id"));
+                w.setProduct_id(rs.getInt("product_id"));
+                w.setTimestamp(rs.getTimestamp("timestamp"));
                 list.add(w);
             }
         } catch (SQLException e) {
@@ -72,6 +72,7 @@ public class WishlistDAO {
         }
         return list;
     }
+
 
 
 

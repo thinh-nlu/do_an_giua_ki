@@ -40,17 +40,17 @@ public class OrderDetailDAO {
     public List<OrderDetail> getDetailOfOrder(int orderId) {
         List<OrderDetail> list = new ArrayList<>();
         OrderDetail orderDetail;
-        query = "select * from order_detail od where od.order_id = ?";
+        query = "SELECT id, order_id, product_id, quantity FROM order_detail WHERE order_id = ?";
         try {
             ps = con.prepareStatement(query);
-            ps.setInt(1,orderId);
+            ps.setInt(1, orderId);
             rs = ps.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 orderDetail = new OrderDetail();
-                orderDetail.setId(rs.getInt(1));
-                orderDetail.setOrderId(rs.getInt(2));
-                orderDetail.setProductId(rs.getInt(3));
-                orderDetail.setQuantity(rs.getInt(4));
+                orderDetail.setId(rs.getInt("id"));
+                orderDetail.setOrderId(rs.getInt("order_id"));
+                orderDetail.setProductId(rs.getInt("product_id"));
+                orderDetail.setQuantity(rs.getInt("quantity"));
                 list.add(orderDetail);
             }
         } catch (SQLException e) {
@@ -58,6 +58,7 @@ public class OrderDetailDAO {
         }
         return list;
     }
+
 
     public static void main(String[] args) {
         OrderDetailDAO dao = new OrderDetailDAO(DBConnect.getConnection());
