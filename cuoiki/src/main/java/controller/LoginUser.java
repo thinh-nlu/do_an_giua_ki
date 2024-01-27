@@ -1,5 +1,6 @@
 package controller;
 
+import com.mysql.cj.Session;
 import dao.UserDAO;
 import database.DBConnect;
 import jakarta.servlet.ServletException;
@@ -27,7 +28,6 @@ public class LoginUser extends HttpServlet {
 
         UserDAO dao = new UserDAO(DBConnect.getConnection());
         User user = dao.getUserByUsername(username);
-        String passwordHashFromDB = user.getPassword();
         String passwordHash = hashPassword(password);
         HttpSession session = req.getSession();
         session.setMaxInactiveInterval(30 * 60);
@@ -37,7 +37,7 @@ public class LoginUser extends HttpServlet {
         } else if (user.getIsActive().equals("0")) {
             session.setAttribute("failed","Tài Khoản Đã Bị Chặn");
             resp.sendRedirect("account/login.jsp");
-        } else if (!passwordHash.equals(passwordHashFromDB)) {
+        } else if (!passwordHash.equals(user.getPassword())) {
             session.setAttribute("failed","Mật khẩu không chính xác");
             resp.sendRedirect("account/login.jsp");
         } else {
