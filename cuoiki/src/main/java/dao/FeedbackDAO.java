@@ -42,31 +42,6 @@ public class FeedbackDAO {
         return isAdd;
     }
 
-    public List<Feedback> getAllFeedback() {
-        List<Feedback> feedbacks = new ArrayList<>();
-        Feedback feedback = null;
-        query = "SELECT id, name, email, message, created, productID FROM feedback ORDER BY id DESC";
-        try {
-            ps = con.prepareStatement(query);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                feedback = new Feedback();
-                feedback.setId(rs.getInt("id"));
-                feedback.setName(rs.getString("name"));
-                feedback.setEmail(rs.getString("email"));
-                feedback.setMessage(rs.getString("message"));
-                feedback.setCreated(rs.getTimestamp("created"));
-                feedback.setProductID(rs.getInt("productID"));
-
-                feedbacks.add(feedback);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return feedbacks;
-    }
-
-
     public List<Feedback> getTop3Feedback(int id) {
         List<Feedback> feedbacks = new ArrayList<>();
         Feedback feedback = null;
@@ -77,13 +52,12 @@ public class FeedbackDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 feedback = new Feedback();
-                feedback.setId(rs.getInt("id"));
-                feedback.setName(rs.getString("name"));
-                feedback.setEmail(rs.getString("email"));
-                feedback.setMessage(rs.getString("message"));
-                feedback.setCreated(rs.getTimestamp("created"));
-                feedback.setProductID(rs.getInt("productID"));
-
+                feedback.setId(rs.getInt(1));
+                feedback.setName(rs.getString(2));
+                feedback.setEmail(rs.getString(3));
+                feedback.setMessage(rs.getString(4));
+                feedback.setCreated(rs.getTimestamp(5));
+                feedback.setProductID(rs.getInt(6));
                 feedbacks.add(feedback);
             }
         } catch (SQLException e) {

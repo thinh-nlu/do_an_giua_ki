@@ -142,7 +142,7 @@ public class OrderDAO {
     public List<Order> getAllOrder() {
         List<Order> list = new ArrayList<>();
         Order o;
-        query = "select * from orders";
+        query = "select id, user_id, invoice_number, amount_due, order_date, order_status from orders";
         try {
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();

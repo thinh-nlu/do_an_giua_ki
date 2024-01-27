@@ -53,14 +53,14 @@ public class UserDAO {
             ps.setString(1, username);
             rs = ps.executeQuery();
             while (rs.next()) {
-                user.setId(rs.getInt("id"));
-                user.setName(rs.getString("username"));
-                user.setEmail(rs.getString("email"));
-                user.setPassword(rs.getString("password"));
-                user.setContact(rs.getString("contact"));
-                user.setIsAdmin(rs.getString("isAdmin"));
-                user.setTimestamp(rs.getTimestamp("date"));
-                user.setIsActive(rs.getString("isActive"));
+                user.setId(rs.getInt(1));
+                user.setName(rs.getString(2));
+                user.setEmail(rs.getString(3));
+                user.setPassword(rs.getString(4));
+                user.setContact(rs.getString(5));
+                user.setIsAdmin(rs.getString(6));
+                user.setTimestamp(rs.getTimestamp(7));
+                user.setIsActive(rs.getString(8));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -77,14 +77,14 @@ public class UserDAO {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
-                user.setId(rs.getInt("id"));
-                user.setName(rs.getString("username"));
-                user.setEmail(rs.getString("email"));
-                user.setPassword(rs.getString("password"));
-                user.setContact(rs.getString("contact"));
-                user.setIsAdmin(rs.getString("isAdmin"));
-                user.setTimestamp(rs.getTimestamp("date"));
-                user.setIsActive(rs.getString("isActive"));
+                user.setId(rs.getInt(1));
+                user.setName(rs.getString(2));
+                user.setEmail(rs.getString(3));
+                user.setPassword(rs.getString(4));
+                user.setContact(rs.getString(5));
+                user.setIsAdmin(rs.getString(6));
+                user.setTimestamp(rs.getTimestamp(7));
+                user.setIsActive(rs.getString(8));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -102,14 +102,14 @@ public class UserDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 u = new User();
-                u.setId(rs.getInt("id"));
-                u.setName(rs.getString("username"));
-                u.setEmail(rs.getString("email"));
-                u.setPassword(rs.getString("password"));
-                u.setContact(rs.getString("contact"));
-                u.setIsAdmin(rs.getString("isAdmin"));
-                u.setTimestamp(rs.getTimestamp("date"));
-                u.setIsActive(rs.getString("isActive"));
+                u.setId(rs.getInt(1));
+                u.setName(rs.getString(2));
+                u.setEmail(rs.getString(3));
+                u.setPassword(rs.getString(4));
+                u.setContact(rs.getString(5));
+                u.setIsAdmin(rs.getString(6));
+                u.setTimestamp(rs.getTimestamp(7));
+                u.setIsActive(rs.getString(8));
                 users.add(u);
             }
         } catch (SQLException e) {
@@ -128,14 +128,14 @@ public class UserDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 u = new User();
-                u.setId(rs.getInt("id"));
-                u.setName(rs.getString("username"));
-                u.setEmail(rs.getString("email"));
-                u.setPassword(rs.getString("password"));
-                u.setContact(rs.getString("contact"));
-                u.setIsAdmin(rs.getString("isAdmin"));
-                u.setTimestamp(rs.getTimestamp("date"));
-                u.setIsActive(rs.getString("isActive"));
+                u.setId(rs.getInt(1));
+                u.setName(rs.getString(2));
+                u.setEmail(rs.getString(3));
+                u.setPassword(rs.getString(4));
+                u.setContact(rs.getString(5));
+                u.setIsAdmin(rs.getString(6));
+                u.setTimestamp(rs.getTimestamp(7));
+                u.setIsActive(rs.getString(8));
                 users.add(u);
             }
         } catch (SQLException e) {
