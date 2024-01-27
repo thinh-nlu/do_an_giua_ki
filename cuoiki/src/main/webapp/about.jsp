@@ -232,48 +232,6 @@
                 </div>
             </div>
         </div>
-        <div class="row my-4">
-            <div class="col-12">
-                <h2 class="noo-sh-title">Các thành viên gồm:</h2>
-            </div>
-            <div class="col">
-                <div class="hover-team">
-                    <div class="our-team"> <img src="" alt="" />
-                        <div class="team-content">
-                            <h3 class="title">Nguyễn Trường Thịnh</h3> <span class="post">Trưởng nhóm</span> </div>
-                        <p>Nguyễn Trường Thịnh</p>
-                        <div class="icon"> <i class="bi bi-person" aria-hidden="true"></i> </div>
-                    </div>
-                    <div class="team-description">
-                    </div>
-                    <hr class="my-0"> </div>
-            </div>
-            <div class="col">
-                <div class="hover-team">
-                    <div class="our-team"> <img src="" alt="" />
-                        <div class="team-content">
-                            <h3 class="title">Đào Trung Tín</h3> <span class="post">Thành viên 1</span> </div>
-                        <p> Đào Trung Tín</p>
-                        <div class="icon"> <i class="bi bi-person" aria-hidden="true"></i> </div>
-                    </div>
-                    <div class="team-description">
-                    </div>
-                    <hr class="my-0"> </div>
-            </div>
-            <div class="col">
-                <div class="hover-team">
-                    <div class="our-team"> <img src="" alt="" />
-                        <div class="team-content">
-                            <h3 class="title">Trần Duy Tân</h3> <span class="post">Thành viên 2</span> </div>
-                        <p>Trần Duy Tân </p>
-                        <div class="icon"> <i class="bi bi-person" aria-hidden="true"></i> </div>
-                    </div>
-                    <div class="team-description">
-                    </div>
-                    <hr class="my-0"> </div>
-            </div>
-
-        </div>
     </div>
 </div>
 <!-- End About Page -->

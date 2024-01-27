@@ -26,7 +26,11 @@ public class UpdateProduct extends HttpServlet {
         String quantity = req.getParameter("quantity");
         String unitPrice = req.getParameter("unit_price");
         Part part = req.getPart("product_image");
-        //String image = part.getSubmittedFileName();
+        String image = part.getSubmittedFileName();
+        String path = getServletContext().getRealPath("/DataWeb/");
+        File file = new File(path);
+        if(!file.exists()) file.mkdirs();
+        part.write(path + File.separator + image);
 
         Product p = new Product(id,title,price,unit,productFromId.getImage(),category,keyword,productFromId.getTimestamp(),quantity,productFromId.getStatus(),unitPrice);
         System.out.println(p);

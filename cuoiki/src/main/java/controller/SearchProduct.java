@@ -23,7 +23,6 @@ public class SearchProduct extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String keyword = req.getParameter("keyword");
         ProductDAO dao = new ProductDAO(DBConnect.getConnection());
-        System.out.println(keyword);
         List<Product> display = dao.searchProduct(keyword);
         HttpSession session = req.getSession();
         if (display.isEmpty()) {

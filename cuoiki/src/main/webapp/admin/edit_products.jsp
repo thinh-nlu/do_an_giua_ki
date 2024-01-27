@@ -97,12 +97,12 @@
     </div>
 
     <!-- image -->
-<%--    <div class="form-outline mb-4 w-50 m-auto">--%>
-<%--      <label for="product_image" class="form-label">Hình ảnh sản phẩm</label>--%>
-<%--      <input type="file" name="product_image" id="product_image" class="form-control"--%>
-<%--             value="<%=product.getImage()%>" src="../DataWeb/<%=product.getImage()%>">--%>
-<%--      <img width="50" height="50" class='cart_img' src='../DataWeb/<%=product.getImage()%>'>--%>
-<%--    </div>--%>
+    <div class="form-outline mb-4 w-50 m-auto">
+      <label for="product_image" class="form-label">Hình ảnh sản phẩm</label>
+      <input type="file" name="product_image" id="product_image" class="form-control"
+             required="required" value="=<%=product.getImage()%>">
+      <img src="../DataWeb/<%=product.getImage()%>" class="img-fluid" alt="Image">
+    </div>
 
     <div class="form-outline mb-4 w-50 m-auto">
       <label for="unit_price" class="form-label">Đơn Giá</label>

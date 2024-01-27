@@ -219,16 +219,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <% if (wishlistList.isEmpty()) { %>
+                <h2 class="text-danger text-center">Không có sản phẩm nào trong danh sách yêu thích</h2>
+                <%}else{%>
                 <div class="main-heading mb-10"></div>
                 <div class="table-wishlist">
                     <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                        <tbody>
-                        <% if (wishlistList.isEmpty()) { %>
-                        <h2 class="text-danger text-center">Không có sản phẩm nào trong danh sách yêu thích</h2>
-                        <% } else {
-                            for (Wishlist w: wishlistList) {
-                                Product product = dao.getProductById(w.getProduct_id());
-                        %>
                         <thead>
                         <tr>
                             <th width="45%">Tên Sản Phẩm</th>
@@ -238,6 +234,11 @@
                             <th width="10%"></th>
                         </tr>
                         </thead>
+                        <tbody>
+                        <%
+                            for (Wishlist w: wishlistList) {
+                                Product product = dao.getProductById(w.getProduct_id());
+                        %>
                         <tr>
                             <td width="45%">
                                 <div class="display-flex align-center">
