@@ -204,7 +204,7 @@ public class ProductDAO {
     }
     public List<Product> getProductsByCategory(String categoryId) {
         List<Product> products = new ArrayList<>();
-        query = "SELECT id, title, image, price, unit, categoryId, keyword, status, insertDate, quantity, unitPrice, descrip FROM products WHERE category_id = ?";
+        query = "SELECT id, title, image, price, unit, categoryId, keyword, status, insertDate, quantity, unitPrice, descrip FROM products WHERE categoryId = ?";
         try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, categoryId);
             try (ResultSet rs = ps.executeQuery()) {

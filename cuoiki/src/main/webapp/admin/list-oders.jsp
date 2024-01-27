@@ -208,7 +208,7 @@
     %>
     <tr class='text-center text-dark font-weight-normal  '>
       <td><%=o.getId()%></td>
-      <td><%=userDAO.getUserById(o.getId()).getName()%></td>
+      <td><%=userDAO.getUserById(o.getUserId()).getName()%></td>
       <td><%=o.getAmountDue() + "VND"%></td>
       <td><%=o.getInvoiceNumber()%></td>
       <td><%=o.getOrderDate()%></td>
