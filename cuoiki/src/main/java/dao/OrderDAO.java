@@ -55,19 +55,19 @@ public class OrderDAO {
 
     public Order getOrderByInvoiceNumber(String invoiceNumber) {
         Order o = null;
-        query = "select * from orders where invoice_number = ?";
+        query = "SELECT id, user_id, invoice_number, amount_due, order_date, order_status FROM orders WHERE invoice_number = ?";
         try {
             ps = con.prepareStatement(query);
-            ps.setString(1,invoiceNumber);
+            ps.setString(1, invoiceNumber);
             rs = ps.executeQuery();
             while (rs.next()) {
                 o = new Order();
-                o.setId(rs.getInt(1));
-                o.setUserId(rs.getInt(2));
-                o.setInvoiceNumber(rs.getString(3));
-                o.setAmountDue(rs.getString(4));
-                o.setOrderDate(rs.getTimestamp(5));
-                o.setOrderStatus(rs.getString(6));
+                o.setId(rs.getInt("id"));
+                o.setUserId(rs.getInt("user_id"));
+                o.setInvoiceNumber(rs.getString("invoice_number"));
+                o.setAmountDue(rs.getString("amount_due"));
+                o.setOrderDate(rs.getTimestamp("order_date"));
+                o.setOrderStatus(rs.getString("order_status"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -75,27 +75,30 @@ public class OrderDAO {
         return o;
     }
 
+
     public Order getOrderById(int id) {
         Order o = null;
-        query = "select * from orders where id = ?";
+        query = "SELECT id, user_id, invoice_number, amount_due, order_date, order_status FROM orders WHERE id = ?";
         try {
             ps = con.prepareStatement(query);
-            ps.setInt(1,id);
+            ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
                 o = new Order();
-                o.setId(rs.getInt(1));
-                o.setUserId(rs.getInt(2));
-                o.setInvoiceNumber(rs.getString(3));
-                o.setAmountDue(rs.getString(4));
-                o.setOrderDate(rs.getTimestamp(5));
-                o.setOrderStatus(rs.getString(6));
+                o.setId(rs.getInt("id"));
+                o.setUserId(rs.getInt("user_id"));
+                o.setInvoiceNumber(rs.getString("invoice_number"));
+                o.setAmountDue(rs.getString("amount_due"));
+                o.setOrderDate(rs.getTimestamp("order_date"));
+                o.setOrderStatus(rs.getString("order_status"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return o;
     }
+
+
 
     public boolean updateStatus(int orderId) {
         boolean isUpdate = false;
@@ -115,19 +118,19 @@ public class OrderDAO {
     public List<Order> getListOrderByUser(int userId) {
         List<Order> list = new ArrayList<>();
         Order o;
-        query = "select * from orders where user_id = ?";
+        query = "SELECT id, user_id, invoice_number, amount_due, order_date, order_status FROM orders WHERE user_id = ?";
         try {
             ps = con.prepareStatement(query);
-            ps.setInt(1,userId);
+            ps.setInt(1, userId);
             rs = ps.executeQuery();
             while(rs.next()) {
                 o = new Order();
-                o.setId(rs.getInt(1));
-                o.setUserId(rs.getInt(2));
-                o.setInvoiceNumber(rs.getString(3));
-                o.setAmountDue(rs.getString(4));
-                o.setOrderDate(rs.getTimestamp(5));
-                o.setOrderStatus(rs.getString(6));
+                o.setId(rs.getInt("id"));
+                o.setUserId(rs.getInt("user_id"));
+                o.setInvoiceNumber(rs.getString("invoice_number"));
+                o.setAmountDue(rs.getString("amount_due"));
+                o.setOrderDate(rs.getTimestamp("order_date"));
+                o.setOrderStatus(rs.getString("order_status"));
                 list.add(o);
             }
         } catch (SQLException e) {

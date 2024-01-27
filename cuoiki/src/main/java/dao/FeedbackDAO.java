@@ -45,7 +45,7 @@ public class FeedbackDAO {
     public List<Feedback> getAllFeedback() {
         List<Feedback> feedbacks = new ArrayList<>();
         Feedback feedback = null;
-        query = "select * from feedback order by id desc";
+        query = "SELECT id, name, email, message, created, productID FROM feedback ORDER BY id DESC";
         try {
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
@@ -65,14 +65,15 @@ public class FeedbackDAO {
         }
         return feedbacks;
     }
+
 
     public List<Feedback> getTop3Feedback(int id) {
         List<Feedback> feedbacks = new ArrayList<>();
         Feedback feedback = null;
-        query = "select * from feedback where productID = ? order by id desc limit 3";
+        query = "SELECT id, name, email, message, created, productID FROM feedback WHERE productID = ? ORDER BY id DESC LIMIT 3";
         try {
             ps = con.prepareStatement(query);
-            ps.setInt(1,id);
+            ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
                 feedback = new Feedback();
@@ -90,6 +91,7 @@ public class FeedbackDAO {
         }
         return feedbacks;
     }
+
 
     public static void main(String[] args) {
         FeedbackDAO feedbackDAO = new FeedbackDAO(DBConnect.getConnection());

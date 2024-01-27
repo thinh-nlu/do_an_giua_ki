@@ -47,43 +47,44 @@ public class UserDAO {
 
     public User getUserByUsername(String username) {
         User user = new User();
-        query = "select * from users where username = ?";
+        query = "SELECT id, username, email, password, contact, isAdmin, date, isActive FROM users WHERE username = ?";
         try {
             ps = con.prepareStatement(query);
-            ps.setString(1,username);
+            ps.setString(1, username);
             rs = ps.executeQuery();
             while (rs.next()) {
-                user.setId(rs.getInt(1));
-                user.setName(rs.getString(2));
-                user.setEmail(rs.getString(3));
-                user.setPassword(rs.getString(4));
-                user.setContact(rs.getString(5));
-                user.setIsAdmin(rs.getString(6));
-                user.setTimestamp(rs.getTimestamp(7));
-                user.setIsActive(rs.getString(8));
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setContact(rs.getString("contact"));
+                user.setIsAdmin(rs.getString("isAdmin"));
+                user.setTimestamp(rs.getTimestamp("date"));
+                user.setIsActive(rs.getString("isActive"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return user;
     }
+
 
     public User getUserById(int id) {
         User user = new User();
-        query = "select * from users where id = ?";
+        query = "SELECT id, username, email, password, contact, isAdmin, date, isActive FROM users WHERE id = ?";
         try {
             ps = con.prepareStatement(query);
-            ps.setInt(1,id);
+            ps.setInt(1, id);
             rs = ps.executeQuery();
-            while (rs.next()) {
-                user.setId(rs.getInt(1));
-                user.setName(rs.getString(2));
-                user.setEmail(rs.getString(3));
-                user.setPassword(rs.getString(4));
-                user.setContact(rs.getString(5));
-                user.setIsAdmin(rs.getString(6));
-                user.setTimestamp(rs.getTimestamp(7));
-                user.setIsActive(rs.getString(8));
+            if (rs.next()) {
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setContact(rs.getString("contact"));
+                user.setIsAdmin(rs.getString("isAdmin"));
+                user.setTimestamp(rs.getTimestamp("date"));
+                user.setIsActive(rs.getString("isActive"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -91,23 +92,24 @@ public class UserDAO {
         return user;
     }
 
+
     public List<User> getAllUser() {
         List<User> users = new ArrayList<>();
-        query = "select * from users";
+        query = "SELECT id, username, email, password, contact, isAdmin, date, isActive FROM users";
         User u = null;
         try {
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 u = new User();
-                u.setId(rs.getInt(1));
-                u.setName(rs.getString(2));
-                u.setEmail(rs.getString(3));
-                u.setPassword(rs.getString(4));
-                u.setContact(rs.getString(5));
-                u.setIsAdmin(rs.getString(6));
-                u.setTimestamp(rs.getTimestamp(7));
-                u.setIsActive(rs.getString(8));
+                u.setId(rs.getInt("id"));
+                u.setName(rs.getString("username"));
+                u.setEmail(rs.getString("email"));
+                u.setPassword(rs.getString("password"));
+                u.setContact(rs.getString("contact"));
+                u.setIsAdmin(rs.getString("isAdmin"));
+                u.setTimestamp(rs.getTimestamp("date"));
+                u.setIsActive(rs.getString("isActive"));
                 users.add(u);
             }
         } catch (SQLException e) {
@@ -117,21 +119,23 @@ public class UserDAO {
     }
     public List<User> getRecords(int start, int total) {
         List<User> users = new ArrayList<>();
-        query = "select * from users limit " + (start-1) + "," + total;
+        query = "SELECT id, username, email, password, contact, isAdmin, date, isActive FROM users LIMIT ?, ?";
         User u = null;
         try {
             ps = con.prepareStatement(query);
+            ps.setInt(1, start - 1);
+            ps.setInt(2, total);
             rs = ps.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 u = new User();
-                u.setId(rs.getInt(1));
-                u.setName(rs.getString(2));
-                u.setEmail(rs.getString(3));
-                u.setPassword(rs.getString(4));
-                u.setContact(rs.getString(5));
-                u.setIsAdmin(rs.getString(6));
-                u.setTimestamp(rs.getTimestamp(7));
-                u.setIsActive(rs.getString(8));
+                u.setId(rs.getInt("id"));
+                u.setName(rs.getString("username"));
+                u.setEmail(rs.getString("email"));
+                u.setPassword(rs.getString("password"));
+                u.setContact(rs.getString("contact"));
+                u.setIsAdmin(rs.getString("isAdmin"));
+                u.setTimestamp(rs.getTimestamp("date"));
+                u.setIsActive(rs.getString("isActive"));
                 users.add(u);
             }
         } catch (SQLException e) {
@@ -139,6 +143,7 @@ public class UserDAO {
         }
         return users;
     }
+
 
     public boolean blockUser(String isActive, int id) {
         boolean isUpdate = false;
