@@ -44,7 +44,7 @@
 											<span class="input-group-addon"><i
                                                     class="glyphicon glyphicon-envelope color-blue"></i></span> <input
                           id="opt" name="otp" placeholder="Nhập mã OTP"
-                          class="form-control" type="text" required="required">
+                          class="form-control" type="number" required="required">
                   </div>
                 </div>
                 <c:if test="${not empty messagesended}">
